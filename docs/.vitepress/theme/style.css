@@ -80,7 +80,8 @@ body {
 }
 
 .vp-doc h1, .vp-doc h2, .vp-doc h3,
-.VPHero .name, .VPHero .text,
+/* VitePress 2.0-alpha 把 hero 的 .name/.text 改名为 .heading/.tagline，两套都写以兼容 */
+.VPHero .name, .VPHero .heading, .VPHero .text, .VPHero .tagline,
 .VPNavBarTitle .title,
 .VPFeature .title {
   font-family: var(--vp-font-display);
