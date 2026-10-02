@@ -5,7 +5,7 @@ import sidebar from './sidebar.json'
 export default defineConfig({
   lang: 'zh-CN',
   title: 'Hello Python',
-  description: 'Python 语言知识体系——从语法入门到面向对象、并发编程与工程实践',
+  description: 'Python 语言知识体系：从语法入门到面向对象、并发编程与工程实践',
   base: '/hello-python/',
   cleanUrls: true,
   lastUpdated: true,

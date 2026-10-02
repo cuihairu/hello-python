@@ -2,10 +2,13 @@
    Hello Python · 主题样式
    排印基调取 popular-web-designs 的 mintlify「阅读优化型」文档模板，
    accent 按本站品牌色改写（python-blue，非 VitePress 默认蓝）。
+   主题气质：简洁 · 工程 · 终端友好——阅读优先，代码至上。
 
    品牌色来源：docs/public/logo.svg 双蛇图形，数 fill 频次——
      #306998 × 2（蛇身 + 眼点）> #FFD43B × 1 > #ffffff × 1
    取最高频的 #306998 为品牌主色，暗色模式用同色系更亮的 #4B8BBE。
+   #FFD43B 金色为受限辅助色，全站只允许三处出现：
+     ① ::selection  ② tip 容器左线  ③ feature 卡 hover 角标
    ============================================================ */
 
 :root {
@@ -21,13 +24,53 @@
   --vp-c-brand-soft: rgba(75, 139, 190, 0.16);
 }
 
+/* ---------- 色彩底座 ---------- */
+
 :root {
-  --vp-font-body: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', 'Noto Sans CJK SC', 'Segoe UI', sans-serif;
-  --vp-font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+  /* light：分区浅蓝灰 tint、正文深蓝黑 */
+  --vp-c-bg-soft: #f4f8fb;
+  --vp-c-bg-mute: #f4f8fb;
+  --vp-c-text: #1a2430;
+  --vp-c-text-1: #1a2430;
+  --vp-code-block-bg: #f4f8fb;
+  /* 阴影走品牌蓝的极淡投影 */
+  --vp-shadow-1: 0 1px 2px rgba(48, 105, 152, 0.10);
+  --vp-shadow-2: 0 1px 4px rgba(48, 105, 152, 0.10);
+  --vp-shadow-3: 0 2px 12px rgba(48, 105, 152, 0.10);
+}
+.dark {
+  /* dark：GitHub 系 off-black 三层底 */
+  --vp-c-bg: #0d1117;
+  --vp-c-bg-soft: #141b24;
+  --vp-c-bg-mute: #141b24;
+  --vp-c-bg-elv: #141b24;
+  --vp-c-text-1: #e6edf3;
+  --vp-c-text-2: #b6c2cf;
+  --vp-c-text-3: #7d8590;
+  --vp-c-divider: #263041;
+  --vp-c-border: #263041;
+  --vp-c-gutter: #263041;
+  --vp-code-block-bg: #10161d;
 }
 
-/* ---------- 基础 ---------- */
+/* 金色第一处：选区 */
+::selection {
+  background: rgba(255, 212, 59, 0.28);
+}
+
+/* ---------- 字体 ---------- */
+
+:root {
+  /* 展示字体：拉丁走 Outfit，中文回退黑体系统栈（h1-h3 / hero / 站名） */
+  --vp-font-display: 'Outfit Variable', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+  /* 代码与行内码全部 JetBrains Mono，终端工程感 */
+  --vp-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo,
+    Consolas, 'Liberation Mono', monospace;
+  --vp-font-family-mono: var(--vp-font-mono);
+  --vp-font-body: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Noto Sans CJK SC', 'Segoe UI', sans-serif;
+}
 
 body {
   font-family: var(--vp-font-body);
@@ -36,7 +79,30 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* 浏览器表面（滚动条、焦点环属于设计） */
+.vp-doc h1, .vp-doc h2, .vp-doc h3,
+.VPHero .name, .VPHero .text,
+.VPNavBarTitle .title,
+.VPFeature .title {
+  font-family: var(--vp-font-display);
+}
+
+/* ---------- 形状与动效：radius 8px · 行内码 5px · 转场 200ms ---------- */
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- 浏览器表面（滚动条、焦点环属于设计） ---------- */
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -120,22 +186,123 @@ body {
 
 /* ---------- 代码 ---------- */
 
+/* 行内码 chip：浅蓝灰底加强对比，radius 5px */
 .vp-doc :not(pre, h1, h2, h3, h4, h5, h6) > code {
   font-family: var(--vp-font-mono);
   font-size: 0.85em;
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 2px 6px;
+  background: #e9eff6;
+  border: 1px solid rgba(48, 105, 152, 0.14);
+  color: #1a2430;
+}
+.dark .vp-doc :not(pre, h1, h2, h3, h4, h5, h6) > code {
+  background: #1b2531;
+  border-color: rgba(255, 255, 255, 0.06);
+  color: #d6e2ee;
 }
 
+.vp-doc div[class*='language-'] {
+  border-radius: 8px;
+}
 .vp-doc div[class*='language-'] code {
   font-size: 0.875rem;
   line-height: 1.7;
 }
 
-/* mintlify 阅读型细节：代码块圆角描边、表头浅底，减轻大面积色块的压迫感 */
-.vp-doc div[class*='language-'] {
+/* kbd 统一为 mono 芯片 */
+.vp-doc kbd {
+  font-family: var(--vp-font-mono);
+  border-radius: 5px;
+  background: var(--vp-c-bg-soft);
+}
+
+/* ---------- 提示容器：蓝 soft 底 + 金左线（金色第二处） ---------- */
+
+.vp-doc .custom-block {
   border-radius: 8px;
 }
+.vp-doc .custom-block.tip {
+  background: var(--vp-c-brand-soft);
+  border-color: var(--vp-c-brand-soft);
+  border-left: 3px solid #FFD43B;
+}
+
+/* ---------- 表格：品牌表头 + 斑马纹 ---------- */
+
 .vp-doc th {
   background: var(--vp-c-brand-soft);
+}
+.vp-doc tr:nth-child(2n) td {
+  background: #f7fafc;
+}
+.dark .vp-doc tr:nth-child(2n) td {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+/* ---------- 首页 hero：「>>> 」REPL 提示符水印（右侧，极淡） ---------- */
+
+.VPHero {
+  position: relative;
+  overflow: hidden;
+}
+.VPHero::after {
+  content: '>>>  >>>  >>>  >>>\A>>>  >>>  >>>  >>>\A>>>  >>>  >>>  >>>\A>>>  >>>  >>>  >>>\A>>>  >>>  >>>  >>>';
+  white-space: pre;
+  position: absolute;
+  right: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--vp-font-family-mono);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 2.1;
+  letter-spacing: 2px;
+  color: var(--vp-c-brand-1);
+  opacity: 0.04;
+  pointer-events: none;
+  user-select: none;
+}
+.dark .VPHero::after {
+  opacity: 0.05;
+}
+@media (max-width: 960px) {
+  .VPHero::after {
+    display: none;
+  }
+}
+
+/* ---------- 首页 features：2×2 网格 · hover 蓝描边 + 金角标（金色第三处） ---------- */
+
+@media (min-width: 720px) {
+  .VPFeatures .items {
+    max-width: 880px;
+    margin-inline: auto;
+  }
+  /* VitePress 1.6 的 features 是 flex+宽度分数布局，2×2 靠宽度覆盖实现 */
+  .VPFeatures .item.grid-2,
+  .VPFeatures .item.grid-3,
+  .VPFeatures .item.grid-4 {
+    width: 50%;
+  }
+}
+.VPFeature {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.VPFeature::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 4px;
+  height: 4px;
+  background: #FFD43B;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.VPFeature:hover {
+  border-color: var(--vp-c-brand-1);
+}
+.VPFeature:hover::before {
+  opacity: 1;
 }
