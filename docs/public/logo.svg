@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none">
+  <!-- 简化双蛇：蓝蛇（上钩）与黄蛇（下钩）互扣，两枚蓝眼点 -->
+  <path d="M44 92V52c0-13.3 10.7-24 24-24h14" stroke="#306998" stroke-width="17" stroke-linecap="round"/>
+  <path d="M84 36v40c0 13.3-10.7 24-24 24H46" stroke="#FFD43B" stroke-width="17" stroke-linecap="round"/>
+  <circle cx="82" cy="28" r="7" fill="#306998"/>
+  <circle cx="46" cy="100" r="7" fill="#306998"/>
+</svg>

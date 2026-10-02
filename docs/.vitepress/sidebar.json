@@ -1,0 +1,144 @@
+[
+  {
+    "text": "入门",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "环境搭建与工具链",
+        "link": "/basics/setup"
+      },
+      {
+        "text": "语法基础",
+        "link": "/basics/syntax"
+      },
+      {
+        "text": "变量与数据类型",
+        "link": "/basics/variables-and-types"
+      },
+      {
+        "text": "控制流",
+        "link": "/basics/control-flow"
+      },
+      {
+        "text": "函数",
+        "link": "/basics/functions"
+      }
+    ]
+  },
+  {
+    "text": "数据结构",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "列表与元组",
+        "link": "/datastructures/list-tuple"
+      },
+      {
+        "text": "字典与集合",
+        "link": "/datastructures/dict-set"
+      },
+      {
+        "text": "字符串与格式化",
+        "link": "/datastructures/string-formatting"
+      },
+      {
+        "text": "推导式、迭代器与生成器",
+        "link": "/datastructures/iterators-generators"
+      }
+    ]
+  },
+  {
+    "text": "进阶",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "面向对象：类与继承",
+        "link": "/advanced/oop"
+      },
+      {
+        "text": "魔法方法与对象协议",
+        "link": "/advanced/magic-methods"
+      },
+      {
+        "text": "dataclass 与结构化数据",
+        "link": "/advanced/dataclass"
+      },
+      {
+        "text": "模块与包",
+        "link": "/advanced/modules"
+      },
+      {
+        "text": "异常处理",
+        "link": "/advanced/exceptions"
+      },
+      {
+        "text": "文件与 IO",
+        "link": "/advanced/file-io"
+      },
+      {
+        "text": "上下文管理器",
+        "link": "/advanced/context-managers"
+      },
+      {
+        "text": "装饰器",
+        "link": "/advanced/decorators"
+      },
+      {
+        "text": "类型注解",
+        "link": "/advanced/typing"
+      },
+      {
+        "text": "常见陷阱与最佳实践",
+        "link": "/advanced/pitfalls"
+      }
+    ]
+  },
+  {
+    "text": "并发编程",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "多线程与 GIL",
+        "link": "/concurrency/threading"
+      },
+      {
+        "text": "异步编程 asyncio",
+        "link": "/concurrency/asyncio"
+      },
+      {
+        "text": "多进程 multiprocessing",
+        "link": "/concurrency/multiprocessing"
+      },
+      {
+        "text": "并发模型对比与选型",
+        "link": "/concurrency/concurrency-compare"
+      }
+    ]
+  },
+  {
+    "text": "工程实践",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "标准库精选",
+        "link": "/engineering/stdlib"
+      },
+      {
+        "text": "测试：unittest 与 pytest",
+        "link": "/engineering/testing"
+      },
+      {
+        "text": "日志与调试",
+        "link": "/engineering/logging"
+      },
+      {
+        "text": "虚拟环境与依赖管理",
+        "link": "/engineering/environments"
+      },
+      {
+        "text": "打包与发布",
+        "link": "/engineering/packaging"
+      }
+    ]
+  }
+]
