@@ -22,4 +22,8 @@ features:
     details: threading 与 GIL、asyncio 事件循环、multiprocessing 的选型对比与取舍。
   - title: 工程实践
     details: 标准库精选、unittest 与 pytest、日志调试、环境管理与打包发布。
+  - title: 追溯源流
+    details: 三十七年发展史时间线，语言核心、并发模型、生态工具与工程实践的关键节点，点开看它为何发生在那时。
+    link: /timeline
+    linkText: 阅读时间线
 ---
