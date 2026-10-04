@@ -1,3 +1,7 @@
+---
+description: 线程、进程、协程三种模型的实测对比与选型决策表。
+---
+
 # 并发模型对比与选型
 
 threading、asyncio、multiprocessing 三条路覆盖了 Python 并发的全部场景。这页给一张决策表和一份实测对比。

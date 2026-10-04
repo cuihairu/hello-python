@@ -1,3 +1,7 @@
+---
+description: f-string 等四种格式化写法对比，str 与 bytes 的编码转换。
+---
+
 # 字符串与格式化
 
 字符串是最常用的数据形态。本章覆盖 f-string、format 规格微型语言、常用方法与编码细节。

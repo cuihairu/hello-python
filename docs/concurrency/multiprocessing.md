@@ -1,3 +1,7 @@
+---
+description: 进程池与进程间通信，shared_memory 共享状态与进程启动方式的选择。
+---
+
 # 多进程 multiprocessing
 
 每个进程有独立解释器与独立 GIL，`multiprocessing` 由此绕开 GIL，是 CPU 密集任务并行的标准答案。代价：进程创建与数据传输更贵，对象要跨进程序列化。

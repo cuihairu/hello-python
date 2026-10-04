@@ -1,3 +1,7 @@
+---
+description: if 分支、for/while 循环与循环 else、match 模式匹配和推导式预览。
+---
+
 # 控制流
 
 Python 的控制流三件套：`if` 分支、`for` 循环、`while` 循环，加上 `break`、`continue`、`else` 三个调节语句，以及 3.10+ 的 `match` 结构化模式匹配。

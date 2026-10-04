@@ -1,3 +1,7 @@
+---
+description: pyproject.toml 字段全解，sdist 与 wheel 构建、版本策略、发布到 PyPI。
+---
+
 # 打包与发布
 
 写好的代码要让别人用得上：内部共享走私有索引，开源发布到 PyPI。现代 Python 打包全部围绕 pyproject.toml（PEP 517/621），构建用 `build`，上传用 `twine`。

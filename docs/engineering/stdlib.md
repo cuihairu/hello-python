@@ -1,3 +1,7 @@
+---
+description: collections、itertools、functools、pathlib、re 与 json/datetime 的常用面。
+---
+
 # 标准库精选
 
 Python「自带电池」（batteries included）的底气来自标准库。这页挑出最高频的几个模块：collections、itertools、functools、pathlib、re、json、datetime——它们能省掉大部分第三方依赖。

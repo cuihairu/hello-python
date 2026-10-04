@@ -1,3 +1,7 @@
+---
+description: unittest 与 pytest 的写法对比、测试替身四类与覆盖率在 CI 的落法。
+---
+
 # 测试：unittest 与 pytest
 
 测试是重构的底气。unittest 是标准库的 xUnit 风格框架，pytest 是事实上的社区标准：断言写 `assert parse_port("80") == 80` 一行，不用记 `assertEqual` 这类方法名；fixture 在用例结束自动回收（`yield` 之后的代码做清理），不用手写 tearDown 与 setUp 配对。两者都能测，新项目直接上 pytest。

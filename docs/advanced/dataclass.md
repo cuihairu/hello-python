@@ -1,3 +1,7 @@
+---
+description: "@dataclass 自动生成 __init__、__repr__、__eq__，field 与 __post_init__ 配置。"
+---
+
 # dataclass 与结构化数据
 
 多数类本质是「带字段的结构」：存数据、比较相等、打印可读。`@dataclass` 装饰器把这些样板代码自动生成，3.7 起用它表达结构化数据。

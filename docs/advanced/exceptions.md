@@ -1,3 +1,7 @@
+---
+description: try/except/else/finally 结构、异常链、自定义异常与 3.11 异常组。
+---
+
 # 异常处理
 
 Python 用异常表达错误：出错就抛（raise），能处理就接（except），接不住就让程序带着完整栈退出。语法层面是 try/except/else/finally，语义层面是「异常即控制流」。

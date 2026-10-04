@@ -1,3 +1,7 @@
+---
+description: venv 隔离、pyproject.toml 声明依赖、锁文件与 uv/Poetry 的取舍。
+---
+
 # 虚拟环境与依赖管理
 
 依赖管理的目标只有一个：让「我机器上能跑」变成「任何人任何机器都能跑」。工具是 venv + pip + 锁定文件这三件套，配合现代工具 uv/Poetry 提效。

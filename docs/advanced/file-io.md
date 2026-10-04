@@ -1,3 +1,7 @@
+---
+description: pathlib 路径操作、文本读写与编码显式化，csv 与 json 结构化数据处理。
+---
+
 # 文件与 IO
 
 文件操作三要素：打开、读写、关闭。Python 用 with 语句保证关闭（见上下文管理器一章），用 pathlib 提供面向对象的路径操作。
