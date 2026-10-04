@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { ERAS, FIELD_LABELS, TIMELINE } from '../data/timeline'
 import type { TimelineEvent } from '../data/timeline'
 
@@ -52,22 +52,30 @@ function toggle(idx: number) {
   expanded.value = expanded.value === idx ? null : idx
 }
 
-// 滚动进场：尊重 prefers-reduced-motion，命中则直接呈现
-onMounted(() => {
+// 滚动进场：尊重 prefers-reduced-motion，命中则直接呈现。
+// 筛选切换会卸载/重挂分期块，重挂的是新 DOM，periods 变化后必须补观察
+let observer: IntersectionObserver | null = null
+
+function observeEras() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-  const io = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in')
-          io.unobserve(entry.target)
+  if (!observer) {
+    observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in')
+            observer!.unobserve(entry.target)
+          }
         }
-      }
-    },
-    { threshold: 0.12 },
-  )
-  document.querySelectorAll('.tl-era').forEach((el) => io.observe(el))
-})
+      },
+      { threshold: 0.12 },
+    )
+  }
+  document.querySelectorAll('.tl-era:not(.in)').forEach((el) => observer!.observe(el))
+}
+
+onMounted(observeEras)
+watch(periods, () => nextTick(observeEras))
 </script>
 
 <template>
