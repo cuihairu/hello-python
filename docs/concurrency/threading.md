@@ -1,6 +1,6 @@
 # 多线程与 GIL
 
-线程是操作系统调度的执行单元。Python 标准库 `threading` 提供线程原语，但受全局解释器锁（GIL）约束——多线程在 CPU 密集任务上不加速，真正的用武之地是 IO 密集。
+线程是操作系统调度的执行单元。Python 标准库 `threading` 提供线程原语，但受全局解释器锁（GIL）约束：多线程在 CPU 密集任务上不加速，真正的用武之地是 IO 密集。
 
 ## GIL 是什么
 
@@ -14,7 +14,7 @@ CPython 中任何时刻只有一个线程执行 Python 字节码，GIL（Global 
 | CPU 密集（计算、解析） | 无效甚至更慢 | 线程切换 + 锁开销，实际还是串行 |
 
 ::: tip GIL 的演进
-Python 3.9 起可用 `sys.setswitchinterval` 调整切换间隔；3.12 起 CPython 从隔离的 per-interpreter GIL 走向子解释器并行；3.13 开始提供实验性的 free-threaded 构建（无 GIL 编译选项，PEP 703）。默认的单进程 CPython 仍带 GIL——本文以默认构建为准。
+Python 3.9 起可用 `sys.setswitchinterval` 调整切换间隔；3.12 起 CPython 从隔离的 per-interpreter GIL 走向子解释器并行；3.13 开始提供实验性的 free-threaded 构建（无 GIL 编译选项，PEP 703）。默认的单进程 CPython 仍带 GIL，本文以默认构建为准。
 :::
 
 ## 创建线程
@@ -153,7 +153,7 @@ print(events, count[0] > 0)
 - 用：网络请求、文件读写、数据库轮询、GUI 后台任务——一切大部分时间在「等」的场景。
 - 不用：数值计算、图像处理、大规模文本解析——GIL 下串行；改用多进程（见下一章）或 C 扩展/NumPy 释放 GIL 的原生代码。
 
-判断方法不是猜，是量：`cProfile` 或简单计时看时间花在计算还是等待。
+判断靠测量：用 `cProfile` 或简单计时，看时间花在计算还是等待。
 
 ## 小结
 

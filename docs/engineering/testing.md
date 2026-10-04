@@ -1,6 +1,6 @@
 # 测试：unittest 与 pytest
 
-测试是重构的底气。unittest 是标准库的 xUnit 风格框架，pytest 是事实上的社区标准——更简洁的断言与更灵活的 fixture。两者都能测，新项目直接上 pytest。
+测试是重构的底气。unittest 是标准库的 xUnit 风格框架，pytest 是事实上的社区标准：断言写 `assert parse_port("80") == 80` 一行，不用记 `assertEqual` 这类方法名；fixture 在用例结束自动回收（`yield` 之后的代码做清理），不用手写 tearDown 与 setUp 配对。两者都能测，新项目直接上 pytest。
 
 ## 一个被测模块
 
@@ -161,7 +161,7 @@ print(m("x"), m.called)
 
 ## 覆盖率与 CI
 
-覆盖率不是目标，是线索——没覆盖的分支先问「该不该测」再补。
+覆盖率只是线索：没覆盖的分支先问「该不该测」，该测的再补上。
 
 ```bash
 python3 -m pip install pytest-cov

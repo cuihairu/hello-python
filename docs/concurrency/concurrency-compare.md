@@ -121,11 +121,11 @@ CPU 密集替换：`from concurrent.futures import ProcessPoolExecutor` 后 `run
 
 ## 常见错误清单
 
-- 在 asyncio 里调 `time.sleep` / 同步 requests——卡死整个循环。
-- 线程里改共享 dict/list 不加锁——偶发数据损坏，难复现。
-- 多进程回调里用 lambda/闭包——spawn 下 pickle 失败。
-- 把 multiprocessing 当提速银弹——小任务序列化开销反超收益。
-- 忘了进程/线程池的 `with`/`shutdown`——资源悬挂。
+- 在 asyncio 里调 `time.sleep` / 同步 requests，会卡死整个循环。
+- 线程里改共享 dict/list 不加锁，偶发数据损坏，难复现。
+- 多进程回调里用 lambda/闭包，spawn 下 pickle 失败。
+- 把 multiprocessing 当提速银弹，小任务的序列化开销会反超收益。
+- 忘了进程/线程池的 `with`/`shutdown`，资源会悬挂。
 
 ## 小结
 

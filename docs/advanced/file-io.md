@@ -23,7 +23,7 @@ demo.txt .txt demo
 
 ## 读写文本
 
-`read_text`/`write_text` 是一次性读写（适合中小文件），永远显式给 `encoding="utf-8"`。大文件用迭代器按行读，不占内存：
+`read_text`/`write_text` 是一次性读写（适合中小文件），始终显式给 `encoding="utf-8"`。大文件用迭代器按行读，不占内存：
 
 ```python
 from pathlib import Path
@@ -191,4 +191,4 @@ with tempfile.TemporaryDirectory() as d:
 - 路径用 `pathlib.Path`，`/` 拼接，`glob`/`rglob` 找文件。
 - 一次性读写 `read_text`/`write_text`，大文件逐行迭代。
 - CSV/JSON 分别用标准库模块，json 传 `ensure_ascii=False`。
-- 关键写入用临时文件 + `replace` 原子替换；编码永远显式。
+- 关键写入用临时文件 + `replace` 原子替换；编码始终显式。

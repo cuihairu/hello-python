@@ -162,7 +162,7 @@ SELECT id, name
 
 ## 编码：str 与 bytes
 
-`str` 是 Unicode 码点序列，`bytes` 是字节序列。网络与磁盘的永远是 bytes，进出都要过一遍编码解码；解码遇到非法字节抛 `UnicodeDecodeError`，可用 `errors` 参数容错：
+`str` 是 Unicode 码点序列，`bytes` 是字节序列。网络与磁盘里都是 bytes，进出都要过一遍编码解码；解码遇到非法字节抛 `UnicodeDecodeError`，可用 `errors` 参数容错：
 
 ```python
 s = "中文"
@@ -180,7 +180,7 @@ b'\xe4\xb8\xad\xe6\x96\x87' 2 6
 ��ok
 ```
 
-文件与网络 API 都要显式给 `encoding="utf-8"`，不要依赖平台默认编码（Windows 上常是 GBK，这正是「读文件乱码」的头号原因）：
+文件与网络 API 都要显式给 `encoding="utf-8"`，不要依赖平台默认编码（Windows 上常是 GBK，这正是「读文件乱码」的常见原因）：
 
 ```python
 import tempfile, pathlib

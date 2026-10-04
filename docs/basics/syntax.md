@@ -15,7 +15,7 @@ else:
     print("不及格")
 ```
 
-缩进错了不是风格问题而是语法错误：该缩进不缩进报 `IndentationError`，多缩进一层报 `unexpected indent`。
+缩进错误属于语法错误：该缩进不缩进报 `IndentationError`，多缩进一层报 `unexpected indent`。
 
 ## 注释与文档字符串
 

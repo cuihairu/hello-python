@@ -41,7 +41,7 @@ print(safe(1, 0), safe(1, "a"), safe(1, 4))
 ```
 
 ::: warning 裸 except 是事故放大器
-`except:` 连 KeyboardInterrupt、SystemExit 都吞，线上出问题查无可查。最低限度也要 `except Exception`，并且要么处理、要么记日志、要么重新抛出——绝不静默吞掉：
+`except:` 连 KeyboardInterrupt、SystemExit 都吞，线上出问题查无可查。最低限度也要 `except Exception`，捕获后处理、记日志或重新抛出，不要静默吞掉：
 
 ```python
 def risky(func):
@@ -203,6 +203,6 @@ run()
 ## 小结
 
 - try/except/else/finally 各司其职；except 按子类顺序排列。
-- 永不裸 except；要么处理要么放行，用 `raise ... from e` 保上下文。
+- 别写裸 except；要么处理要么放行，用 `raise ... from e` 保上下文。
 - 自定义异常继承 Exception，携带结构化字段。
 - 默认 EAFP 风格；3.11+ 异常组服务并发批量失败。

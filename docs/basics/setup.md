@@ -1,6 +1,6 @@
 # 环境搭建与工具链
 
-工欲善其事，必先利其器。本章把一套顺手的 Python 开发环境搭起来：解释器怎么装、版本怎么选、虚拟环境和 pip 怎么用、编辑器怎么配。
+本章把一套顺手的 Python 开发环境搭起来：解释器怎么装、版本怎么选、虚拟环境和 pip 怎么用、编辑器怎么配。
 
 ## 安装 Python
 
@@ -77,15 +77,12 @@ deactivate                   # 退出虚拟环境
 激活后提示符会出现 `(.venv)` 前缀，此时 `python`、`pip` 都指向虚拟环境内的副本。`.venv/` 目录不应提交到版本库（本仓库的 `.gitignore` 已忽略）。
 
 ::: tip 环境管理工具的演进
-传统三件套是 venv + pip + requirements.txt。社区还有更现代的统一工具：[uv](https://github.com/astral-sh/uv)（Rust 编写，极快，兼容 pip 工作流）、[Poetry](https://python-poetry.org/)（依赖解析 + 打包一体）、[PDM](https://pdm-project.org/)（遵循 PEP 582/621）。初学先用 venv + pip 打好底，理解了再上工具。
+传统三件套是 venv + pip + requirements.txt。社区还有更现代的统一工具：[uv](https://github.com/astral-sh/uv)（Rust 编写，兼容 pip 工作流）、[Poetry](https://python-poetry.org/)（依赖解析 + 打包一体）、[PDM](https://pdm-project.org/)（遵循 PEP 582/621）。初学先用 venv + pip 打好底，理解了再上工具。
 :::
 
 ## 编辑器与调试
 
-两个主流选择：
-
-- **VS Code**：装官方 Python 扩展（Pylance 提供语言服务），轻量、启动快，配置即开即用。
-- **PyCharm**：Community 版免费，重构、调试、测试集成开箱即得，适合大型项目。
+两个主流选择：VS Code 装官方 Python 扩展（Pylance 提供语言服务），轻量、启动快，配置即开即用；PyCharm 的 Community 版免费，重构、调试、测试集成开箱即得，适合大型项目。
 
 无论用哪个，把格式化工具和 linter 配进保存动作：`ruff` 一个工具同时承担检查与格式化（替代 flake8 + isort + black），装好后 VS Code 保存即自动修格式。
 
@@ -98,5 +95,5 @@ ruff format .       # 格式化
 ## 小结
 
 - pyenv 管多版本，venv 管项目隔离，pip 管包安装，三层各司其职。
-- 用 `python3 -m pip` 与 `python3 -m venv`，让命令永远绑定当前解释器。
+- 用 `python3 -m pip` 与 `python3 -m venv`，让命令始终绑定当前解释器。
 - 依赖清单 requirements.txt 随代码一起提交，别人才能复现你的环境。

@@ -110,6 +110,6 @@ uv lock                 # 生成 uv.lock，跨机器可复现
 ## 小结
 
 - venv 隔离环境，pyproject.toml 声明直接依赖，锁文件固定全量版本。
-- `python3 -m pip` 永远绑定当前解释器。
+- `python3 -m pip` 指向当前解释器的 pip。
 - 追效率用 uv，要成熟锁体验用 Poetry；pip freeze 是底线而非终点。
 - 事故九成来自「不隔离」与「不锁版本」。
