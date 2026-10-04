@@ -85,6 +85,7 @@ watch(periods, () => nextTick(observeEras))
         type="button"
         class="tl-chip"
         :class="{ active: filter === 'all' }"
+        :aria-pressed="filter === 'all'"
         @click="filter = 'all'"
       >全部 <b>{{ counts.all }}</b></button>
       <button
@@ -93,6 +94,7 @@ watch(periods, () => nextTick(observeEras))
         type="button"
         class="tl-chip"
         :class="{ active: filter === f }"
+        :aria-pressed="filter === f"
         @click="filter = f"
       >{{ FIELD_LABELS[f] }} <b>{{ counts[f] }}</b></button>
     </div>
@@ -205,6 +207,13 @@ watch(periods, () => nextTick(observeEras))
 
 .tl-chip.active b {
   color: #fff;
+}
+
+/* 键盘走查：自定义按钮给品牌色焦点环，不依赖 UA 默认样式 */
+.tl-chip:focus-visible,
+.tl-row:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
 }
 
 /* ── 分期块 ─────────────────────────────────── */
