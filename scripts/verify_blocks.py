@@ -11,7 +11,7 @@ import subprocess
 import sys
 import tempfile
 
-ROOT = pathlib.Path('/home/cui/workspaces/hello-python')
+ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 
 def extract(path):
