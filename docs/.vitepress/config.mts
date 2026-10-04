@@ -21,7 +21,11 @@ export default defineConfig({
   },
 
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/hello-python/favicon.svg' }]
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/hello-python/favicon.svg' }],
+    // 移动端浏览器地址栏着色，取两种模式的真实页面底色；
+    // media 放首位：mergeHead 取首个非 content 属性做去重键，靠 media 区分两条
+    ['meta', { media: '(prefers-color-scheme: light)', name: 'theme-color', content: '#ffffff' }],
+    ['meta', { media: '(prefers-color-scheme: dark)', name: 'theme-color', content: '#0d1117' }]
   ],
 
   ignoreDeadLinks: false,
@@ -38,7 +42,8 @@ export default defineConfig({
       ['meta', { property: 'og:type', content: 'website' }],
       ['meta', { property: 'og:site_name', content: siteData.title }],
       ['meta', { property: 'og:title', content: pageData.title }],
-      ['meta', { property: 'og:url', content: url }]
+      ['meta', { property: 'og:url', content: url }],
+      ['meta', { property: 'og:locale', content: 'zh_CN' }]
     ]
     const desc = pageData.description || siteData.description
     if (desc) head.push(['meta', { property: 'og:description', content: desc }])
