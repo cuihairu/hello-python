@@ -55,6 +55,11 @@ export default defineConfig({
       copyright: '© 2025 cuihairu'
     },
 
+    editLink: {
+      pattern: 'https://github.com/cuihairu/hello-python/edit/main/docs/:path',
+      text: '在 GitHub 上编辑此页'
+    },
+
     search: {
       provider: 'local',
       options: {
