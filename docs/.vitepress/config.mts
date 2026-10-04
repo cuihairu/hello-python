@@ -26,7 +26,12 @@ export default defineConfig({
     // 移动端浏览器地址栏着色，取两种模式的真实页面底色；
     // media 放首位：mergeHead 取首个非 content 属性做去重键，靠 media 区分两条
     ['meta', { media: '(prefers-color-scheme: light)', name: 'theme-color', content: '#ffffff' }],
-    ['meta', { media: '(prefers-color-scheme: dark)', name: 'theme-color', content: '#0d1117' }]
+    ['meta', { media: '(prefers-color-scheme: dark)', name: 'theme-color', content: '#0d1117' }],
+    // 分享卡片图与 twitter 卡型；图为 1200x630 静态卡，由 logo.svg 栅格化合成
+    ['meta', { property: 'og:image', content: 'https://cuihairu.github.io/hello-python/og-image.png' }],
+    ['meta', { property: 'og:image:width', content: '1200' }],
+    ['meta', { property: 'og:image:height', content: '630' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }]
   ],
 
   ignoreDeadLinks: false,
