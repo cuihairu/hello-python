@@ -10,6 +10,16 @@ export default defineConfig({
   cleanUrls: true,
   lastUpdated: true,
 
+  sitemap: {
+    hostname: 'https://cuihairu.github.io',
+    // vitepress 生成的 item url 不含 base，子路径部署需手动补
+    transformItems: (items) =>
+      items.map((item) => ({
+        ...item,
+        url: ('/hello-python/' + String(item.url).replace(/^\//, ''))
+      }))
+  },
+
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/hello-python/favicon.svg' }]
   ],
