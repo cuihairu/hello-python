@@ -29,6 +29,22 @@ export default defineConfig({
   // 外部写入 docs/ 的平行编号目录（01-…06-）：隔离出构建，归属未明不进站
   srcExclude: ['0[1-6]-*/*.md', '0[1-6]-*/**/*.md'],
 
+  // 逐页补社交分享标签；无 og:image（仓库只有 SVG 图，爬虫不支持，宁缺毋假）
+  transformHead: ({ pageData, siteData }) => {
+    const url =
+      'https://cuihairu.github.io/hello-python/' +
+      String(pageData.relativePath).replace(/(index)?\.md$/, '')
+    const head: [string, Record<string, string>][] = [
+      ['meta', { property: 'og:type', content: 'website' }],
+      ['meta', { property: 'og:site_name', content: siteData.title }],
+      ['meta', { property: 'og:title', content: pageData.title }],
+      ['meta', { property: 'og:url', content: url }]
+    ]
+    const desc = pageData.description || siteData.description
+    if (desc) head.push(['meta', { property: 'og:description', content: desc }])
+    return head
+  },
+
   themeConfig: {
     logo: '/logo.svg',
     siteTitle: 'Hello Python',
