@@ -14,7 +14,7 @@ export default defineConfig({
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/hello-python/favicon.svg' }]
   ],
 
-  ignoreDeadLinks: true,
+  ignoreDeadLinks: false,
 
   // 外部写入 docs/ 的平行编号目录（01-…06-）：隔离出构建，归属未明不进站
   srcExclude: ['0[1-6]-*/*.md', '0[1-6]-*/**/*.md'],
