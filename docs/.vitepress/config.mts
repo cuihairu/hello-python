@@ -55,6 +55,28 @@ export default defineConfig({
             resetButtonTitle: '清除查询条件',
             footer: { selectText: '选择', navigateText: '切换', closeText: '关闭' }
           }
+        },
+        // MiniSearch 默认按空白/标点切词，中文整句成为一个 token，查询基本落空；
+        // 这里把汉字串切成二元组（单字落单时保留单字），拉丁/数字仍按词切
+        miniSearch: {
+          options: {
+            tokenize: (text: string): string[] => {
+              const tokens: string[] = []
+              for (const word of text.toLowerCase().split(/[^\p{L}\p{N}_]+/u)) {
+                if (!word) continue
+                if (/^[㐀-䶿一-鿿]+$/.test(word)) {
+                  if (word.length === 1) {
+                    tokens.push(word)
+                  } else {
+                    for (let i = 0; i < word.length - 1; i++) tokens.push(word.slice(i, i + 2))
+                  }
+                } else {
+                  tokens.push(word)
+                }
+              }
+              return tokens
+            }
+          }
         }
       }
     },
