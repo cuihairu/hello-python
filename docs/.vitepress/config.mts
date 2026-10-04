@@ -22,6 +22,7 @@ export default defineConfig({
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/hello-python/favicon.svg' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/hello-python/apple-touch-icon.png' }],
     // 移动端浏览器地址栏着色，取两种模式的真实页面底色；
     // media 放首位：mergeHead 取首个非 content 属性做去重键，靠 media 区分两条
     ['meta', { media: '(prefers-color-scheme: light)', name: 'theme-color', content: '#ffffff' }],
