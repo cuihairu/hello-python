@@ -30,5 +30,6 @@ docs/
 ├── advanced/        # 进阶：OOP、魔法方法、装饰器、类型注解
 ├── concurrency/     # 并发：threading、asyncio、multiprocessing
 ├── engineering/     # 工程：标准库、测试、日志、打包
+├── internals/       # 源码解析：CPython 源码走读（带文件行号引用）
 └── .vitepress/      # VitePress 配置与主题
 ```

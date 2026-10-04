@@ -29,7 +29,8 @@ export default defineConfig({
       { text: '数据结构', link: '/datastructures/list-tuple' },
       { text: '进阶', link: '/advanced/oop' },
       { text: '并发编程', link: '/concurrency/threading' },
-      { text: '工程实践', link: '/engineering/stdlib' }
+      { text: '工程实践', link: '/engineering/stdlib' },
+      { text: '源码解析', link: '/internals/cpython-source' }
     ],
 
     // 本仓无 mdbook 遗留，sidebar.json 为手工编排的目录

@@ -142,6 +142,16 @@
     ]
   },
   {
+    "text": "源码解析",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "CPython 源码解析",
+        "link": "/internals/cpython-source"
+      }
+    ]
+  },
+  {
     "text": "发展史时间线",
     "link": "/timeline"
   }
