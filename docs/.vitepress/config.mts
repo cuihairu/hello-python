@@ -167,6 +167,9 @@ export default defineConfig({
 
     returnToTopLabel: '回到顶部',
     sidebarMenuLabel: '菜单',
+    navMenuLabel: '主导航',
+    mobileMenuLabel: '打开菜单',
+    skipToContentLabel: '跳到正文',
     darkModeSwitchLabel: '外观',
     lightModeSwitchTitle: '切换到浅色模式',
     darkModeSwitchTitle: '切换到深色模式'
