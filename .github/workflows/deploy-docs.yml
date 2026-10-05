@@ -42,6 +42,9 @@ jobs:
       - name: Verify markdown anchors
         run: python3 scripts/check_anchors.py
 
+      - name: Verify timeline data
+        run: python3 scripts/check_timeline.py
+
       - name: Build with VitePress
         run: npm run docs:build
 
