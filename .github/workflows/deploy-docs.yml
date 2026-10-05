@@ -3,6 +3,8 @@ name: Deploy VitePress to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -49,6 +51,8 @@ jobs:
           path: docs/.vitepress/dist
 
   deploy:
+    # PR 只跑校验不部署；push main 与手动触发才发布
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
