@@ -22,6 +22,9 @@ export default defineConfig({
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/hello-python/favicon.svg' }],
+    // PNG 兜底：部分浏览器/场景不支持 SVG favicon，按 sizes 提供 16/32
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/hello-python/favicon-32.png' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/hello-python/favicon-16.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/hello-python/apple-touch-icon.png' }],
     // 移动端浏览器地址栏着色，取两种模式的真实页面底色；
     // media 放首位：mergeHead 取首个非 content 属性做去重键，靠 media 区分两条
