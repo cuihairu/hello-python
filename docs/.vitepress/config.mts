@@ -42,12 +42,12 @@ export default defineConfig({
   // 外部写入 docs/ 的平行编号目录（01-…06-）：隔离出构建，归属未明不进站
   srcExclude: ['0[1-6]-*/*.md', '0[1-6]-*/**/*.md'],
 
-  // 逐页补社交分享标签；无 og:image（仓库只有 SVG 图，爬虫不支持，宁缺毋假）
+  // 逐页补社交分享标签（og:image 用 og-image.png 静态卡）
   transformHead: ({ pageData, siteData }) => {
     const url =
       'https://cuihairu.github.io/hello-python/' +
       String(pageData.relativePath).replace(/(index)?\.md$/, '')
-    const head: [string, Record<string, string>][] = [
+    const head: [string, Record<string, string>, string?][] = [
       ['meta', { property: 'og:type', content: 'website' }],
       ['meta', { property: 'og:site_name', content: siteData.title }],
       ['meta', { property: 'og:title', content: pageData.title }],
@@ -56,6 +56,31 @@ export default defineConfig({
     ]
     const desc = pageData.description || siteData.description
     if (desc) head.push(['meta', { property: 'og:description', content: desc }])
+
+    // JSON-LD：首页 WebSite，内页 TechArticle（爬虫可读的页面语义）
+    const isHome = pageData.relativePath === 'index.md'
+    const jsonLd = isHome
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: siteData.title,
+          description: siteData.description,
+          url: 'https://cuihairu.github.io/hello-python/',
+          inLanguage: 'zh-CN'
+        }
+      : {
+          '@context': 'https://schema.org',
+          '@type': 'TechArticle',
+          headline: pageData.title,
+          description: desc,
+          url,
+          inLanguage: 'zh-CN',
+          image: 'https://cuihairu.github.io/hello-python/og-image.png',
+          author: { '@type': 'Person', name: 'cuihairu' },
+          publisher: { '@type': 'Person', name: 'cuihairu' },
+          mainEntityOfPage: { '@type': 'WebPage', '@id': url }
+        }
+    head.push(['script', { type: 'application/ld+json' }, JSON.stringify(jsonLd)])
     return head
   },
 
