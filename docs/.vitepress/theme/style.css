@@ -307,3 +307,78 @@ html {
 .VPFeature:hover::before {
   opacity: 1;
 }
+
+/* ---------- 打印（浏览器打印 / 导出 PDF） ---------- */
+@media print {
+  /* 深色模式直接打印会得到「浅色字 + 白纸」，整体压回 light 配色 */
+  html.dark {
+    color-scheme: light;
+    --vp-c-bg: #ffffff;
+    --vp-c-bg-soft: #f4f8fb;
+    --vp-c-bg-mute: #f4f8fb;
+    --vp-c-bg-elv: #ffffff;
+    --vp-c-text-1: #1a2430;
+    --vp-c-text-2: #3c4654;
+    --vp-c-text-3: #5b6672;
+    --vp-c-divider: #d8dee6;
+    --vp-c-border: #c9d2dc;
+    --vp-c-gutter: #d8dee6;
+    --vp-code-block-bg: #f4f8fb;
+    --vp-c-brand-1: #306998;
+    --vp-c-brand-2: #285A84;
+    --vp-c-brand-3: #204B70;
+    --vp-c-brand-soft: rgba(48, 105, 152, 0.14);
+  }
+  /* 代码高亮双主题：暗色规则 .dark .shiki span 优先级更高，用 !important 拉回 light */
+  .shiki span {
+    color: var(--shiki-light, inherit) !important;
+    -webkit-text-decoration: var(--shiki-light-text-decoration, inherit);
+    text-decoration: var(--shiki-light-text-decoration, inherit);
+    font-weight: var(--shiki-light-font-weight, inherit);
+  }
+
+  /* 壳层不印：导航、侧栏、页脚、页面导航、上下篇与编辑入口 */
+  .VPNav, .VPSidebar, .VPLocalNav, .VPFooter,
+  .VPDocAside, .VPDocFooter, .aside {
+    display: none !important;
+  }
+  /* 内容铺满纸面：去掉侧栏/目录占位与滚动留白 */
+  .VPContent, .VPDoc, .VPDoc .container, .VPDoc .content,
+  .vp-doc.container {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  /* 排版：代码块淡底保色并可断行，元素不跨页撕开 */
+  div[class*='language-'], pre {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  h1, h2, h3 {
+    break-after: avoid;
+  }
+  blockquote, table, tr, .custom-block {
+    break-inside: avoid;
+  }
+
+  /* 外链在纸面上补出完整 URL，扫码不可用时可手抄溯源 */
+  .vp-doc a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 12px;
+    color: #5b6672;
+    word-break: break-all;
+  }
+
+  /* 时间线滚动进场动画：未触发 .in 的节点打印时强制显形 */
+  .tl-era .tl-node {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
