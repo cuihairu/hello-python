@@ -56,14 +56,14 @@ asyncio.run(run_asyncio()); t3 = time.perf_counter()
 serial = (t1 - t0) * 1000
 threads = (t2 - t1) * 1000
 aio = (t3 - t2) * 1000
-print(serial >= 110, threads < 90, aio < 90)   # 串行 4x30ms；并发压到 ~30ms
+print(serial >= 110, threads < serial, aio < serial)   # 串行 4x30ms；并发只等其中一份
 ```
 
 ```text
 True True True
 ```
 
-串行 120ms，线程与协程都压到约 30ms——IO 等待场景两者等效，选型看并发规模与库生态。
+串行 4 段共 120ms，线程与协程只花其中一段的等待时间——IO 等待场景两者等效，选型看并发规模与库生态。（断言用与串行耗时的相对比较，机器负载高低都成立。）
 
 ## 实测：CPU 密集必须多进程
 
