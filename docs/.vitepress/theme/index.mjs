@@ -4,13 +4,8 @@ import '@fontsource/jetbrains-mono/400.css'
 import '@fontsource/jetbrains-mono/700.css'
 import './style.css'
 
+// 404 页文案在 .vitepress/config.mts 的 themeConfig.notFound：
+// NotFound 组件只读 useData().theme（即 themeConfig），theme 模块上的键不会被消费
 export default {
-  extends: DefaultTheme,
-  notFound: {
-    code: '404',
-    title: '页面未找到',
-    quote: '但如果你不改变方向，继续寻找，你可能会到达你本要去的地方。',
-    linkText: '回到首页',
-    linkLabel: '回到首页'
-  }
+  extends: DefaultTheme
 }
