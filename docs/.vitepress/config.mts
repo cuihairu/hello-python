@@ -45,10 +45,14 @@ export default defineConfig({
 
   // 逐页补社交分享标签（og:image 用 og-image.png 静态卡）
   transformHead: ({ pageData, siteData }) => {
+    // 404 是所有坏地址的软着陆页，不该带指向自身的 og:url/canonical/JSON-LD
+    if (pageData.relativePath === '404.md') return []
     const url =
       'https://cuihairu.github.io/hello-python/' +
       String(pageData.relativePath).replace(/(index)?\.md$/, '')
     const head: [string, Record<string, string>, string?][] = [
+      // canonical 收敛 URL 变体（尾斜杠/大小写/旧链），避免站外引用分权重
+      ['link', { rel: 'canonical', href: url }],
       ['meta', { property: 'og:type', content: 'website' }],
       ['meta', { property: 'og:site_name', content: siteData.title }],
       ['meta', { property: 'og:title', content: pageData.title }],
