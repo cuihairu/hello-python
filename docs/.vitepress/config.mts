@@ -177,7 +177,15 @@ export default defineConfig({
     skipToContentLabel: '跳到正文',
     darkModeSwitchLabel: '外观',
     lightModeSwitchTitle: '切换到浅色模式',
-    darkModeSwitchTitle: '切换到深色模式'
+    darkModeSwitchTitle: '切换到深色模式',
+
+    // 404 页默认值全英文（PAGE NOT FOUND / Take me home / 英文格言），中文站本地化
+    notFound: {
+      title: '页面不存在',
+      quote: '地址可能已经失效，或者从未存在过。',
+      linkText: '返回首页',
+      linkLabel: '返回首页'
+    }
   },
 
   markdown: {
