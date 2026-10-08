@@ -1,3 +1,5 @@
+[English](README.md) | [中文](README.zh.md)
+
 <div align="center">
 
 <p align="center"><img src="docs/public/logo.svg" width="64" height="64" alt="logo" /> </p>
@@ -11,36 +13,36 @@
   <img src="docs/public/badges/langs.svg" alt="langs" />
 </p>
 
-Python 语言知识体系 · [在线阅读](https://cuihairu.github.io/hello-python/)
+A Python knowledge base · [Read online](https://cuihairu.github.io/hello-python/)
 
 </div>
 
 ---
 
-从语法入门到工程实战的 Python 知识站点，覆盖数据结构、面向对象、并发编程、标准库、测试与打包发布。
+A Python knowledge site that goes from syntax basics to engineering practice, covering data structures, object-oriented programming, concurrent programming, the standard library, testing, and packaging.
 
-## 本地开发
+## Local development
 
 ```bash
-npm install          # 安装依赖
-npm run docs:dev     # 本地开发
-npm run docs:build   # 构建到 docs/.vitepress/dist
-npm run docs:preview # 本地预览构建产物
+npm install          # Install dependencies
+npm run docs:dev     # Start the dev server
+npm run docs:build   # Build to docs/.vitepress/dist
+npm run docs:preview # Preview the build output locally
 ```
 
-## 目录结构
+## Directory structure
 
 ```text
 docs/
-├── basics/          # 入门：环境、语法、类型、控制流、函数
-├── datastructures/  # 数据结构：列表、字典、字符串、迭代器
-├── advanced/        # 进阶：OOP、魔法方法、装饰器、类型注解
-├── concurrency/     # 并发：threading、asyncio、multiprocessing
-├── engineering/     # 工程：标准库、测试、日志、打包
-├── internals/       # 源码解析：CPython 源码走读（带文件行号引用）
-└── .vitepress/      # VitePress 配置与主题
+├── basics/          # Getting started: environment, syntax, types, control flow, functions
+├── datastructures/  # Data structures: lists, dicts, strings, iterators
+├── advanced/        # Advanced: OOP, magic methods, decorators, type annotations
+├── concurrency/     # Concurrency: threading, asyncio, multiprocessing
+├── engineering/     # Engineering: standard library, testing, logging, packaging
+├── internals/       # CPython source walkthroughs (with file and line references)
+└── .vitepress/      # VitePress config and theme
 ```
 
 ## License
 
-本作品采用 [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) 许可协议发布。
+This work is published under the [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) license.
