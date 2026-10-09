@@ -17,7 +17,7 @@ description: 站内知识点对应的官方出处：PEP 逐条、标准库章节
 - **[PEP 517](https://peps.python.org/pep-0517/) 与 [PEP 518](https://peps.python.org/pep-0518/)**：构建后端接口与 `pyproject.toml`，现代打包的根基。→ [打包与发布](/engineering/packaging)
 - **[PEP 557](https://peps.python.org/pep-0557/)**：dataclasses，3.7 落地。→ [dataclass](/advanced/dataclass)
 - **[PEP 572](https://peps.python.org/pep-0572/)**：海象运算符 `:=`，3.8 落地。→ [语法基础](/basics/syntax)
-- **[PEP 582](https://peps.python.org/pep-0582/)**：`__pypackages__` 本地包目录方案，PDM 的立身之本（提案本身已被撤回，工具仍在）。→ [虚拟环境与依赖管理](/engineering/environments)
+- **[PEP 582](https://peps.python.org/pep-0582/)**：`__pypackages__` 本地包目录方案，PDM 的立身之本（提案本身已被否决，工具仍在）。→ [虚拟环境与依赖管理](/engineering/environments)
 - **[PEP 584](https://peps.python.org/pep-0584/)**：dict 合并运算符 `|`，3.9 落地。→ [字典与集合](/datastructures/dict-set)
 - **[PEP 617](https://peps.python.org/pep-0617/)**：PEG 解析器替换 pgen，3.9 落地，为后续语法演进解除束缚。→ [CPython 源码解析](/internals/cpython-source)
 - **[PEP 621](https://peps.python.org/pep-0621/)**：项目元数据进 `pyproject.toml`。→ [虚拟环境与依赖管理](/engineering/environments)
