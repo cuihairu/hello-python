@@ -42,6 +42,8 @@ docs/
 ├── concurrency/     # Concurrency: threading, asyncio, multiprocessing
 ├── engineering/     # Engineering: standard library, testing, logging, packaging
 ├── internals/       # CPython source walkthroughs (with file and line references)
+├── knowledge/       # Knowledge base: concepts, books, official docs, scenarios, pitfalls
+├── timeline.md      # Language history timeline
 └── .vitepress/      # VitePress config and theme
 ```
 

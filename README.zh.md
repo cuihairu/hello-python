@@ -42,6 +42,8 @@ docs/
 ├── concurrency/     # 并发：threading、asyncio、multiprocessing
 ├── engineering/     # 工程：标准库、测试、日志、打包
 ├── internals/       # 源码解析：CPython 源码走读（带文件行号引用）
+├── knowledge/       # 知识体系：概念、书籍、官方文档、场景与坑
+├── timeline.md      # 发展史时间线
 └── .vitepress/      # VitePress 配置与主题
 ```
 

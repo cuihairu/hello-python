@@ -100,7 +100,9 @@ export default defineConfig({
       { text: '进阶', link: '/advanced/oop' },
       { text: '并发编程', link: '/concurrency/threading' },
       { text: '工程实践', link: '/engineering/stdlib' },
-      { text: '源码解析', link: '/internals/cpython-source' }
+      { text: '源码解析', link: '/internals/cpython-source' },
+      { text: '时间线', link: '/timeline' },
+      { text: '知识体系', link: '/knowledge/' }
     ],
 
     // 本仓无 mdbook 遗留，sidebar.json 为手工编排的目录
