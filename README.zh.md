@@ -32,6 +32,19 @@ npm run docs:build   # 构建到 docs/.vitepress/dist
 npm run docs:preview # 本地预览构建产物
 ```
 
+## 文档校验
+
+CI 在每次推送和 PR 上跑四道门禁，提交前可在本地先跑：
+
+```bash
+python3 scripts/verify_blocks.py   # 校验代码块输出与文档一致
+python3 scripts/check_anchors.py    # 校验内部链接与锚点
+python3 scripts/check_timeline.py    # 校验时间线数据
+python3 scripts/check_links.py      # 校验外链（以 CI 结果为准）
+```
+
+构建也必须通过：`npm run docs:build`。
+
 ## 目录结构
 
 ```text

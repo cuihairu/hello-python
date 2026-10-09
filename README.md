@@ -32,6 +32,19 @@ npm run docs:build   # Build to docs/.vitepress/dist
 npm run docs:preview # Preview the build output locally
 ```
 
+## Documentation checks
+
+CI runs four gates on every push and pull request; run them locally before committing:
+
+```bash
+python3 scripts/verify_blocks.py   # Verify code block outputs match the docs
+python3 scripts/check_anchors.py    # Verify internal links and anchors
+python3 scripts/check_timeline.py    # Verify timeline data
+python3 scripts/check_links.py      # Verify external links (CI is authoritative)
+```
+
+The build must also pass: `npm run docs:build`.
+
 ## Directory structure
 
 ```text
