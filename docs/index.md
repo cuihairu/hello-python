@@ -10,6 +10,9 @@ hero:
       text: 开始阅读
       link: /basics/setup
     - theme: alt
+      text: 知识体系
+      link: /knowledge/
+    - theme: alt
       text: GitHub
       link: https://github.com/cuihairu/hello-python
 
