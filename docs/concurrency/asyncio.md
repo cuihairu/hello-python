@@ -46,13 +46,18 @@ async def fetch(tag, delay):
 
 async def main():
     t0 = time.perf_counter()
+    for tag in ("x", "y", "z"):
+        await fetch(tag, 0.05)         # 串行：三个 50ms 逐一加起来
+    serial = time.perf_counter() - t0
+
+    t0 = time.perf_counter()
     r1 = await asyncio.gather(
         fetch("A", 0.05),
         fetch("B", 0.05),
         fetch("C", 0.05),
     )
     cost = time.perf_counter() - t0
-    print(r1, cost < 0.12)             # 三个 50ms 并发 ≈ 50-60ms
+    print(r1, cost < serial)           # 并发 ≈ 最慢一个，串行是三者之和
 
 asyncio.run(main())
 ```
