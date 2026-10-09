@@ -42,6 +42,9 @@ jobs:
       - name: Verify markdown anchors
         run: python3 scripts/check_anchors.py
 
+      - name: Check external links
+        run: python3 scripts/check_links.py
+
       - name: Verify timeline data
         run: python3 scripts/check_timeline.py
 

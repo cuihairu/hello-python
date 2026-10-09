@@ -16,7 +16,7 @@ description: 站内知识点对应的权威书籍：书名、作者、实考链�
 ## 并发与性能
 
 - **《Python Concurrency with asyncio》** Matthew Fowler（Manning，2022）：14 章，从事件循环与协程到 `gather`、超时取消、阻塞调用改造、CPU 密集任务的进程池混合方案；成书于 Python 3.10，早于 3.11 的 `TaskGroup`，书中对应内容是 `gather` 与 `wait`。→ [异步编程 asyncio](/concurrency/asyncio)　（实考：[Manning 图书页](https://www.manning.com/books/python-concurrency-with-asyncio)，目录经 pythonbooks.org 核对）
-- **《High Performance Python》** Micha Gorelick、Ian Ozsvald（第 2 版，O'Reilly，2020）：13 章，从性能剖析与基准测试讲到容器内幕、迭代器生成器、矩阵向量化、编译到 C、并发与 multiprocessing、省内存。→ [多进程 multiprocessing](/concurrency/multiprocessing)、[日志与调试](/engineering/logging)、[推导式、迭代器与生成器](/datastructures/iterators-generators)　（实考：[作者官网书页](https://ianozsvald.com/high-performance-python-book/)，目录核对）
+- **《High Performance Python》** Micha Gorelick、Ian Ozsvald（第 2 版，O'Reilly，2020）：13 章，从性能剖析与基准测试讲到容器内幕、迭代器生成器、矩阵向量化、编译到 C、并发与 multiprocessing、省内存。→ [多进程 multiprocessing](/concurrency/multiprocessing)、[日志与调试](/engineering/logging)、[推导式、迭代器与生成器](/datastructures/iterators-generators)　（实考：13 章目录经作者官网书页核对；该站已转型下线，现挂 [O'Reilly 图书页](https://www.oreilly.com/library/view/high-performance-python-2nd/9781492055013/)）
 
 ## 工程实践
 
