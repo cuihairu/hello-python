@@ -154,5 +154,35 @@
   {
     "text": "发展史时间线",
     "link": "/timeline"
+  },
+  {
+    "text": "知识体系",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "知识点总览",
+        "link": "/knowledge/"
+      },
+      {
+        "text": "核心概念",
+        "link": "/knowledge/core-concepts"
+      },
+      {
+        "text": "权威书籍",
+        "link": "/knowledge/books"
+      },
+      {
+        "text": "官方文档",
+        "link": "/knowledge/official-docs"
+      },
+      {
+        "text": "应用场景",
+        "link": "/knowledge/scenarios"
+      },
+      {
+        "text": "常见坑",
+        "link": "/knowledge/pitfalls"
+      }
+    ]
   }
 ]

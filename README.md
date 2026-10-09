@@ -21,6 +21,8 @@ A Python knowledge base · [Read online](https://cuihairu.github.io/hello-python
 
 A Python knowledge site that goes from syntax basics to engineering practice, covering data structures, object-oriented programming, concurrent programming, the standard library, testing, and packaging.
 
+Knowledge base: [Core concepts](https://cuihairu.github.io/hello-python/knowledge/core-concepts) · [Books](https://cuihairu.github.io/hello-python/knowledge/books) · [Official docs](https://cuihairu.github.io/hello-python/knowledge/official-docs) · [Scenarios](https://cuihairu.github.io/hello-python/knowledge/scenarios) · [Pitfalls](https://cuihairu.github.io/hello-python/knowledge/pitfalls)
+
 ## Local development
 
 ```bash

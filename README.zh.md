@@ -21,6 +21,8 @@ Python 语言知识体系 · [在线阅读](https://cuihairu.github.io/hello-pyt
 
 从语法入门到工程实战的 Python 知识站点，覆盖数据结构、面向对象、并发编程、标准库、测试与打包发布。
 
+知识点体系：[核心概念](https://cuihairu.github.io/hello-python/knowledge/core-concepts) · [权威书籍](https://cuihairu.github.io/hello-python/knowledge/books) · [官方文档](https://cuihairu.github.io/hello-python/knowledge/official-docs) · [应用场景](https://cuihairu.github.io/hello-python/knowledge/scenarios) · [常见坑](https://cuihairu.github.io/hello-python/knowledge/pitfalls)
+
 ## 本地开发
 
 ```bash
