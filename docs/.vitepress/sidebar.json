@@ -146,8 +146,40 @@
     "collapsed": true,
     "items": [
       {
-        "text": "CPython 源码解析",
+        "text": "CPython 源码解析：总览",
         "link": "/internals/cpython-source"
+      },
+      {
+        "text": "核心数据结构",
+        "link": "/internals/object-model"
+      },
+      {
+        "text": "类型系统与属性查找",
+        "link": "/internals/type-system"
+      },
+      {
+        "text": "解释器主循环",
+        "link": "/internals/eval-loop"
+      },
+      {
+        "text": "编译管线",
+        "link": "/internals/compiler-pipeline"
+      },
+      {
+        "text": "内存管理",
+        "link": "/internals/memory-management"
+      },
+      {
+        "text": "GIL 与线程模型",
+        "link": "/internals/gil-threading"
+      },
+      {
+        "text": "import 机制与模块对象",
+        "link": "/internals/import-system"
+      },
+      {
+        "text": "CPython 与标准实现的边界",
+        "link": "/internals/implementation-boundary"
       }
     ]
   },

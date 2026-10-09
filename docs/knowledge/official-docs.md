@@ -19,7 +19,7 @@ description: 站内知识点对应的官方出处：PEP 逐条、标准库章节
 - **[PEP 572](https://peps.python.org/pep-0572/)**：海象运算符 `:=`，3.8 落地。→ [语法基础](/basics/syntax)
 - **[PEP 582](https://peps.python.org/pep-0582/)**：`__pypackages__` 本地包目录方案，PDM 的立身之本（提案本身已被否决，工具仍在）。→ [虚拟环境与依赖管理](/engineering/environments)
 - **[PEP 584](https://peps.python.org/pep-0584/)**：dict 合并运算符 `|`，3.9 落地。→ [字典与集合](/datastructures/dict-set)
-- **[PEP 617](https://peps.python.org/pep-0617/)**：PEG 解析器替换 pgen，3.9 落地，为后续语法演进解除束缚。→ [CPython 源码解析](/internals/cpython-source)
+- **[PEP 617](https://peps.python.org/pep-0617/)**：PEG 解析器替换 pgen，3.9 落地，为后续语法演进解除束缚。→ [编译管线](/internals/compiler-pipeline)
 - **[PEP 621](https://peps.python.org/pep-0621/)**：项目元数据进 `pyproject.toml`。→ [虚拟环境与依赖管理](/engineering/environments)
 - **[PEP 634](https://peps.python.org/pep-0634/)**：结构化模式匹配，3.10 落地。→ [控制流](/basics/control-flow)
 - **[PEP 654](https://peps.python.org/pep-0654/)**：异常组与 `except*`，3.11 落地。→ [异常处理](/advanced/exceptions)
@@ -28,12 +28,12 @@ description: 站内知识点对应的官方出处：PEP 逐条、标准库章节
 - **[PEP 703](https://peps.python.org/pep-0703/)**：让 GIL 可选的 free-threaded 构建，3.13 实验性引入。→ [多线程与 GIL](/concurrency/threading)
 - **[PEP 750](https://peps.python.org/pep-0750/)**：模板字符串 t-string，3.14 落地。→ [发展史时间线](/timeline)
 - **[PEP 779](https://peps.python.org/pep-0779/)**：free-threaded 构建从实验转官方支持（仍非默认），3.14。→ [多线程与 GIL](/concurrency/threading)
-- **[PEP 11](https://peps.python.org/pep-0011/)**：平台支持政策，判断「哪些行为属于实现而非语言」时的边界文件。→ [CPython 源码解析](/internals/cpython-source)
+- **[PEP 11](https://peps.python.org/pep-0011/)**：平台支持政策，判断「哪些行为属于实现而非语言」时的边界文件。→ [CPython 与标准实现的边界](/internals/implementation-boundary)
 
 ## 标准库与语言参考
 
 - **[Python Tutorial](https://docs.python.org/3/tutorial/)**：官方入门教程，站内「入门」「数据结构」两段的主题都能在这里找到对应章节。→ [环境搭建](/basics/setup)
-- **[The Python Language Reference](https://docs.python.org/3/reference/)**：语言规范本体，「Python 是什么」的权威定义；源码页讲「语言与实现的边界」时以它为准。→ [CPython 源码解析](/internals/cpython-source)
+- **[The Python Language Reference](https://docs.python.org/3/reference/)**：语言规范本体，「Python 是什么」的权威定义；源码页讲「语言与实现的边界」时以它为准。→ [CPython 与标准实现的边界](/internals/implementation-boundary)
 - **[The Python Standard Library](https://docs.python.org/3/library/)**：标准库参考。collections、itertools、functools、pathlib、re、json、datetime 的行为细节都在这里。→ [标准库精选](/engineering/stdlib)
 - **[asyncio 文档](https://docs.python.org/3/library/asyncio.html)**：事件循环、协程、`gather`/`TaskGroup`/`timeout` 的完整 API 面。→ [异步编程 asyncio](/concurrency/asyncio)
 - **[threading 文档](https://docs.python.org/3/library/threading.html)** 与 **[multiprocessing 文档](https://docs.python.org/3/library/multiprocessing.html)**：线程同步原语与进程启动方式的权威说明；`sys.setswitchinterval` 在 [sys 文档](https://docs.python.org/3/library/sys.html#sys.setswitchinterval)。→ [多线程与 GIL](/concurrency/threading)、[多进程 multiprocessing](/concurrency/multiprocessing)
