@@ -110,7 +110,7 @@ description: 按六大主题收拢站内概念与要点，每条挂回原章节�
 
 ## 解释器内部
 
-以下条目读的是 CPython 3.14 分支源码，引用带文件行号，原页给了逐条出处。→ [CPython 源码解析](/internals/cpython-source)
+以下条目读的是 CPython 3.14 分支源码，引用带文件行号，源码解析一组页面给了逐条出处。→ [CPython 源码解析：总览](/internals/cpython-source)
 
 - **PyObject 头**：所有 Python 对象开头都是「引用计数 + 类型指针」十六字节，`PyObject_HEAD` 宏负责放在每个类型结构体开头；变长对象多一个长度字段 `PyVarObject`。
 - **不死对象**：3.12 后静态对象（`None`、小整数等）引用计数带符号位标记，增减引用是空操作。
