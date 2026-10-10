@@ -22,4 +22,4 @@ description: 引用计数即时回收、pymalloc 三级池分配、分代 GC 的
 
 算法本体在 `gc_collect_main`（`Python/gc.c:1313`）：先把本代所有对象引用数减一（subtract_refs），再从外部根遍历，引用数没恢复到零的就是不可达（`move_unreachable`，注释见 `Python/gc.c:32`、`:190`），不可达且无 `__del__` 的直接释放，有 `__del__` 的进 `gc.garbage`。存活的晋升到老一代。手动入口 `PyGC_Collect`（`Python/gc.c:1671`），分配侧挂钩在 `_PyObject_GC_New`（`Python/gc.c:1907`），每次分配给第零代计数加一（`:1865`）。
 
-分工判断：引用计数负责九成以上的回收，分代 GC 只为环存在。CPython 不做移动式压缩，堆碎片靠 pymalloc 的尺寸类池缓解，这是它和 JVM 类运行时的根本差异。
+分工判断：引用计数负责九成以上的回收，分代 GC 只为环存在。CPython 不做移动式压缩，堆碎片靠 pymalloc 的尺寸类池缓解，这是它和 JVM 类运行时的根本差异。回收器暴露给 Python 的启停、观测与调试接口（`gc.collect`、`gc.callbacks`、`gc.freeze` 等）在 [gc 模块](/internals/gc-module)一页单独走读。
