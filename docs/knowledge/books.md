@@ -10,7 +10,7 @@ description: 站内知识点对应的权威书籍：书名、作者、实考链�
 
 - **《流畅的 Python》** Luciano Ramalho（第 2 版，O'Reilly，2022）：第 1 章数据模型开篇讲魔法方法，第 2–6 章按序列、字典、数据类、对象引用展开，第 7–10 章覆盖一等函数、类型提示、装饰器与设计模式。→ [魔法方法](/advanced/magic-methods)、[面向对象](/advanced/oop)、[类型注解](/advanced/typing)、[推导式、迭代器与生成器](/datastructures/iterators-generators)　（实考：[O'Reilly 图书页](https://www.oreilly.com/library/view/fluent-python-2nd/9781492056355/)，目录经搜索结果核对）
 - **《Effective Python》** Brett Slatkin（第 3 版，Addison-Wesley，2024）：14 章 125 条编号建议，覆盖 Pythonic 写法、列表与字典、函数、推导式与生成器、类与接口、并发等主题。→ [推导式、迭代器与生成器](/datastructures/iterators-generators)、[异常处理](/advanced/exceptions)　（实考：[effectivepython.com](https://www.effectivepython.com/)，作者官网目录页核对）
-- **《Python Cookbook》** David Beazley、Brian Jones（第 3 版，O'Reilly，2013）：15 章共 663 页专题方案，覆盖数据结构、字符串、迭代器与生成器、函数、类与元编程、模块与包、并发、测试调试。覆盖 Python 3.3+，年代早但方案本身多数仍直接可用。→ [标准库精选](/engineering/stdlib)、[推导式、迭代器与生成器](/datastructures/iterators-generators)、[函数](/basics/functions)　（实考：[dabeaz.com 书页](https://www.dabeaz.com/cookbook.html)，作者官网目录页核对）
+- **《Python Cookbook》** David Beazley、Brian Jones（第 3 版，O'Reilly，2013）：15 章共 663 页专题方案，覆盖数据结构、字符串、迭代器与生成器、函数、类与元编程、模块与包、并发、测试调试。覆盖 Python 3.3+，年代早但方案本身多数仍直接可用。→ [标准库精选](/engineering/stdlib)、[推导式、迭代器与生成器](/datastructures/iterators-generators)、[函数](/basics/functions)　（实考：[dabeaz.com 书页](https://www.dabeaz.com/cookbook.html)，作者官网目录页核对；该站对爬虫返 403，另挂 [Wayback 快照](https://web.archive.org/web/20230127051117/https://www.dabeaz.com/cookbook.html) 双保险）
 - **《Python Distilled》** David Beazley（Pearson，2022）：10 章浓缩语言核心——变量与值、程序结构与控制流、函数与函数式编程、类与对象、对象类型与协议、数据结构、程序组织。二十余年教学的提炼版。→ [变量与数据类型](/basics/variables-and-types)、[函数](/basics/functions)、[魔法方法](/advanced/magic-methods)　（实考：[dabeaz.com 书页](https://www.dabeaz.com/distilled.html)，作者官网目录页核对）
 
 ## 并发与性能
