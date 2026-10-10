@@ -170,6 +170,10 @@
         "link": "/internals/memory-management"
       },
       {
+        "text": "gc 模块：垃圾回收的 Python 面",
+        "link": "/internals/gc-module"
+      },
+      {
         "text": "GIL 与线程模型",
         "link": "/internals/gil-threading"
       },

@@ -48,7 +48,7 @@ sudo make install
 
 ## 章节导览
 
-本页之后的八个子页按「数据怎么摆、类型怎么查、代码怎么跑、内存怎么收、线程怎么切、模块怎么进」展开，行号口径与本页一致：
+本页之后的九个子页按「数据怎么摆、类型怎么查、代码怎么跑、内存怎么收、垃圾怎么观、线程怎么切、模块怎么进」展开，行号口径与本页一致：
 
 | 子页 | 内容 |
 | --- | --- |
@@ -57,6 +57,7 @@ sudo make install
 | [解释器主循环](/internals/eval-loop) | 字节码分发的三种模式、`bytecodes.c` 指令定义、自适应特化与 tier-2/JIT |
 | [编译管线](/internals/compiler-pipeline) | 词法、PEG 解析、AST 预处理、符号表、代码生成、CFG 优化与汇编 |
 | [内存管理](/internals/memory-management) | 引用计数、pymalloc 三级池、分代 GC 的阈值与算法 |
+| [gc 模块：垃圾回收的 Python 面](/internals/gc-module) | 启停与阈值、collect 与统计、观测 API、调试位与回调、freeze |
 | [GIL 与线程模型](/internals/gil-threading) | GIL 实现与切换间隔、线程状态、自由线程构建的布局变化 |
 | [import 机制与模块对象](/internals/import-system) | C/Python 双半边、加载调用链、pyc 缓存校验、模块对象本质 |
 | [CPython 与标准实现的边界](/internals/implementation-boundary) | `sys.implementation`、稳定 ABI、语言规范与实现细节的分界 |
