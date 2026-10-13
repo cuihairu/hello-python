@@ -205,3 +205,18 @@ b ['banana']
 - 生成器函数用 yield 惰性产出，能表达无限序列；`yield from` 做委托。
 - 只遍历一遍的大数据用生成器表达式，反复访问用列表。
 - `itertools` + 内建 `zip`/`enumerate` 覆盖绝大多数迭代需求。
+
+## 参考资料
+
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/controlflow.html)
+- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/expressions.html)
+- [PEP 255 · 生成器](https://peps.python.org/pep-0255/)
+- [PEP 380 · yield from](https://peps.python.org/pep-0380/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [scenarios](/knowledge/scenarios.md)

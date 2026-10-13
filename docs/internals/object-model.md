@@ -37,3 +37,17 @@ description: PyObject 对象头、引用计数与不死对象，dict 紧凑哈�
 新字符串由 `PyUnicode_New`（`Objects/unicodeobject.c:1376`）按最大码点定宽度分配。驻留（interning）是每解释器一个字典（`Objects/unicodeobject.c:267`），标识符和常量字符串进字典后 `state.interned` 置位，配合不死机制让属性查找可以只比指针。
 
 对象头上的类型指针指向 `PyTypeObject`，[类型系统与属性查找](/internals/type-system)一节展开这张「虚表」。
+
+## 参考资料
+
+- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/datamodel.html)
+- [CPython C API · 对象协议](https://docs.python.org/3/c-api/object.html)
+- [CPython 开发者指南](https://devguide.python.org/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [cpython-source](cpython-source.md)
+- [gil-threading](gil-threading.md)
+- [memory-management](memory-management.md)

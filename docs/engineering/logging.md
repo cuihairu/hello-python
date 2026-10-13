@@ -175,3 +175,19 @@ True
 - 日志惰性格式化（`log.info("%s", x)`），异常用 `logger.exception` 带堆栈。
 - `extra` 结构化字段服务采集系统；formatter 字段缺失时错误被拦在 handler 内部（stderr 可见），不会抛给调用方。
 - 断点 `breakpoint()` 进 pdb；性能先 timeit 微基准、再 cProfile 画像。
+
+## 参考资料
+
+- [Python 官方文档 · logging](https://docs.python.org/3/library/logging.html)
+- [Python 官方文档 · logging 教程](https://docs.python.org/3/howto/)
+- [Python 官方文档 · logging cookbook](https://docs.python.org/3/howto/logging-cookbook.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

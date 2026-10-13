@@ -137,3 +137,16 @@ CPU 密集替换：`from concurrent.futures import ProcessPoolExecutor` 后 `run
 - 选型前先测量瓶颈，别按直觉。
 - 混合负载用「asyncio 调度 + executor 卸载」的组合。
 - 三种模型的坑不同：锁与竞态（线程）、阻塞卡死（协程）、pickle 与启动开销（进程）。
+
+## 参考资料
+
+- [Python 官方文档 · concurrent.futures](https://docs.python.org/3/library/concurrent.futures.html)
+- [Python 官方文档 · threading](https://docs.python.org/3/library/threading.html)
+- [Python 官方文档 · multiprocessing](https://docs.python.org/3/library/multiprocessing.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [scenarios](/knowledge/scenarios.md)

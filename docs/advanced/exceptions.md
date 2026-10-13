@@ -210,3 +210,18 @@ run()
 - 别写裸 except；要么处理要么放行，用 `raise ... from e` 保上下文。
 - 自定义异常继承 Exception，携带结构化字段。
 - 默认 EAFP 风格；3.11+ 异常组服务并发批量失败。
+
+## 参考资料
+
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/errors.html)
+- [Python 官方文档 · 内置异常](https://docs.python.org/3/library/exceptions.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

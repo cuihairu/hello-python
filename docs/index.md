@@ -42,3 +42,7 @@ features:
     link: /timeline
     linkText: 阅读时间线
 ---
+
+## 参考资料
+
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/)

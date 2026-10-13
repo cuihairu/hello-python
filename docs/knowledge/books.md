@@ -40,3 +40,13 @@ description: 站内知识点对应的权威书籍：书名、作者、实考链�
 - 并发选型：Fowler 讲 asyncio 一条线，Gorelick & Ozsvald 讲性能剖析与多进程；
 - 工程化：Percival & Gregory 那本免费在线，直接读；
 - 源码兴趣：Shaw 的书基于 CPython 3.9 可以上手编译走读，陈儒那本当对象模型的历史参照。
+
+## 参考资料
+
+- [Fluent Python（作者官网）](https://pythonfluente.com/)
+- [Effective Python](https://www.effectivepython.com/)
+- [CPython 源码（配合 Internals 阅读）](https://github.com/python/cpython)
+
+## 相关页面
+
+- [index](index.md)

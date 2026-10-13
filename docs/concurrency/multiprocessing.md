@@ -191,3 +191,18 @@ if __name__ == "__main__":
 - 脚本必须有 `if __name__ == "__main__"` 守卫；跨进程数据走 pickle。
 - 日常用 `Pool.map` 批量分发；共享大块数据用 `shared_memory`。
 - 核数 = 上限参考：`os.cpu_count()`；进程创建与序列化有固定开销，任务要够大才划算。
+
+## 参考资料
+
+- [Python 官方文档 · multiprocessing](https://docs.python.org/3/library/multiprocessing.html)
+- [Python 官方文档 · 并发 futures](https://docs.python.org/3/library/concurrent.futures.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

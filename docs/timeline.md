@@ -22,3 +22,13 @@ Python 的每个关键能力都是对某个具体问题的回答。lambda 与 re
 需要通读时，页面底部「按时期通读全部节点」是同一份数据的纯文本形态，不依赖筛选与展开，便于逐条对照各章。
 
 <DevTimeline />
+
+## 参考资料
+
+- [Python 版本发布（whatsnew）](https://docs.python.org/3/whatsnew/3.13.html)
+- [Python 3.14 whatsnew](https://docs.python.org/3/whatsnew/3.14.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [official-docs](/knowledge/official-docs.md)

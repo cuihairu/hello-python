@@ -217,3 +217,20 @@ asyncio.run(main())
 - CPU 密集别塞协程，跑 `run_in_executor` 或多进程。
 - 超时用 `wait_for`/`timeout`，限流用 `Semaphore`，阻塞调用必须改造。
 - 3.11+ 优先 TaskGroup（结构化并发），异常传播更可靠。
+
+## 参考资料
+
+- [Python 官方文档 · asyncio](https://docs.python.org/3/library/asyncio.html)
+- [Python 官方文档 · 协程与任务](https://docs.python.org/3/library/asyncio-task.html)
+- [Python 官方文档 · 事件循环](https://docs.python.org/3/library/asyncio-eventloop.html)
+- [PEP 492 · async/await](https://peps.python.org/pep-0492/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

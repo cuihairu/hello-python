@@ -187,3 +187,16 @@ print((now + timedelta(days=1)).date().isoformat())
 - functools 的 `lru_cache`/`partial` 覆盖记忆化与偏函数两大高频需求。
 - 路径用 pathlib，正则编译复用且优先预定义类别。
 - 结构化数据用对应解析器，正则只啃有规律的片段。
+
+## 参考资料
+
+- [Python 官方文档 · 标准库导览](https://docs.python.org/3/tutorial/stdlib.html)
+- [Python 官方文档 · 标准库](https://docs.python.org/3/library/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [scenarios](/knowledge/scenarios.md)

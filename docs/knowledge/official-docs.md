@@ -55,3 +55,15 @@ description: 站内知识点对应的官方出处：PEP 逐条、标准库章节
 - **[uv](https://docs.astral.sh/uv/)**：Rust 实现的包管理器，`uv lock` 跨机器可复现。→ [虚拟环境与依赖管理](/engineering/environments)
 - **[Poetry](https://python-poetry.org/)** 与 **[PDM](https://pdm-project.org/)**：依赖+打包一体与 PEP 582/621 路线的两份官方文档。→ [虚拟环境与依赖管理](/engineering/environments)
 - **[pyenv](https://github.com/pyenv/pyenv)**：用户级多版本管理。→ [环境搭建](/basics/setup)
+
+## 参考资料
+
+- [Python 官方文档](https://docs.python.org/3/)
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/)
+- [Python 官方文档 · 标准库](https://docs.python.org/3/library/)
+- [PEP 索引](https://peps.python.org/pep-0008/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [index](index.md)

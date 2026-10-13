@@ -248,3 +248,16 @@ print(say_hi.calls, say_hi.__name__)
 - 带参数装饰器是三层嵌套：参数 → 函数 → 调用。
 - 缓存用 `lru_cache`（要求纯函数 + 可哈希参数），别重复造轮子。
 - 装饰器栈自下而上包裹；类装饰器实现 `__call__` 并可携带状态。
+
+## 参考资料
+
+- [Python 官方文档 · 函数定义（装饰器）](https://docs.python.org/3/reference/compound_stmts.html)
+- [Python 官方文档 · functools](https://docs.python.org/3/library/functools.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

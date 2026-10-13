@@ -101,3 +101,16 @@ ruff format .       # 格式化
 - pyenv 管多版本，venv 管项目隔离，pip 管包安装，三层各司其职。
 - 用 `python3 -m pip` 与 `python3 -m venv`，让命令始终绑定当前解释器。
 - 依赖清单 requirements.txt 随代码一起提交，别人才能复现你的环境。
+
+## 参考资料
+
+- [Python 官方文档 · venv 虚拟环境教程](https://docs.python.org/3/tutorial/venv.html)
+- [Python 官方文档 · 命令行与环境](https://docs.python.org/3/using/cmdline.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)

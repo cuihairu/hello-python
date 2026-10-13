@@ -35,3 +35,16 @@ MRO 查找本身有缓存：`_PyType_Lookup`（`Objects/typeobject.c:5972`）进
 - `classmethod`/`staticmethod`：类型定义也在 `Objects/funcobject.c`（`:1684`、`:1932`），区别只在绑定时取类还是忽略实例。
 
 受限 API（`Py_LIMITED_API`）下不允许直接写 `PyTypeObject` 字面量，替代路径是 `PyType_FromSpec`（`Objects/typeobject.c:5432`），用 `PyType_Spec` 描述槽位由运行时拼装。类型标志位集中在 `Include/object.h:543` 起：`Py_TPFLAGS_HEAPTYPE`（`:546`）标记堆上创建的类型，`Py_TPFLAGS_BASETYPE`（`:549`）允许被继承。
+
+## 参考资料
+
+- [Python 官方文档 · 类型对象](https://docs.python.org/3/library/types.html)
+- [CPython C API · 类型对象](https://docs.python.org/3/c-api/typeobj.html)
+- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/datamodel.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [cpython-source](cpython-source.md)
+- [object-model](object-model.md)

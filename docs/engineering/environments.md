@@ -117,3 +117,19 @@ uv lock                 # 生成 uv.lock，跨机器可复现
 - `python3 -m pip` 指向当前解释器的 pip。
 - 追效率用 uv，要成熟锁体验用 Poetry；pip freeze 是底线而非终点。
 - 事故九成来自「不隔离」与「不锁版本」。
+
+## 参考资料
+
+- [Python 官方文档 · venv](https://docs.python.org/3/library/venv.html)
+- [Python 官方文档 · venv 教程](https://docs.python.org/3/tutorial/venv.html)
+- [uv 官方文档](https://docs.astral.sh/uv/)
+- [pip 官方文档](https://pip.pypa.io/en/stable/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

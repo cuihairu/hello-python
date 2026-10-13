@@ -23,3 +23,16 @@ description: 从源码到可执行字节码的完整流水线：词法、PEG 语
 对 Python 使用者的直接推论：`compile()` 拿到的是这套管线的产物；字节码随版本变，因为它是这条流水线当前的输出，不是语言承诺。
 
 产出的指令序列由[解释器主循环](/internals/eval-loop)逐条求值，特化计数器在首次执行前种入。
+
+## 参考资料
+
+- [CPython 开发者指南 · 编译器内部](https://devguide.python.org/internals/compiler/)
+- [CPython 开发者指南](https://devguide.python.org/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [cpython-source](cpython-source.md)
+- [eval-loop](eval-loop.md)
+- [official-docs](/knowledge/official-docs.md)

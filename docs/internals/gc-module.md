@@ -137,3 +137,16 @@ print(len(events), events[0])
 `gc.freeze`（`Modules/gcmodule.c:458`）把当前全部受管对象挪进永久代（`Python/gc.c:126` 初始化的 `permanent_generation`），之后的收集不再碰它们。clinic 注释（`:447` 起）写明用途：POSIX `fork()` 前调用，让子进程别因 GC 写页而失去与父进程共享的内存页。`gc.unfreeze`（`:475`）把永久代整个放回最老一代。`gc.get_freeze_count`（`:490`）读永久代对象数。
 
 版本注记：`gc.is_finalized`（`:440`，判定对象是否已被 GC 收尾）是 3.13 新增，`gc.get_freeze_count` 是 3.14 新增——老解释器上先 `hasattr` 探一下再用。
+
+## 参考资料
+
+- [Python 官方文档 · gc](https://docs.python.org/3/library/gc.html)
+- [Python 官方文档 · weakref](https://docs.python.org/3/library/weakref.html)
+- [CPython 仓库](https://github.com/python/cpython)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [cpython-source](cpython-source.md)
+- [memory-management](memory-management.md)

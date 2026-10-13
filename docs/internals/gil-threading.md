@@ -13,3 +13,15 @@ GIL 的实现比传闻朴素。`_gil_runtime_state`（`Include/internal/pycore_g
 线程状态方面，每个 OS 线程对应一个 `PyThreadState`；C 扩展最常用的 `PyGILState_Ensure`（`Python/pystate.c:2894`）负责给当前线程补建线程状态并抢 GIL，配对的 `Release` 归还。信号处理依赖同一个中断位：求值循环里的 `_CHECK_PERIODIC`（`Python/bytecodes.c:155`）是信号得以在纯 Python 代码中响应的唯一通道，机制见[解释器主循环](/internals/eval-loop)。
 
 自由线程构建是 3.14 的实验特性，需要 `--disable-gil` 显式配置（`configure.ac:1728`）。对象头换成线程 ID 加双计数布局（`Include/object.h:152`，与默认布局的对照见[核心数据结构](/internals/object-model)），容器内部用对象锁和延迟回收保护：dict 在被其他线程首次读取时标记 shared（`Objects/dictobject.c:1315`）。默认构建仍是带 GIL 的解释器，本页其余引用均以默认构建为准。
+
+## 参考资料
+
+- [Python 官方文档 · threading](https://docs.python.org/3/library/threading.html)
+- [Python 官方文档 · 子解释器初始化（C API）](https://docs.python.org/3/c-api/init.html)
+- [PEP 684 · 每 解释器 GIL](https://peps.python.org/pep-0684/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [cpython-source](cpython-source.md)

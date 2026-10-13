@@ -63,3 +63,23 @@ sudo make install
 | [CPython 与标准实现的边界](/internals/implementation-boundary) | `sys.implementation`、稳定 ABI、语言规范与实现细节的分界 |
 
 建议顺序：先读本页与核心数据结构，再按兴趣进——关心性能看解释器主循环和编译管线，关心调试看内存管理，关心多线程看 GIL 与线程模型。
+
+## 参考资料
+
+- [CPython 仓库](https://github.com/python/cpython)
+- [CPython 开发者指南](https://devguide.python.org/)
+- [CPython 开发者指南 · 内部机制导览](https://devguide.python.org/internals/exploring/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [compiler-pipeline](compiler-pipeline.md)
+- [eval-loop](eval-loop.md)
+- [gil-threading](gil-threading.md)
+- [implementation-boundary](implementation-boundary.md)
+- [import-system](import-system.md)
+- [memory-management](memory-management.md)
+- [object-model](object-model.md)
+- [type-system](type-system.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)

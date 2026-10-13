@@ -208,3 +208,15 @@ False True
 - 遍历中不改容器；异常不许静默吞。
 - `is` 只用于 None/True/False 单例判断。
 - 资源释放走 with/finally，不赌 `__del__`。
+
+## 参考资料
+
+- [Python 官方文档 · 执行模型](https://docs.python.org/3/reference/executionmodel.html)
+- [Python 官方文档 · 术语表](https://docs.python.org/3/glossary.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)

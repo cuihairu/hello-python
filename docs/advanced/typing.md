@@ -196,3 +196,17 @@ mypy --strict src/   # 严格模式：未注解也报
 - 新语法：内建泛型 `list[int]`、联合 `X | Y`（3.10+）、PEP 695 泛型（3.12+）。
 - 结构匹配用 `Protocol`，字典结构用 `TypedDict`，语义区分用 `NewType`。
 - 回调标 `Callable`，生成器标 `Iterator`/`Generator`。
+
+## 参考资料
+
+- [Python 官方文档 · typing](https://docs.python.org/3/library/typing.html)
+- [PEP 484 · 类型提示](https://peps.python.org/pep-0484/)
+- [PEP 544 · 协议](https://peps.python.org/pep-0544/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)

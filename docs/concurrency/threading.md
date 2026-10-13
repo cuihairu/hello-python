@@ -165,3 +165,18 @@ print(events, count[0] > 0)
 - `start` 启动、`join` 等待；共享状态必须 `Lock` 保护。
 - 线程间通信用 `queue.Queue`，停止信号用 `Event`，别直接杀线程。
 - daemon 线程只放后台杂务，正事要 join。
+
+## 参考资料
+
+- [Python 官方文档 · threading](https://docs.python.org/3/library/threading.html)
+- [Python 官方文档 · 队列 queue](https://docs.python.org/3/library/queue.html)
+- [Python 官方文档 · 并发 futures](https://docs.python.org/3/library/concurrent.futures.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

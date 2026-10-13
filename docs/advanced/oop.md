@@ -244,3 +244,16 @@ R2 哔哔
 - `@property` + setter 实现带校验的属性式封装。
 - `_x` 惯例私有，`__x` 名称改写防子类冲突；`@classmethod` 做替代构造器。
 - 鸭子类型 + `Protocol`：结构对得上就能协作。
+
+## 参考资料
+
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/classes.html)
+- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/datamodel.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [scenarios](/knowledge/scenarios.md)

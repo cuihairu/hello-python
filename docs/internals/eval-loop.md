@@ -36,3 +36,16 @@ description: 求值循环的三种分发模式、bytecodes.c 指令定义与生�
 3.14 还留着 tier-2 微指令优化器和可选 JIT：`Python/optimizer.c` 生成执行器，求值循环里 `_Py_TIER2`/`_Py_JIT` 分支接管热代码（`Python/ceval.c:1244`、`:1266`），JIT 要 `--enable-experimental-jit` 才编译（`configure.ac:2845`），默认构建两者都不启用。
 
 字节码是[编译管线](/internals/compiler-pipeline)的产物，特化计数器的播种（`_PyCode_Quicken`）也发生在那条流水线的末端。
+
+## 参考资料
+
+- [CPython 开发者指南](https://devguide.python.org/)
+- [Python 官方文档 · 性能分析（perf）](https://docs.python.org/3/howto/perf_profiling.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [compiler-pipeline](compiler-pipeline.md)
+- [cpython-source](cpython-source.md)
+- [gil-threading](gil-threading.md)

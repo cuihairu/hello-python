@@ -44,3 +44,13 @@ description: 高频陷阱的原理与规避：语义、容器、并发、工程�
 - **依赖只写不锁**：requirements.txt 不锁版本，出现「上周还好好的」式漂移。规避：直接依赖写范围约束 + 锁文件固定全量版本。→ [虚拟环境与依赖管理](/engineering/environments)
 - **PyPI 版本号复用**：上传的文件名永久占用，同版本号不能重复上传，删版本也释放不了文件名。规避：发布前先在 TestPyPI 演练，版本号宁可靠后不可超前。→ [打包与发布](/engineering/packaging)
 - **资源释放赌 `__del__`**：循环引用里带 `__del__` 的对象回收时机难保证。规避：资源释放用 `with`/`finally`，别依赖 `__del__`。→ [常见陷阱](/advanced/pitfalls)
+
+## 参考资料
+
+- [Python 官方文档 · 常见陷阱（FAQ）](https://docs.python.org/3/tutorial/appendix.html)
+- [Python 官方文档 · 执行模型](https://docs.python.org/3/reference/executionmodel.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [index](index.md)

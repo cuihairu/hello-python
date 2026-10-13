@@ -179,3 +179,16 @@ print(square(5), cube(5))
 - 可变默认参数是共享陷阱，用 `None` 哨兵。
 - 闭包捕获变量本身；重绑定外层用 `nonlocal`；循环 lambda 用默认参数快照。
 - lambda 只放单表达式，复杂逻辑用具名函数。
+
+## 参考资料
+
+- [Python 官方文档 · 函数定义](https://docs.python.org/3/reference/compound_stmts.html)
+- [Python 官方文档 · 内置函数](https://docs.python.org/3/library/functions.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [pitfalls](/knowledge/pitfalls.md)

@@ -140,3 +140,16 @@ True True
 - `__init__.py` 提升包的公共 API，`__all__` 声明 `*` 白名单。
 - `if __name__ == "__main__"` 区分「被导入」与「被执行」。
 - 项目用 src/ 布局 + 可编辑安装，杜绝 sys.path hack。
+
+## 参考资料
+
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/modules.html)
+- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/import.html)
+- [Python 官方文档 · importlib](https://docs.python.org/3/library/importlib.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [pitfalls](/knowledge/pitfalls.md)

@@ -202,3 +202,18 @@ print(log)
 - 协议：`__enter__` 返回 as 值，`__exit__` 看异常三元组、返回真即吞异常。
 - 过程性逻辑用 `@contextmanager`，异常忽略用 `suppress`，多资源用 `ExitStack`。
 - 锁、事务、重定向这类标准场景直接用现成的。
+
+## 参考资料
+
+- [Python 官方文档 · contextlib](https://docs.python.org/3/library/contextlib.html)
+- [PEP 343 · with 语句](https://peps.python.org/pep-0343/)
+- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/datamodel.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

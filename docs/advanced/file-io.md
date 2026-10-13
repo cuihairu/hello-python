@@ -196,3 +196,14 @@ with tempfile.TemporaryDirectory() as d:
 - 一次性读写 `read_text`/`write_text`，大文件逐行迭代。
 - CSV/JSON 分别用标准库模块，json 传 `ensure_ascii=False`。
 - 关键写入用临时文件 + `replace` 原子替换；编码始终显式。
+
+## 参考资料
+
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/inputoutput.html)
+- [Python 官方文档 · pathlib](https://docs.python.org/3/library/pathlib.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [core-concepts](/knowledge/core-concepts.md)
+- [scenarios](/knowledge/scenarios.md)

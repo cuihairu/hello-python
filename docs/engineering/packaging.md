@@ -143,3 +143,20 @@ python3 -m pip install "hello-pkg @ git+https://github.com/cuihairu/hello-python
 - 依赖约束写范围；入口命令用 `[project.scripts]`。
 - 发布用 twine + 可信发布；先 TestPyPI 演练，版本号不可复用。
 - 内部共享用私有索引或 git 直装。
+
+## 参考资料
+
+- [Python 打包用户指南](https://packaging.python.org/en/latest/)
+- [PEP 517 · 构建后端接口](https://peps.python.org/pep-0517/)
+- [PEP 518 · pyproject.toml](https://peps.python.org/pep-0518/)
+- [PEP 621 · 项目元数据](https://peps.python.org/pep-0621/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

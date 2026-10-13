@@ -180,3 +180,18 @@ CI 里跑测试的标准姿势：装依赖 → `pytest -q`，失败即红灯挡�
 - 一个测试一件事；数据驱动用 parametrize。
 - 资源夹具用 fixture（yield 做清理），外部依赖用 mock 隔离。
 - 覆盖率看缺口不追数字，CI 必跑 `-q`。
+
+## 参考资料
+
+- [pytest 官方文档](https://docs.pytest.org/en/stable/)
+- [Python 官方文档 · unittest](https://docs.python.org/3/library/unittest.html)
+- [Python 官方文档 · unittest.mock](https://docs.python.org/3/library/unittest.mock.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [scenarios](/knowledge/scenarios.md)

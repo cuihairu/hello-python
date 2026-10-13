@@ -216,3 +216,16 @@ print(Vec(1.5, 2.5).dx)
 - 赋值即共享引用，嵌套结构要独立用 deepcopy。
 - `[[]] * n` 是引用复制陷阱，多维用推导式。
 - 固定结构记录用 tuple/NamedTuple，动态集合用 list。
+
+## 参考资料
+
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/datastructures.html)
+- [Python 官方文档 · 内置类型](https://docs.python.org/3/library/stdtypes.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

@@ -182,3 +182,15 @@ Point(x=1.0, y=2.0) True
 - 容器协议五件套让对象支持 len、下标、in、for。
 - `__call__` 做带状态的可调用对象，`__bool__` 定真值。
 - 别为炫技重载运算符——语义清晰时才用。
+
+## 参考资料
+
+- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/datamodel.html)
+- [Python 官方文档 · 标准库](https://docs.python.org/3/library/operator.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)

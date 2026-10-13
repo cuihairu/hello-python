@@ -134,3 +134,14 @@ print(变量)
 - 变量是名字绑定对象，`:=` 在表达式里赋值。
 - docstring 写在模块/函数/类第一行，`__doc__` 可取。
 - 长表达式用括号续行，源码默认 UTF-8。
+
+## 参考资料
+
+- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/lexical_analysis.html)
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)

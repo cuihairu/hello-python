@@ -199,3 +199,16 @@ print(squares, evens)
 - 循环 `else` 只在「没 break」时执行，替代布尔标志。
 - `match`（3.10+）做结构化模式匹配，`case _` 兜底。
 - 一行变换用推导式，可读性优先。
+
+## 参考资料
+
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/controlflow.html)
+- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/compound_stmts.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)

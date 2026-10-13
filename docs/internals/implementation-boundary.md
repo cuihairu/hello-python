@@ -17,3 +17,15 @@ description: 哪些行为属于语言规范、哪些属于 CPython 实现：sys.
 一些广为人知的机制，官方文档明说是实现细节而非语言承诺：不死对象（`Doc/glossary.rst:777`）。字节码格式、`co_code_adaptive`、特化统计、GIL 切换参数同理，都是 CPython 私有，其他实现无一兼容。
 
 边界之外还有一层实用判断：读 CPython 源码得到的结论，分为「语言规范」和「当前实现」两类。对象模型、描述符优先级属于前者，换实现大概率一致；自适应特化、pymalloc 的池参数、2000 的 GC 阈值属于后者，任何版本都可能变。这套文档的引用方式（文件加行号）就是为了让这两类结论都能被复核。
+
+## 参考资料
+
+- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/)
+- [Python 官方文档 · C API](https://docs.python.org/3/c-api/object.html)
+- [CPython 开发者指南](https://devguide.python.org/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [cpython-source](cpython-source.md)
+- [official-docs](/knowledge/official-docs.md)

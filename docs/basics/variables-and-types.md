@@ -155,3 +155,16 @@ True
 - 不可变对象（int/str/tuple）改则新建，可变对象（list/dict/set）原地改、引用共变。
 - `is` 比身份，`==` 比值；判 `None` 用 `is`。
 - 浮点比较设容差，精确计算换 `Decimal`。
+
+## 参考资料
+
+- [Python 官方文档 · 内置类型](https://docs.python.org/3/library/stdtypes.html)
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [pitfalls](/knowledge/pitfalls.md)

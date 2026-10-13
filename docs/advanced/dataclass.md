@@ -150,3 +150,17 @@ Point(x=9.0, y=2.0) {'x': 1.0, 'y': 2.0}
 - 可变默认用 `field(default_factory=...)`。
 - `frozen` 换不可变与可哈希，`__post_init__` 做派生与校验。
 - `asdict`/`replace` 服务序列化与不可变更新。
+
+## 参考资料
+
+- [Python 官方文档 · dataclasses](https://docs.python.org/3/library/dataclasses.html)
+- [PEP 557 · dataclasses](https://peps.python.org/pep-0557/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

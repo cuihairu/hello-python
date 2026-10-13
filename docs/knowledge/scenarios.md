@@ -59,3 +59,12 @@ description: 每种特性的落地场景与选型：遇到什么需求用什么�
 - **定位性能瓶颈**：先 `timeit` 做微基准、再 `cProfile` 出整体画像，按 `ncalls`/`cumtime` 找热点，别凭直觉优化。→ [日志与调试](/engineering/logging)
 - **打断点**：`breakpoint()`（3.7+）进 pdb，`n` 下一行、`s` 步入、`p 表达式` 打印、`c` 继续。→ [日志与调试](/engineering/logging)
 - **判断「为什么慢」**：用测量区分时间花在计算还是等待，再决定线程、协程还是进程。→ [多线程与 GIL](/concurrency/threading)
+
+## 参考资料
+
+- [Python 官方文档 · 标准库](https://docs.python.org/3/library/)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [index](index.md)

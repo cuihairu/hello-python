@@ -205,3 +205,17 @@ with tempfile.TemporaryDirectory() as d:
 - `strip`/`split`/`join`/`find` 是高频方法；批量拼接用 join。
 - 原始字符串 `r"..."` 服务于正则与路径。
 - str 与 bytes 边界处显式 `encoding="utf-8"`。
+
+## 参考资料
+
+- [Python 官方文档 · str 格式化语法](https://docs.python.org/3/library/string.html)
+- [Python 官方文档 · 内置类型（str）](https://docs.python.org/3/library/stdtypes.html)
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/inputoutput.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [scenarios](/knowledge/scenarios.md)

@@ -182,3 +182,17 @@ o -
 - 取值用 `get`/`setdefault`，缺键统计用 `defaultdict`，计数用 `Counter`。
 - 3.7+ dict 保插入序；去重保序用 `dict.fromkeys`。
 - 合并用 `|`（3.9+），反转/变换用字典推导式。
+
+## 参考资料
+
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/datastructures.html)
+- [Python 官方文档 · collections](https://docs.python.org/3/library/collections.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

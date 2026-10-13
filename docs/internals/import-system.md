@@ -18,3 +18,15 @@ Python 层调用链：
 文件模块的加载在 `_bootstrap_external.py`：`SourceFileLoader`（`:966`）的 `get_code`（`:1015`）读源码或缓存的 pyc。pyc 魔数 `MAGIC_NUMBER`（`:224`）绑死字节码版本，`_classify_pyc`（`:424`）校验魔数不匹配就重新编译；时间戳模式再比源文件 mtime 和大小（`_validate_timestamp_pyc`，`:457`）；缓存路径由 `cache_from_source`（`:239`）生成 `__pycache__` 布局。
 
 模块对象本体很薄：`PyModuleObject` 主要就是一个名字加一个字典，`PyModule_NewObject`（`Objects/moduleobject.c:128`）创建，模块的 `__dict__` 就是它的全部状态，`__name__`、`__spec__`、`__loader__` 都是这个字典里的键。属性访问走 `_Py_module_getattro`（`Objects/moduleobject.c:1140`），支持模块级 `__getattr__` 兜底。
+
+## 参考资料
+
+- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/import.html)
+- [Python 官方文档 · importlib](https://docs.python.org/3/library/importlib.html)
+- [Python 官方文档 · site](https://docs.python.org/3/library/site.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [cpython-source](cpython-source.md)

@@ -127,3 +127,14 @@ description: 按六大主题收拢站内概念与要点，每条挂回原章节�
 - **GIL 实现**：一个 `locked` 整数加互斥锁和条件变量，默认切换间隔 5000 微秒；切换点只在字节码边界和显式释放点。
 - **import 机制**：C 半边提供 `_imp` 内建接口，Python 半边在 `importlib/_bootstrap*.py`；`_find_and_load` 先查 `sys.modules` 快路径。
 - **稳定 ABI**：定义 `Py_LIMITED_API` 后私有布局被隔离，受限模式建类型只有 `PyType_FromSpec` 一条路。
+
+## 参考资料
+
+- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/)
+- [Python 官方文档 · 术语表](https://docs.python.org/3/glossary.html)
+
+<!-- BACKLINKS-AUTO -->
+## 相关页面
+
+- [glossary](/glossary.md)
+- [index](index.md)
