@@ -5,7 +5,7 @@ import sidebar from './sidebar.json' with { type: 'json' }
 export default defineConfig({
   lang: 'zh-CN',
   title: 'Hello Python',
-  description: 'Python 语言知识体系：从语法入门到面向对象、并发编程与工程实践',
+  description: '个人 Python 学习笔记与开发经验分享，记录游戏开发实践中的语言、并发与工程观察。',
   base: '/hello-python/',
   cleanUrls: true,
   lastUpdated: true,
@@ -105,7 +105,7 @@ export default defineConfig({
       { text: '知识体系', link: '/knowledge/' }
     ],
 
-    // 本仓无 mdbook 遗留，sidebar.json 为手工编排的目录
+    // sidebar.json 是唯一导航真源；维护规则见 /navigation
     sidebar: sidebar as never,
 
     socialLinks: [

@@ -3,11 +3,11 @@ layout: home
 
 hero:
   name: Hello Python
-  text: Python 知识体系
-  tagline: 从语法入门到工程实战：数据结构、面向对象、并发编程、标准库与测试打包，系统掌握 Python。
+  text: Python 学习笔记与开发经验
+  tagline: 以游戏开发者视角记录 Python 语言、并发与工程实践中的观察、心得和经验。
   actions:
     - theme: brand
-      text: 开始阅读
+      text: 浏览笔记
       link: /basics/setup
     - theme: alt
       text: 知识体系

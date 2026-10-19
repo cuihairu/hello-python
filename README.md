@@ -19,7 +19,7 @@ A Python knowledge base · [Read online](https://cuihairu.github.io/hello-python
 
 ---
 
-A Python knowledge site that goes from syntax basics to engineering practice, covering data structures, object-oriented programming, concurrent programming, the standard library, testing, and packaging.
+A personal collection of Python notes, takeaways, and experience from a game developer's perspective. It records things learned while building software; it is a set of notes to share, not a course or learning path.
 
 Knowledge base: [Core concepts](https://cuihairu.github.io/hello-python/knowledge/core-concepts) · [Books](https://cuihairu.github.io/hello-python/knowledge/books) · [Official docs](https://cuihairu.github.io/hello-python/knowledge/official-docs) · [Scenarios](https://cuihairu.github.io/hello-python/knowledge/scenarios) · [Pitfalls](https://cuihairu.github.io/hello-python/knowledge/pitfalls)
 
@@ -49,16 +49,22 @@ The build must also pass: `npm run docs:build`.
 
 ```text
 docs/
-├── basics/          # Getting started: environment, syntax, types, control flow, functions
+├── index.md         # Site home and overview
+├── basics/          # Environment and language basics: syntax, types, control flow, functions
 ├── datastructures/  # Data structures: lists, dicts, strings, iterators
-├── advanced/        # Advanced: OOP, magic methods, decorators, type annotations
+├── advanced/        # Language features: OOP, magic methods, decorators, type annotations
 ├── concurrency/     # Concurrency: threading, asyncio, multiprocessing
 ├── engineering/     # Engineering: standard library, testing, logging, packaging
 ├── internals/       # CPython source walkthroughs (with file and line references)
 ├── knowledge/       # Knowledge base: concepts, books, official docs, scenarios, pitfalls
+├── glossary.md      # Cross-topic glossary
 ├── timeline.md      # Language history timeline
+├── navigation.md    # Sidebar source and maintenance rules
+├── public/          # Site assets
 └── .vitepress/      # VitePress config and theme
 ```
+
+The site navigation is maintained in `docs/.vitepress/sidebar.json`; see [Navigation maintenance](https://cuihairu.github.io/hello-python/navigation) before changing the sidebar.
 
 ## License
 

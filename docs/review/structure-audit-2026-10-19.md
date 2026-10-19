@@ -107,3 +107,35 @@
 1. 查清 `srcExclude` 对应的 `01-…06-` 目录约定是否仍被仓库外流程使用，再决定保留或删除该排除规则。
 2. 用已安装依赖的环境跑一次 `npm run docs:build`，确认死链、当前源页和本地搜索索引；当前报告未能核实。
 3. 给两篇 pitfalls 明确角色（完整专题 vs. 快速索引），先互链和标注边界，只有确认实质重复后再合并。
+
+## A→B→C 收口记录（2026-10-19）
+
+本节记录本轮执行结果；上文是改动前审计底稿，部分数字按当时工作树统计。
+
+### A. 导航唯一真源
+
+- `git ls-files 'SUMMARY.md' 'docs/**SUMMARY*'` 无输出：仓库没有手写 `SUMMARY.md` 或同类目录副本，不存在需要改写的副本。
+- `docs/.vitepress/config.mts:2,108-109` 导入并使用 `docs/.vitepress/sidebar.json`；`docs/navigation.md:7-11` 明确其为唯一真源，并写明更新顺序、目标校验、同侧栏去重规则与首页路由规则。
+- `docs/.vitepress/sidebar.json:194-197` 将导航维护说明挂入侧栏。全侧栏 47 个链接、47 个唯一 URL、重复 0、失效目标 0；跨分组路由复用不作重复处理。
+
+### B. 跨轴重复与不同角度
+
+| 分类 | 两处改前证据 | 处理与改后证据 |
+| --- | --- | --- |
+| 真重复 1 组（6 条事实） | `docs/advanced/pitfalls.md` 的“可变默认参数”“`is` 当 `==` 用”“字符串比较不归一”“浅拷贝当深拷贝”“遍历中改容器”“资源释放赌 `__del__`”逐项讲原理与写法；`docs/knowledge/pitfalls.md` 原先对应条目也逐项复述原理与规避，例如“默认值在函数定义时求值一次……所有调用共享同一个对象”与“默认值在定义时求值一次并绑定在函数对象上，所有调用共享”。 | 保留专题页为细节权威，不删任一文件。`docs/knowledge/pitfalls.md:7,11,15,20,21,46` 改成各自要点摘要并指回 `/advanced/pitfalls`；专题页 `docs/advanced/pitfalls.md:7` 标明展开成因、复现与处理，互链保留。 |
+| 不同角度 1 组（保留） | `docs/internals/implementation-boundary.md` 原文讨论 `sys.implementation`、稳定 ABI 与可移植性；`docs/engineering/stdlib.md` 原文逐模块给出 collections、itertools、functools 等日常用法，两处没有重复同一事实。 | 保留两篇。`docs/internals/implementation-boundary.md:10` 与 `docs/engineering/stdlib.md:7` 互链并标注“实现边界/可移植性”与“日常选用”角度。 |
+| 不同角度 2 组（保留） | `docs/internals/object-model.md` 原文讲 `PyObject`、dict 紧凑表与 list 指针数组的 CPython 内存布局；`docs/datastructures/list-tuple.md`、`docs/datastructures/dict-set.md` 原文讲 Python 语言层面的容器操作、语义与使用场景。 | 保留实现笔记与语言用法页。`docs/internals/object-model.md:7`、`docs/datastructures/list-tuple.md:7`、`docs/datastructures/dict-set.md:7` 互链并标明两个视角。 |
+
+### C. 口径与侧栏核对
+
+- `README.md:22`、`README.zh.md:22` 已改为个人学习笔记、心得与游戏开发者经验分享定位，明确不是课程或学习路径；两份目录树分别在 `README.md:51-64`、`README.zh.md:51-64`，均只列出现存目录/文件。
+- 两份 README 的目录树现在列出真实存在的 `index.md`、`glossary.md`、`navigation.md`、`public/` 与 `.vitepress/`，不含不存在目录；未写失真的篇数。知识索引提到的“38 个内容页”对应六个主题目录实际 5+4+10+4+5+10=38 篇。
+- `docs/.vitepress/config.mts:8` 与 `docs/public/site.webmanifest:4` 的站点描述、`docs/index.md:6-7` 的首页文案及 `docs/knowledge/index.md:7,31-35` 的索引说明同步为开发者笔记口径，不规定阅读顺序。
+- 侧栏分组使用“基础语法与环境”“语言特性”，首页操作文案为“浏览笔记”；未引入学习路径或编号章节结构。
+- `docs/.vitepress/sidebar.json` 原有 46 项全部可解析、无同侧栏重复；本轮增加导航说明 1 项后为 47 项，全部目标存在。配置死条目删除 0；重要首页仍由 `/` 路由进入。侧栏无过期“N 讲”数字。
+
+### 验收记录
+
+- `pnpm docs:build`：通过，VitePress 构建并渲染完成；仅有既存的大 bundle 提示。
+- `python3 scripts/check_anchors.py`：49 files checked，0 bad anchors。VitePress 构建配置 `ignoreDeadLinks: false`，因此构建同时校验页面目标；另以脚本核对侧栏目标为 47/47 存在、0 条死目标。
+- `git diff --diff-filter=D --name-only`：Markdown 删除数 0；本轮没有删除任何 Markdown 文件或改动 URL。

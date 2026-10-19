@@ -1,7 +1,7 @@
 {
   "name": "Hello Python",
   "short_name": "Hello Python",
-  "description": "Python 语言知识体系：从语法入门到面向对象、并发编程与工程实践",
+  "description": "个人 Python 学习笔记与开发经验分享，记录游戏开发实践中的语言、并发与工程观察。",
   "lang": "zh-CN",
   "start_url": "./",
   "scope": "./",
