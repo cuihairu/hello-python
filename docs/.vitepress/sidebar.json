@@ -1,6 +1,6 @@
 [
   {
-    "text": "入门",
+    "text": "基础语法与环境",
     "collapsed": true,
     "items": [
       {
@@ -48,7 +48,7 @@
     ]
   },
   {
-    "text": "进阶",
+    "text": "语言特性",
     "collapsed": true,
     "items": [
       {
@@ -190,6 +190,10 @@
   {
     "text": "发展史时间线",
     "link": "/timeline"
+  },
+  {
+    "text": "导航维护说明",
+    "link": "/navigation"
   },
   {
     "text": "知识体系",
