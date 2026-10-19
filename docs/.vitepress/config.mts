@@ -5,7 +5,7 @@ import sidebar from './sidebar.json' with { type: 'json' }
 export default defineConfig({
   lang: 'zh-CN',
   title: 'Hello Python',
-  description: '个人 Python 学习笔记与开发经验分享，记录游戏开发实践中的语言、并发与工程观察。',
+  description: '游戏开发者的 Python 经验记录，整理语言、并发与工程实践中的观察、取舍和踩坑。',
   base: '/hello-python/',
   cleanUrls: true,
   lastUpdated: true,

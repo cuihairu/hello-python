@@ -62,7 +62,7 @@ sudo make install
 | [import 机制与模块对象](/internals/import-system) | C/Python 双半边、加载调用链、pyc 缓存校验、模块对象本质 |
 | [CPython 与标准实现的边界](/internals/implementation-boundary) | `sys.implementation`、稳定 ABI、语言规范与实现细节的分界 |
 
-建议顺序：先读本页与核心数据结构，再按兴趣进——关心性能看解释器主循环和编译管线，关心调试看内存管理，关心多线程看 GIL 与线程模型。
+这些页面按实现环节拆开，阅读时可以按关注点挑选：性能相关看解释器主循环和编译管线，调试相关看内存管理，多线程相关看 GIL 与线程模型；源码总览和核心数据结构提供整体背景。
 
 ## 参考资料
 

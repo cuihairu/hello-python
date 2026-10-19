@@ -13,15 +13,15 @@
   <img src="docs/public/badges/langs.svg" alt="langs" />
 </p>
 
-Python 语言知识体系 · [在线阅读](https://cuihairu.github.io/hello-python/)
+Python 开发记录与经验分享 · [在线阅读](https://cuihairu.github.io/hello-python/)
 
 </div>
 
 ---
 
-这里记录个人的 Python 学习笔记、心得与经验，视角来自游戏开发实践。内容是开发过程中的整理与分享，不是课程或学习路径。
+这里记录我在游戏开发中使用 Python 的观察、取舍和踩坑经历。内容按主题整理，方便回看和查找。
 
-知识点体系：[核心概念](https://cuihairu.github.io/hello-python/knowledge/core-concepts) · [权威书籍](https://cuihairu.github.io/hello-python/knowledge/books) · [官方文档](https://cuihairu.github.io/hello-python/knowledge/official-docs) · [应用场景](https://cuihairu.github.io/hello-python/knowledge/scenarios) · [常见坑](https://cuihairu.github.io/hello-python/knowledge/pitfalls)
+主题索引：[核心概念](https://cuihairu.github.io/hello-python/knowledge/core-concepts) · [权威书籍](https://cuihairu.github.io/hello-python/knowledge/books) · [官方文档](https://cuihairu.github.io/hello-python/knowledge/official-docs) · [应用场景](https://cuihairu.github.io/hello-python/knowledge/scenarios) · [常见坑](https://cuihairu.github.io/hello-python/knowledge/pitfalls)
 
 ## 本地开发
 
@@ -56,7 +56,7 @@ docs/
 ├── concurrency/     # 并发：threading、asyncio、multiprocessing
 ├── engineering/     # 工程：标准库、测试、日志、打包
 ├── internals/       # 源码解析：CPython 源码走读（带文件行号引用）
-├── knowledge/       # 知识体系：概念、书籍、官方文档、场景与坑
+├── knowledge/       # 主题索引：概念、书籍、官方文档、场景与坑
 ├── glossary.md      # 跨主题术语表
 ├── timeline.md      # 发展史时间线
 ├── navigation.md    # 侧栏真源与维护规则

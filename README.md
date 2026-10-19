@@ -19,7 +19,7 @@ A Python knowledge base · [Read online](https://cuihairu.github.io/hello-python
 
 ---
 
-A personal collection of Python notes, takeaways, and experience from a game developer's perspective. It records things learned while building software; it is a set of notes to share, not a course or learning path.
+A game developer's field notes on Python: observations, tradeoffs, and mistakes encountered while building software. The pages are organized by topic for reference.
 
 Knowledge base: [Core concepts](https://cuihairu.github.io/hello-python/knowledge/core-concepts) · [Books](https://cuihairu.github.io/hello-python/knowledge/books) · [Official docs](https://cuihairu.github.io/hello-python/knowledge/official-docs) · [Scenarios](https://cuihairu.github.io/hello-python/knowledge/scenarios) · [Pitfalls](https://cuihairu.github.io/hello-python/knowledge/pitfalls)
 

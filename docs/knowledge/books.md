@@ -27,19 +27,19 @@ description: 站内知识点对应的权威书籍：书名、作者、实考链�
 - **《CPython Internals》** Anthony Shaw（Real Python，2021）：基于 CPython 3.9，从获取源码、编译解释器讲到语法与词法分析、AST 到字节码的编译管线、求值循环、内存管理、对象与类型系统、测试套件与调试基准，附录含面向 Python 程序员的 C 入门。→ [CPython 源码解析](/internals/cpython-source)　（实考：[Real Python 图书页](https://realpython.com/products/cpython-internals-book/)，目录核对）
 - **《Python 源码剖析》** 陈儒（电子工业出版社，2008）：基于 CPython 2.5 的源码走读，覆盖对象系统、类型系统与运行时环境。年代早、版本旧，但对象模型的核心结构至今大体沿用，适合配合源码对照阅读。→ [CPython 源码解析](/internals/cpython-source)　（实考：[豆瓣条目](https://book.douban.com/subject/3117898/)，版本与作者信息核对）
 
-## 入门
+## 初学阶段的参考
 
 - **《Python 编程：从入门到实践》** Eric Matthes（第 3 版，No Starch Press，2023）：第一部分按环境搭建、变量、列表、字典、if 与函数的顺序打基础，第二部分三个实战项目（游戏、数据可视化、Web 应用）。→ [环境搭建](/basics/setup)、[控制流](/basics/control-flow)　（实考：[作者官网资源站](https://ehmatthes.github.io/pcc_3e/)，第 3 版说明页核对）
 
 ## 读法建议
 
-这十本不必都读。按站内学习路径对号入座：
+这十本不必都读。下面是我按使用场景整理的参考方式：
 
-- 打基础：先 Matthes 入门，再 Beazley《Python Distilled》把语言核心过一遍；
+- 刚接触 Python：Matthes 的书从基础语法讲到实战项目；Beazley《Python Distilled》适合快速查阅语言核心；
 - 写惯用法：Slatkin《Effective Python》按建议条目当清单用，Ramalho《流畅的 Python》讲背后的机制为什么这样设计；
 - 并发选型：Fowler 讲 asyncio 一条线，Gorelick & Ozsvald 讲性能剖析与多进程；
 - 工程化：Percival & Gregory 那本免费在线，直接读；
-- 源码兴趣：Shaw 的书基于 CPython 3.9 可以上手编译走读，陈儒那本当对象模型的历史参照。
+- 想看解释器实现：Shaw 的书基于 CPython 3.9，可配合源码编译和走读；陈儒那本可作对象模型的历史参照。
 
 ## 参考资料
 

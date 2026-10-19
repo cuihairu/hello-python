@@ -32,7 +32,7 @@ description: 站内知识点对应的官方出处：PEP 逐条、标准库章节
 
 ## 标准库与语言参考
 
-- **[Python Tutorial](https://docs.python.org/3/tutorial/)**：官方入门教程，站内「入门」「数据结构」两段的主题都能在这里找到对应章节。→ [环境搭建](/basics/setup)
+- **[Python Tutorial](https://docs.python.org/3/tutorial/)**：Python 官方教程（外部资源原名），其中有与站内语法和数据结构主题相关的章节。→ [环境搭建](/basics/setup)
 - **[The Python Language Reference](https://docs.python.org/3/reference/)**：语言规范本体，「Python 是什么」的权威定义；源码页讲「语言与实现的边界」时以它为准。→ [CPython 与标准实现的边界](/internals/implementation-boundary)
 - **[The Python Standard Library](https://docs.python.org/3/library/)**：标准库参考。collections、itertools、functools、pathlib、re、json、datetime 的行为细节都在这里。→ [标准库精选](/engineering/stdlib)
 - **[asyncio 文档](https://docs.python.org/3/library/asyncio.html)**：事件循环、协程、`gather`/`TaskGroup`/`timeout` 的完整 API 面。→ [异步编程 asyncio](/concurrency/asyncio)

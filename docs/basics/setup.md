@@ -4,7 +4,7 @@ description: 解释器安装、版本管理、venv 虚拟环境与 pip 依赖，
 
 # 环境搭建与工具链
 
-本章把一套顺手的 Python 开发环境搭起来：解释器怎么装、版本怎么选、虚拟环境和 pip 怎么用、编辑器怎么配。
+我常用的 Python 开发环境包括解释器、版本管理、虚拟环境、pip 和编辑器配置；这里记录各自的选择与设置方式。
 
 ## 安装 Python
 
@@ -81,7 +81,7 @@ deactivate                   # 退出虚拟环境
 激活后提示符会出现 `(.venv)` 前缀，此时 `python`、`pip` 都指向虚拟环境内的副本。`.venv/` 目录不应提交到版本库（本仓库的 `.gitignore` 已忽略）。
 
 ::: tip 环境管理工具的演进
-传统三件套是 venv + pip + requirements.txt。社区还有更现代的统一工具：[uv](https://github.com/astral-sh/uv)（Rust 编写，兼容 pip 工作流）、[Poetry](https://python-poetry.org/)（依赖解析 + 打包一体）、[PDM](https://pdm-project.org/)（遵循 PEP 582/621）。初学先用 venv + pip 打好底，理解了再上工具。
+传统三件套是 venv + pip + requirements.txt。社区还有更现代的统一工具：[uv](https://github.com/astral-sh/uv)（Rust 编写，兼容 pip 工作流）、[Poetry](https://python-poetry.org/)（依赖解析 + 打包一体）、[PDM](https://pdm-project.org/)（遵循 PEP 582/621）。我通常从 venv + pip 起步；项目需要时再评估统一工具。
 :::
 
 ## 编辑器与调试
