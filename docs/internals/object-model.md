@@ -4,6 +4,8 @@ description: PyObject 对象头、引用计数与不死对象，dict 紧凑哈�
 
 # 核心数据结构：PyObject 与三大容器
 
+本页聚焦 CPython 对象与容器的内存布局；从 Python 代码使用列表、字典和元组的角度见[列表与元组](/datastructures/list-tuple)及[字典与集合](/datastructures/dict-set)。
+
 行号对应 3.14 分支 commit `66df30d15c9052785ed6463663e70d38107a9edf`（2026-10-04 检出）；克隆方式与阅读前提见[总览](/internals/cpython-source)。
 
 ## 一切对象的头

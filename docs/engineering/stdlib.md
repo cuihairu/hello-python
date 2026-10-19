@@ -6,6 +6,8 @@ description: collections、itertools、functools、pathlib、re 与 json/datetim
 
 Python「自带电池」（batteries included）的底气来自标准库。这页挑出最高频的几个模块：collections、itertools、functools、pathlib、re、json、datetime——它们能省掉大部分第三方依赖。
 
+本页从日常开发的选用角度介绍标准库；语言规范与 CPython 实现的边界见[源码解析笔记](/internals/implementation-boundary)。
+
 ## collections
 
 通用容器之外的增强数据结构：

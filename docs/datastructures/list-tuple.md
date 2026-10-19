@@ -6,6 +6,8 @@ description: 列表的增删改查与切片，元组的不可变语义与解包�
 
 列表（list）和元组（tuple）都是有序序列，区别只有一条：list 可变，tuple 不可变。这决定了它们的使用场景——同类元素的动态集合用 list，结构固定的记录用 tuple。
 
+这里讲语言层面的用法；CPython 中 list 的指针数组布局见[对象与容器实现笔记](/internals/object-model)。
+
 ## 列表：增删改查
 
 ```python

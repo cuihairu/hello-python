@@ -12,6 +12,8 @@ description: 哪些行为属于语言规范、哪些属于 CPython 实现：sys.
 
 标准库几乎不为其他实现写特判，例外集中在 `Lib/platform.py`：`python_implementation()`（`:1249`）按 `sys.version` 前缀识别 Jython（`:1182`）和 PyPy（`:1193`）。除此之外，PyPy、IronPython、GraalPy、MicroPython、RustPython 的任何代码都不在本仓库；PEP 11（平台支持政策）的编号在 3.14 分支只出现在 `Misc/HISTORY` 历史日志里（如 `Misc/HISTORY:4559`），现行代码与语言文档零引用。
 
+这里讨论的是实现边界与可移植性；日常工程里挑选标准库模块的用法见[标准库精选](/engineering/stdlib)。
+
 稳定 ABI 是给扩展作者划的线。`Py_LIMITED_API` 定义后，`Include/Python.h` 按版本条件裁剪包含（`Include/Python.h:36`、`:42`），全部私有布局被隔离进 `Include/cpython/` 并以 `#ifndef Py_LIMITED_API` 包裹（如 `Include/cpython/code.h:3`）；受限模式下建类型只有 `PyType_FromSpec` 一条路（`Objects/typeobject.c:5432`）。遵守这条线的扩展理论上可跑在其他实现上，承诺清单在 `Doc/data/stable_abi.dat`。
 
 一些广为人知的机制，官方文档明说是实现细节而非语言承诺：不死对象（`Doc/glossary.rst:777`）。字节码格式、`co_code_adaptive`、特化统计、GIL 切换参数同理，都是 CPython 私有，其他实现无一兼容。
