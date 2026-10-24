@@ -4,7 +4,7 @@ description: Measured comparison of the three models — threads, processes, cor
 
 # Comparing concurrency models
 
-threading, asyncio and multiprocessing cover every concurrency scenario in Python. This page gives a decision table and a measured comparison.
+`threading`, `asyncio` and `multiprocessing` cover every concurrency scenario in Python. This page gives a decision table and a measured comparison.
 
 ## The three models on one table
 
@@ -147,6 +147,6 @@ CPU-bound swap: `from concurrent.futures import ProcessPoolExecutor`, then `run_
 <!-- BACKLINKS-AUTO -->
 ## Related pages
 
-- [glossary](/zh/glossary.md)
-- [core-concepts](/zh/knowledge/core-concepts.md)
-- [scenarios](/zh/knowledge/scenarios.md)
+- [glossary](/glossary.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [scenarios](/knowledge/scenarios.md)

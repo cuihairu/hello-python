@@ -4,7 +4,7 @@ description: "Which behaviors are language-spec guarantees and which are CPython
 
 # The boundary between CPython and the standard implementation
 
-Line numbers correspond to the 3.14 branch at commit `66df30d15c9052785ed6463663e70d38107a9edf` (checked out 2026-10-04); for how to clone and the prerequisites for reading, see the [overview](/zh/internals/cpython-source).
+Line numbers correspond to the 3.14 branch at commit `66df30d15c9052785ed6463663e70d38107a9edf` (checked out 2026-10-04); for how to clone and the prerequisites for reading, see the [overview](/internals/cpython-source).
 
 "What Python is" is defined by the language reference (`Doc/reference/` in this repo); CPython is one implementation of that spec. The source itself marks which behaviors belong to this implementation and not to the language:
 
@@ -12,7 +12,7 @@ Line numbers correspond to the 3.14 branch at commit `66df30d15c9052785ed6463663
 
 The standard library almost never writes special cases for other implementations; the exceptions are concentrated in `Lib/platform.py`: `python_implementation()` (`:1249`) identifies Jython (`:1182`) and PyPy (`:1193`) from the `sys.version` prefix. Beyond that, no code for PyPy, IronPython, GraalPy, MicroPython or RustPython lives in this repo; the PEP 11 (platform support policy) number appears in the 3.14 branch only in the `Misc/HISTORY` changelog (e.g. `Misc/HISTORY:4559`), with zero references from current code or language documentation.
 
-This page covers the implementation boundary and portability; for choosing standard library modules in everyday engineering, see [Standard library highlights](/zh/engineering/stdlib).
+This page covers the implementation boundary and portability; for choosing standard library modules in everyday engineering, see [Standard library highlights](/engineering/stdlib).
 
 The stable ABI draws the line for extension authors. Once `Py_LIMITED_API` is defined, `Include/Python.h` trims its includes by version condition (`Include/Python.h:36`, `:42`), and all private layouts are quarantined into `Include/cpython/` and wrapped in `#ifndef Py_LIMITED_API` (e.g. `Include/cpython/code.h:3`); in limited mode there is only one way to create a type, `PyType_FromSpec` (`Objects/typeobject.c:5432`). An extension that respects this line could in theory run on another implementation; the list of promises is in `Doc/data/stable_abi.dat`.
 
@@ -30,4 +30,4 @@ Beyond the boundary there is a layer of practical judgment: conclusions drawn fr
 ## Related pages
 
 - [cpython-source](cpython-source.md)
-- [official-docs](/zh/knowledge/official-docs.md)
+- [official-docs](/knowledge/official-docs.md)

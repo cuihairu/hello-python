@@ -150,6 +150,6 @@ True True
 <!-- BACKLINKS-AUTO -->
 ## Related pages
 
-- [glossary](/zh/glossary.md)
-- [core-concepts](/zh/knowledge/core-concepts.md)
-- [pitfalls](/zh/knowledge/pitfalls.md)
+- [glossary](/glossary.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [pitfalls](/knowledge/pitfalls.md)

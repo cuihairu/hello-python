@@ -185,9 +185,9 @@ The full `print_stats` output includes call counts, time spent and file line num
 <!-- BACKLINKS-AUTO -->
 ## Related pages
 
-- [glossary](/zh/glossary.md)
-- [books](/zh/knowledge/books.md)
-- [core-concepts](/zh/knowledge/core-concepts.md)
-- [official-docs](/zh/knowledge/official-docs.md)
-- [pitfalls](/zh/knowledge/pitfalls.md)
-- [scenarios](/zh/knowledge/scenarios.md)
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

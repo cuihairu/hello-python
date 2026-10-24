@@ -21,7 +21,7 @@ print(squares, evens, labels)
 [0, 1, 4, 9, 16, 25] [0, 2, 4, 6, 8] ['0!', '1!', '2!']
 ```
 
-Dict and set comprehensions swap the outer brackets and the target expression; nested loops expand left to right, corresponding one-to-one with the equivalent for form:
+Dict and set comprehensions swap the outer brackets and the target expression; nested loops expand left to right, corresponding one-to-one with the equivalent for-loop form:
 
 ```python
 lengths = {w: len(w) for w in ("py", "python")}
@@ -216,7 +216,7 @@ b ['banana']
 <!-- BACKLINKS-AUTO -->
 ## Related pages
 
-- [glossary](/zh/glossary.md)
-- [books](/zh/knowledge/books.md)
-- [core-concepts](/zh/knowledge/core-concepts.md)
-- [scenarios](/zh/knowledge/scenarios.md)
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [scenarios](/knowledge/scenarios.md)

@@ -4,7 +4,7 @@ description: if branches, for/while loops and loop else, match pattern matching,
 
 # Control flow
 
-Python's control-flow three-piece set: `if` branches, `for` loops, `while` loops, plus the three steering statements `break`, `continue`, `else`, and 3.10+'s `match` structural pattern matching.
+Python's three control-flow building blocks: `if` branches, `for` loops, `while` loops, plus the three steering statements `break`, `continue`, `else`, and 3.10+'s `match` structural pattern matching.
 
 ## if branches
 
@@ -208,7 +208,7 @@ print(squares, evens)
 <!-- BACKLINKS-AUTO -->
 ## Related pages
 
-- [glossary](/zh/glossary.md)
-- [books](/zh/knowledge/books.md)
-- [core-concepts](/zh/knowledge/core-concepts.md)
-- [official-docs](/zh/knowledge/official-docs.md)
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)

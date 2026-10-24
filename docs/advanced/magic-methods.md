@@ -191,6 +191,6 @@ Point(x=1.0, y=2.0) True
 <!-- BACKLINKS-AUTO -->
 ## Related pages
 
-- [glossary](/zh/glossary.md)
-- [books](/zh/knowledge/books.md)
-- [core-concepts](/zh/knowledge/core-concepts.md)
+- [glossary](/glossary.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
