@@ -1,0 +1,232 @@
+[
+  {
+    "text": "基础语法与环境",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "环境搭建与工具链",
+        "link": "/zh/basics/setup"
+      },
+      {
+        "text": "语法基础",
+        "link": "/zh/basics/syntax"
+      },
+      {
+        "text": "变量与数据类型",
+        "link": "/zh/basics/variables-and-types"
+      },
+      {
+        "text": "控制流",
+        "link": "/zh/basics/control-flow"
+      },
+      {
+        "text": "函数",
+        "link": "/zh/basics/functions"
+      }
+    ]
+  },
+  {
+    "text": "数据结构",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "列表与元组",
+        "link": "/zh/datastructures/list-tuple"
+      },
+      {
+        "text": "字典与集合",
+        "link": "/zh/datastructures/dict-set"
+      },
+      {
+        "text": "字符串与格式化",
+        "link": "/zh/datastructures/string-formatting"
+      },
+      {
+        "text": "推导式、迭代器与生成器",
+        "link": "/zh/datastructures/iterators-generators"
+      }
+    ]
+  },
+  {
+    "text": "语言特性",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "面向对象：类与继承",
+        "link": "/zh/advanced/oop"
+      },
+      {
+        "text": "魔法方法与对象协议",
+        "link": "/zh/advanced/magic-methods"
+      },
+      {
+        "text": "dataclass 与结构化数据",
+        "link": "/zh/advanced/dataclass"
+      },
+      {
+        "text": "模块与包",
+        "link": "/zh/advanced/modules"
+      },
+      {
+        "text": "异常处理",
+        "link": "/zh/advanced/exceptions"
+      },
+      {
+        "text": "文件与 IO",
+        "link": "/zh/advanced/file-io"
+      },
+      {
+        "text": "上下文管理器",
+        "link": "/zh/advanced/context-managers"
+      },
+      {
+        "text": "装饰器",
+        "link": "/zh/advanced/decorators"
+      },
+      {
+        "text": "类型注解",
+        "link": "/zh/advanced/typing"
+      },
+      {
+        "text": "常见陷阱与最佳实践",
+        "link": "/zh/advanced/pitfalls"
+      }
+    ]
+  },
+  {
+    "text": "并发编程",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "多线程与 GIL",
+        "link": "/zh/concurrency/threading"
+      },
+      {
+        "text": "异步编程 asyncio",
+        "link": "/zh/concurrency/asyncio"
+      },
+      {
+        "text": "多进程 multiprocessing",
+        "link": "/zh/concurrency/multiprocessing"
+      },
+      {
+        "text": "并发模型对比与选型",
+        "link": "/zh/concurrency/concurrency-compare"
+      }
+    ]
+  },
+  {
+    "text": "工程实践",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "标准库精选",
+        "link": "/zh/engineering/stdlib"
+      },
+      {
+        "text": "测试：unittest 与 pytest",
+        "link": "/zh/engineering/testing"
+      },
+      {
+        "text": "日志与调试",
+        "link": "/zh/engineering/logging"
+      },
+      {
+        "text": "虚拟环境与依赖管理",
+        "link": "/zh/engineering/environments"
+      },
+      {
+        "text": "打包与发布",
+        "link": "/zh/engineering/packaging"
+      }
+    ]
+  },
+  {
+    "text": "源码解析",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "CPython 源码解析：总览",
+        "link": "/zh/internals/cpython-source"
+      },
+      {
+        "text": "核心数据结构",
+        "link": "/zh/internals/object-model"
+      },
+      {
+        "text": "类型系统与属性查找",
+        "link": "/zh/internals/type-system"
+      },
+      {
+        "text": "解释器主循环",
+        "link": "/zh/internals/eval-loop"
+      },
+      {
+        "text": "编译管线",
+        "link": "/zh/internals/compiler-pipeline"
+      },
+      {
+        "text": "内存管理",
+        "link": "/zh/internals/memory-management"
+      },
+      {
+        "text": "gc 模块：垃圾回收的 Python 面",
+        "link": "/zh/internals/gc-module"
+      },
+      {
+        "text": "GIL 与线程模型",
+        "link": "/zh/internals/gil-threading"
+      },
+      {
+        "text": "import 机制与模块对象",
+        "link": "/zh/internals/import-system"
+      },
+      {
+        "text": "CPython 与标准实现的边界",
+        "link": "/zh/internals/implementation-boundary"
+      }
+    ]
+  },
+  {
+    "text": "发展史时间线",
+    "link": "/zh/timeline"
+  },
+  {
+    "text": "导航维护说明",
+    "link": "/zh/navigation"
+  },
+  {
+    "text": "主题索引",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "知识点总览",
+        "link": "/zh/knowledge/"
+      },
+      {
+        "text": "核心概念",
+        "link": "/zh/knowledge/core-concepts"
+      },
+      {
+        "text": "权威书籍",
+        "link": "/zh/knowledge/books"
+      },
+      {
+        "text": "官方文档",
+        "link": "/zh/knowledge/official-docs"
+      },
+      {
+        "text": "应用场景",
+        "link": "/zh/knowledge/scenarios"
+      },
+      {
+        "text": "常见坑",
+        "link": "/zh/knowledge/pitfalls"
+      }
+    ]
+  },
+  {
+    "text": "术语表",
+    "link": "/zh/glossary"
+  }
+]

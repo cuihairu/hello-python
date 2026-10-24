@@ -1,14 +1,14 @@
 ---
-description: f-string 等四种格式化写法对比，str 与 bytes 的编码转换。
+description: A comparison of f-strings and the three other formatting styles, plus encoding conversion between str and bytes.
 ---
 
-# 字符串与格式化
+# Strings and Formatting
 
-字符串是最常用的数据形态。这里记录 f-string、format 规格微型语言、常用方法与编码细节。
+Strings are the most common data shape. This page records f-strings, the micro-language of format specs, common methods, and encoding details.
 
-## f-string：首选格式化
+## f-strings: the first-choice formatter
 
-f-string（3.6+）在字符串前加 `f`，花括号内直接放表达式，可读性最好：
+An f-string (3.6+) puts an `f` before the string and drops expressions straight into braces — the most readable option:
 
 ```python
 name, pi = "Python", 3.14159
@@ -25,7 +25,7 @@ Python 有 6 个字符
 87.5%
 ```
 
-3.8+ 的 `=` 修饰符把「表达式与值」一起打出来，调试利器：
+The `=` specifier in 3.8+ prints "expression and value" together — a debugging staple:
 
 ```python
 x, y = 10, 3
@@ -36,7 +36,7 @@ print(f"{x = }, {y = }, {x % y = }")
 x = 10, y = 3, x % y = 1
 ```
 
-对齐与填充：`>` 右对齐、`<` 左对齐、`^` 居中，冒号后是填充字符、宽度：
+Alignment and padding: `>` right-aligns, `<` left-aligns, `^` centers; after the colon comes the fill character and the width:
 
 ```python
 for w in ("id", "name", "score"):
@@ -53,9 +53,9 @@ print(f"{42:05d}", f"{'py':*>6}")
 00042 ****py
 ```
 
-## format 方法与 % 记法
+## The format method and % notation
 
-f-string 之外的历史方案仍会大量遇到：`str.format` 支持位置与关键字槽位；`%` 记法来自 C printf。新代码一律用 f-string，读旧代码要认识这两种：
+Historical alternatives to f-strings still turn up all the time: `str.format` supports positional and keyword slots; the `%` notation comes from C's printf. Use f-strings in new code, but recognize both when reading old code:
 
 ```python
 print("{} + {} = {}".format(1, 2, 3))
@@ -69,9 +69,9 @@ py: 99
 py 有 30 岁
 ```
 
-## 常用方法
+## Common methods
 
-查找替换、去空白、拆分拼接是日常高频操作。注意 `strip`/`split` 默认按空白处理且 `split()` 会合并连续空白：
+Search/replace, stripping whitespace, splitting and joining are everyday high-frequency operations. Note that `strip`/`split` default to whitespace handling, and `split()` collapses runs of whitespace:
 
 ```python
 s = "  Hello, Python  "
@@ -92,7 +92,7 @@ True True
 2 -1
 ```
 
-`splitlines` 处理跨平台换行；`partition` 一次拆成三段，比两次 `split` 高效：
+`splitlines` handles cross-platform newlines; `partition` splits into three pieces in one call, more efficient than two `split`s:
 
 ```python
 log = "2026-10-02 08:00 INFO start\r\n2026-10-02 08:01 INFO done\n"
@@ -107,7 +107,7 @@ print(head, repr(sep), tail)
 key '=' value
 ```
 
-判断类方法一族：`isalpha`、`isdigit`、`isalnum`、`isupper`、`istitle`，常用于输入校验：
+A family of testing methods: `isalpha`, `isdigit`, `isalnum`, `isupper`, `istitle` — commonly used for input validation:
 
 ```python
 print("abc".isalpha(), "123".isdigit(), "Py3".isalnum())
@@ -119,8 +119,8 @@ True True True
 True True
 ```
 
-::: tip 拼接的性能
-循环里 `s += x` 每次都新建字符串（str 不可变），O(n²)。批量拼接用 `"".join(iterable)`，一次成型 O(n)：
+::: tip Joining performance
+Inside a loop, `s += x` builds a new string every time (str is immutable) — O(n²). For batch joining, use `"".join(iterable)` to build it once in O(n):
 
 ```python
 parts = ["a"] * 5
@@ -134,9 +134,9 @@ aaaaa
 ```
 :::
 
-## 原始字符串与转义
+## Raw strings and escapes
 
-反斜杠转义：`\n` 换行、`\t` 制表、`\\` 反斜杠本身。正则、Windows 路径里反斜杠成灾，用 `r"..."` 原始字符串关掉转义：
+Backslash escapes: `\n` newline, `\t` tab, `\\` the backslash itself. Backslashes multiply in regexes and Windows paths — use `r"..."` raw strings to turn escaping off:
 
 ```python
 print("a\tb\nc")
@@ -151,7 +151,7 @@ a\tb\nc
 C:\new\test
 ```
 
-多行文本用三引号，行尾反斜杠阻止换行进入字符串：
+For multiline text, use triple quotes; a trailing backslash at the end of a line keeps the newline out of the string:
 
 ```python
 sql = """SELECT id, name
@@ -164,9 +164,9 @@ print(sql.splitlines()[0])
 SELECT id, name
 ```
 
-## 编码：str 与 bytes
+## Encoding: str and bytes
 
-`str` 是 Unicode 码点序列，`bytes` 是字节序列。网络与磁盘里都是 bytes，进出都要过一遍编码解码；解码遇到非法字节抛 `UnicodeDecodeError`，可用 `errors` 参数容错：
+`str` is a sequence of Unicode code points; `bytes` is a sequence of bytes. Networks and disks carry bytes, so everything crossing that boundary needs an encode/decode pass; decoding illegal bytes raises `UnicodeDecodeError`, and the `errors` parameter makes it fault-tolerant:
 
 ```python
 s = "中文"
@@ -184,7 +184,7 @@ b'\xe4\xb8\xad\xe6\x96\x87' 2 6
 ��ok
 ```
 
-文件与网络 API 都要显式给 `encoding="utf-8"`，不要依赖平台默认编码（Windows 上常是 GBK，这正是「读文件乱码」的常见原因）：
+File and network APIs should always pass `encoding="utf-8"` explicitly — don't rely on the platform default (on Windows it's often GBK, which is the usual cause of "mojibake when reading a file"):
 
 ```python
 import tempfile, pathlib
@@ -199,23 +199,23 @@ with tempfile.TemporaryDirectory() as d:
 中文
 ```
 
-## 小结
+## Summary
 
-- 格式化首选 f-string，`=` 调试、`:.2f`/`,`/`%` 规格符要熟。
-- `strip`/`split`/`join`/`find` 是高频方法；批量拼接用 join。
-- 原始字符串 `r"..."` 服务于正则与路径。
-- str 与 bytes 边界处显式 `encoding="utf-8"`。
+- f-strings are the first choice for formatting; be fluent with the `=` debug specifier and the `:.2f`/`,`/`%` specifiers.
+- `strip`/`split`/`join`/`find` are high-frequency methods; use join for batch concatenation.
+- Raw strings `r"..."` serve regexes and paths.
+- Pass `encoding="utf-8"` explicitly at the str/bytes boundary.
 
-## 参考资料
+## References
 
-- [Python 官方文档 · str 格式化语法](https://docs.python.org/3/library/string.html)
-- [Python 官方文档 · 内置类型（str）](https://docs.python.org/3/library/stdtypes.html)
-- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/inputoutput.html)
+- [Python official docs · str formatting syntax](https://docs.python.org/3/library/string.html)
+- [Python official docs · built-in types (str)](https://docs.python.org/3/library/stdtypes.html)
+- [Python official docs · tutorial](https://docs.python.org/3/tutorial/inputoutput.html)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
-- [scenarios](/knowledge/scenarios.md)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)
+- [scenarios](/zh/knowledge/scenarios)

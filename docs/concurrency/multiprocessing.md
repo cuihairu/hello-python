@@ -1,14 +1,14 @@
 ---
-description: 进程池与进程间通信，shared_memory 共享状态与进程启动方式的选择。
+description: Process pools and inter-process communication, shared state with shared_memory, and choosing the process start method.
 ---
 
-# 多进程 multiprocessing
+# Multiprocessing with multiprocessing
 
-每个进程有独立解释器与独立 GIL，`multiprocessing` 由此绕开 GIL，是 CPU 密集任务并行的标准答案。代价：进程创建与数据传输更贵，对象要跨进程序列化。
+Every process gets its own interpreter and its own GIL, which is how `multiprocessing` sidesteps the GIL — the standard answer for parallelizing CPU-bound tasks. The cost: process creation and data transfer are more expensive, and objects must be serialized to cross process boundaries.
 
-## 基本用法
+## Basic usage
 
-`Process` 与 `Thread` 接口几乎一致。脚本里必须包 `if __name__ == "__main__":` 守卫——子进程在 spawn 模式下会重新导入主模块，没有守卫会无限递归创建进程：
+`Process` has nearly the same interface as `Thread`. Scripts must wrap things in an `if __name__ == "__main__":` guard — under the spawn start method the child re-imports the main module, and without the guard you get unbounded recursive process creation:
 
 ```python
 from multiprocessing import Process, Queue
@@ -34,9 +34,9 @@ if __name__ == "__main__":
 父进程 pid 独立: True
 ```
 
-## 进程池 Pool
+## The Pool
 
-手动管进程太琐碎，池化按 CPU 核数自动分配。`map` 把任务批量分发，`imap` 流式返回，`apply_async` 单个异步任务：
+Managing processes by hand gets tedious; a pool distributes work automatically across CPU cores. `map` dispatches tasks in a batch, `imap` streams results back, `apply_async` submits a single async task:
 
 ```python
 from multiprocessing import Pool
@@ -57,9 +57,9 @@ if __name__ == "__main__":
 True
 ```
 
-## 进程间通信
+## Inter-process communication
 
-进程不共享内存，传数据靠序列化。`Queue` 走管道，`Pipe` 点对点；大量共享数据用 `Manager` 或 `shared_memory`：
+Processes do not share memory; moving data means serializing it. `Queue` goes over a pipe, `Pipe` is point-to-point; for large amounts of shared data use `Manager` or `shared_memory`:
 
 ```python
 from multiprocessing import Process, Queue
@@ -90,17 +90,17 @@ if __name__ == "__main__":
 ['DATA-0', 'DATA-1', 'DATA-2']
 ```
 
-::: tip 父子进程的内存是复制的
-给子进程传 list，它拿到的是 pickle 还原的**副本**——子进程 append 再多次，父进程的列表纹丝不动（返回时见 `[]`）。跨进程回传结果要走队列或 `Manager().list()`。
+::: tip Parent and child memory is copied
+Pass a list to a child process and it receives a **copy** restored from pickle — the child can append as many times as it likes, the parent's list never moves (you get `[]` back). Results have to travel back across the process boundary via a queue or `Manager().list()`.
 :::
 
-::: warning 可序列化约束
-跨进程的一切参数与返回值必须可 pickle：lambda、局部函数、打开的文件句柄都不行。spawn 模式（macOS/Windows 默认）下子进程重导入模块，target 函数必须是模块顶层可导入的名字。
+::: warning The pickle constraint
+Every argument and return value that crosses a process boundary must be picklable: lambdas, local functions, and open file handles are out. Under the spawn start method (the default on macOS/Windows) the child re-imports the module, so target functions must be importable top-level names in the module.
 :::
 
-## 并行加速验证
+## Verifying the parallel speedup
 
-用计算任务对比「串行 vs 双进程池」的实际加速比（近似 2 倍，受进程创建开销影响）：
+Compare serial versus a two-process pool on a compute task (roughly a 2x speedup, dampened by process-creation overhead):
 
 ```python
 from multiprocessing import Pool
@@ -121,9 +121,9 @@ if __name__ == "__main__":
 True
 ```
 
-## shared_memory 与共享状态
+## shared_memory and shared state
 
-3.8+ 的 `shared_memory.SharedMemory` 让多个进程直接读写同一块内存（NumPy 大数组场景的标配）：
+`shared_memory.SharedMemory` (3.8+) lets multiple processes read and write the same block of memory directly (the standard tool for large NumPy arrays):
 
 ```python
 from multiprocessing import shared_memory, Process
@@ -148,7 +148,7 @@ if __name__ == "__main__":
 42
 ```
 
-简单共享计数用 `Manager` 更省事（值通过代理进程同步，性能低于 shared_memory）：
+For a simple shared counter, `Manager` is less hassle (values are synchronized through a proxy process; slower than shared_memory):
 
 ```python
 from multiprocessing import Process, Value
@@ -170,39 +170,39 @@ if __name__ == "__main__":
 2000
 ```
 
-## 进程的启动方式
+## Process start methods
 
-| 方式 | 平台默认 | 特点 |
+| Method | Platform default | Characteristics |
 | --- | --- | --- |
-| `fork` | Linux | 快，子进程复制父进程内存；与线程混用有坑 |
-| `spawn` | macOS/Windows | 慢但干净，重新导入模块，最可移植 |
-| `forkserver` | 无默认 | 先起干净进程再 fork，兼顾安全 |
+| `fork` | Linux | Fast; the child copies the parent's memory; has pitfalls when mixed with threads |
+| `spawn` | macOS/Windows | Slower but clean; re-imports the module; most portable |
+| `forkserver` | No default | Starts a clean process first, then forks from it; a safety compromise |
 
-跨平台项目显式 `multiprocessing.set_start_method("spawn")`（仅一次），行为才一致。
+For cross-platform projects, set `multiprocessing.set_start_method("spawn")` explicitly (once only) so behavior is consistent.
 
-## 何时用多进程
+## When to use multiprocessing
 
-- 用：图像处理、数值计算、大文件解析、模型推理——CPU 打满的任务。
-- 不用：网络等待为主的场景（协程/线程更省）；数据量极大但计算极小（序列化开销反超收益）。
+- Use it for: image processing, numeric computation, parsing large files, model inference — tasks that saturate the CPU.
+- Don't use it for: work dominated by network waiting (coroutines/threads are cheaper); or huge data volumes with trivial computation (serialization overhead outweighs the gain).
 
-## 小结
+## Summary
 
-- 多进程绕开 GIL，CPU 密集并行的标准方案。
-- 脚本必须有 `if __name__ == "__main__"` 守卫；跨进程数据走 pickle。
-- 日常用 `Pool.map` 批量分发；共享大块数据用 `shared_memory`。
-- 核数 = 上限参考：`os.cpu_count()`；进程创建与序列化有固定开销，任务要够大才划算。
+- Multiprocessing sidesteps the GIL; it is the standard approach for CPU-bound parallelism.
+- Scripts must have the `if __name__ == "__main__"` guard; data crossing processes goes through pickle.
+- Day to day, batch dispatch with `Pool.map`; use `shared_memory` for large shared data.
+- Core count is the ceiling to reference: `os.cpu_count()`. Process creation and serialization have fixed overhead, so tasks must be big enough to pay off.
 
-## 参考资料
+## References
 
-- [Python 官方文档 · multiprocessing](https://docs.python.org/3/library/multiprocessing.html)
-- [Python 官方文档 · 并发 futures](https://docs.python.org/3/library/concurrent.futures.html)
+- [Python official docs · multiprocessing](https://docs.python.org/3/library/multiprocessing.html)
+- [Python official docs · concurrent.futures](https://docs.python.org/3/library/concurrent.futures.html)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [books](/knowledge/books.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
-- [pitfalls](/knowledge/pitfalls.md)
-- [scenarios](/knowledge/scenarios.md)
+- [books](/zh/knowledge/books)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)
+- [pitfalls](/zh/knowledge/pitfalls)
+- [scenarios](/zh/knowledge/scenarios)

@@ -1,14 +1,14 @@
 ---
-description: 协程基础、gather 与 TaskGroup 并发、超时取消，阻塞调用的三种出路。
+description: Coroutines fundamentals, gather and TaskGroup for concurrency, timeout and cancellation, and the three ways out of a blocking call.
 ---
 
-# 异步编程 asyncio
+# Async programming with asyncio
 
-asyncio 是单线程并发模型：一个事件循环调度大量协程，遇到 IO 等待（`await`）就切走，不占线程。高并发网络服务（每秒数万连接）线程模型会撞到线程数与内存上限，协程没有这个包袱。
+asyncio is a single-threaded concurrency model: one event loop schedules many coroutines, switching away whenever it hits an IO wait (`await`) instead of occupying a thread. High-concurrency network services (tens of thousands of connections per second) will hit thread-count and memory ceilings with the thread model; coroutines carry no such baggage.
 
-## 协程基础
+## Coroutine fundamentals
 
-`async def` 定义协程函数，调用得到协程对象；`await` 挂起等待结果。协程不能直接 `run()`，要交给事件循环——3.7+ 用 `asyncio.run`：
+`async def` defines a coroutine function; calling it returns a coroutine object. `await` suspends and waits for the result. A coroutine cannot be run directly with `run()` — hand it to an event loop, via `asyncio.run` on 3.7+:
 
 ```python
 import asyncio
@@ -29,13 +29,13 @@ print(asyncio.run(main()))
 ['你好, A', '你好, B']
 ```
 
-::: warning 协程 ≠ 线程
-`async def` 的函数在没有 `await` 挂起的纯计算段是**完全阻塞**事件循环的。协程适合 IO 密集；CPU 密集计算必须扔到线程池（`loop.run_in_executor`）或多进程，否则整个循环被卡住，所有协程一起停摆。
+::: warning Coroutines are not threads
+A pure-compute stretch in an `async def` function that contains no `await` suspension is **completely blocking** to the event loop. Coroutines suit IO-bound work; CPU-bound computation must be pushed to a thread pool (`loop.run_in_executor`) or to a separate process, otherwise the whole loop stalls and every coroutine comes to a halt with it.
 :::
 
-## 并发运行：gather 与 TaskGroup
+## Running concurrently: gather and TaskGroup
 
-真正的并发靠把协程「排一起跑」：`asyncio.gather`（3.7+）与 3.11+ 的 `TaskGroup`（结构化并发，异常自动传播并取消兄弟任务）。等待总耗时 ≈ 最慢那个，而不是总和：
+Real concurrency comes from scheduling coroutines to run together: `asyncio.gather` (3.7+) and `TaskGroup` (3.11+, structured concurrency — exceptions propagate automatically and sibling tasks are cancelled). Total wait time is roughly the slowest one, not the sum:
 
 ```python
 import asyncio, time
@@ -66,7 +66,7 @@ asyncio.run(main())
 ['A done', 'B done', 'C done'] True
 ```
 
-TaskGroup 写法（推荐 3.11+ 用它，异常处理更稳）：
+The TaskGroup form (prefer this on 3.11+ — exception handling is more solid):
 
 ```python
 import asyncio
@@ -88,9 +88,9 @@ print(asyncio.run(main()))
 ['aa', 'bb']
 ```
 
-## 超时、取消与异常
+## Timeout, cancellation and exceptions
 
-`asyncio.wait_for` / 3.11+ 的 `asyncio.timeout` 给等待加时限；取消是协程协作式的，需要在 `CancelledError` 里做清理：
+`asyncio.wait_for` / `asyncio.timeout` on 3.11+ add a deadline to a wait; cancellation is cooperative, so you need to clean up inside `CancelledError`:
 
 ```python
 import asyncio
@@ -114,7 +114,7 @@ asyncio.run(main())
 清理完成
 ```
 
-gather 默认第一个异常就抛出（其余任务被丢弃）；`return_exceptions=True` 把异常当结果收：
+gather raises on the first exception by default (the remaining tasks are discarded); `return_exceptions=True` collects exceptions as results instead:
 
 ```python
 import asyncio
@@ -138,9 +138,9 @@ asyncio.run(main())
 ['str', 'ValueError']
 ```
 
-## 常用原语
+## Common primitives
 
-事件循环自带一套并发原语：`Semaphore` 限并发数、`Queue` 协程间通信、`Event` 信号、`Lock` 互斥（全部是协程版，`await` 获取）：
+The event loop ships with a full set of concurrency primitives: `Semaphore` to cap concurrency, `Queue` for inter-coroutine messaging, `Event` for signals, `Lock` for mutual exclusion (all are coroutine versions, acquired with `await`):
 
 ```python
 import asyncio
@@ -161,9 +161,9 @@ asyncio.run(main())
 [0, 1, 2, 3, 4]
 ```
 
-## 阻塞调用怎么办
+## What to do about blocking calls
 
-标准库同步 API（`requests`、磁盘 IO、`time.sleep`）会卡死循环，三种出路：
+Synchronous standard-library APIs (`requests`, disk IO, `time.sleep`) will freeze the loop. Three ways out:
 
 ```python
 import asyncio
@@ -181,13 +181,13 @@ asyncio.run(main())
 499500
 ```
 
-- 少量调用：`run_in_executor` 放默认线程池。
-- 网络 IO：换异步库（httpx/aiohttp、asyncpg、redis.asyncio）。
-- 定时：`await asyncio.sleep`，别用 `time.sleep`。
+- A few calls: put them on the default thread pool with `run_in_executor`.
+- Network IO: switch to an async library (httpx/aiohttp, asyncpg, redis.asyncio).
+- Timing: `await asyncio.sleep`, never `time.sleep`.
 
-## async 生成器与异步迭代
+## Async generators and asynchronous iteration
 
-`async for` 遍历异步生成器（`async def` + `yield`），流式数据、分页拉取用得上：
+`async for` iterates over an async generator (`async def` + `yield`); useful for streaming data and paginated pulls:
 
 ```python
 import asyncio
@@ -210,27 +210,27 @@ asyncio.run(main())
 6
 ```
 
-## 小结
+## Summary
 
-- 协程 = `async def` + `await`，`asyncio.run` 启动事件循环。
-- 并发靠 `gather` / `TaskGroup`，总耗时看最慢者。
-- CPU 密集别塞协程，跑 `run_in_executor` 或多进程。
-- 超时用 `wait_for`/`timeout`，限流用 `Semaphore`，阻塞调用必须改造。
-- 3.11+ 优先 TaskGroup（结构化并发），异常传播更可靠。
+- Coroutine = `async def` + `await`; `asyncio.run` starts the event loop.
+- Concurrency comes from `gather` / `TaskGroup`; total time is the slowest task.
+- Don't cram CPU-bound work into coroutines — use `run_in_executor` or multiprocessing.
+- Use `wait_for`/`timeout` for deadlines, `Semaphore` for rate limiting, and rework blocking calls.
+- Prefer TaskGroup on 3.11+ (structured concurrency) — exception propagation is more reliable.
 
-## 参考资料
+## References
 
-- [Python 官方文档 · asyncio](https://docs.python.org/3/library/asyncio.html)
-- [Python 官方文档 · 协程与任务](https://docs.python.org/3/library/asyncio-task.html)
-- [Python 官方文档 · 事件循环](https://docs.python.org/3/library/asyncio-eventloop.html)
+- [Python official docs · asyncio](https://docs.python.org/3/library/asyncio.html)
+- [Python official docs · coroutines and tasks](https://docs.python.org/3/library/asyncio-task.html)
+- [Python official docs · event loop](https://docs.python.org/3/library/asyncio-eventloop.html)
 - [PEP 492 · async/await](https://peps.python.org/pep-0492/)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [books](/knowledge/books.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
-- [pitfalls](/knowledge/pitfalls.md)
-- [scenarios](/knowledge/scenarios.md)
+- [books](/zh/knowledge/books)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)
+- [pitfalls](/zh/knowledge/pitfalls)
+- [scenarios](/zh/knowledge/scenarios)

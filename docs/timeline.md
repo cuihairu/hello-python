@@ -1,34 +1,34 @@
 ---
-description: 1989 到 2026 的 Python 发展时间线，30 个节点各答「为什么是这个时候」。
-title: 发展史时间线
+description: Python's development timeline from 1989 to 2026 — 30 nodes, each answering "why it happened when it did".
+title: Timeline
 ---
 
 <script setup>
 import DevTimeline from './.vitepress/theme/components/DevTimeline.vue'
 </script>
 
-# 发展史时间线
+# Timeline
 
-Python 的每个关键能力都是对某个具体问题的回答。lambda 与 reduce 源于早期用户对函数式表达的期待；asyncio 解决的是单线程高并发的标准化问题；自由线程则在偿还 GIL 三十年欠下的多核债。这条线从 1989 年圣诞假期一路走到 2026 年，按时间顺序排列 30 个节点，每个节点都先回答「为什么是这个时候」，再给出与站内章节的对应关系。
+Every major capability in Python is an answer to a concrete problem. lambda and reduce came from early users' desire for functional expression; asyncio answered the need to standardize high concurrency inside a single thread; free threading is paying down the three decades of multicore debt the GIL left behind. This line runs from a Christmas holiday in 1989 all the way to 2026: 30 nodes in chronological order, each one answering "why now" first and then pointing to the matching chapter on this site.
 
-## 这条线怎么用
+## How to use this timeline
 
-先筛后看。顶部的领域标签是语言核心、并发模型、生态与工具、工程实践四组，计数标在标签上。只看「并发模型」，这条线就从 2008 年的多进程一路走到 2025 年自由线程转正：十七年里，「多核时代怎么办」的答案换了三轮。
+Filter first, then read. The field labels at the top group events into four areas — language core, concurrency, ecosystem, and engineering — with the count on the label itself. Select "Concurrency" alone and the line runs from multiprocessing in 2008 to free threading becoming official in 2025: over seventeen years, the answer to "what do we do about multicore" changed three times.
 
-点开看来由。每个节点是一行年份加一句标题，点开有谁做的、为什么是这个时候、站内对应章节三段。同一时点常常不止一件事：2008 年 10 月 pip 与 multiprocessing 先后落位，安装与并发两条线在同一个月里各进一步，这说明生态已经成熟到临界点。
+Open a node to see why. Each node is a year plus a one-line title; expand it for who did it, why it happened then, and the related chapter. One moment often holds more than one event: in October 2008 pip and multiprocessing landed one after the other, packaging and concurrency each moving forward in the same month — a sign the ecosystem had reached a critical mass.
 
-按时期读。四个分期各有一段导语：诞生与奠基、社区与生态成形、3.x 抉择与并发转身、现代化与提速。年份取「能力或机制落地」的时点，不是它被广泛采用的时点——3.0 修复了历史债却在社区痛了十年，落地与消化之间隔着一个版本周期。
+Read by era. The four eras each carry an intro: Birth & Foundations, Community & Ecosystem Take Shape, The 3.x Bet & the Concurrency Turn, and Modernization & Speed. A year is taken at the point when the capability or mechanism landed, not when it became widely used — 3.0 cleared the historical debt, but the community spent ten years in pain; between landing and digestion sits a release cycle.
 
-需要通读时，页面底部「按时期通读全部节点」是同一份数据的纯文本形态，不依赖筛选与展开，便于逐条对照各章。
+When you want the full sweep, "Read every event by era" at the bottom of the page is a plain-text form of the same data, independent of filtering and expansion, which makes it easy to compare against each chapter.
 
 <DevTimeline />
 
-## 参考资料
+## Further reading
 
-- [Python 版本发布（whatsnew）](https://docs.python.org/3/whatsnew/3.13.html)
+- [Python version releases (whatsnew)](https://docs.python.org/3/whatsnew/3.13.html)
 - [Python 3.14 whatsnew](https://docs.python.org/3/whatsnew/3.14.html)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
-- [official-docs](/knowledge/official-docs.md)
+- [official-docs](/zh/knowledge/official-docs)

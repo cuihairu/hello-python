@@ -1,14 +1,14 @@
 ---
-description: 列表的增删改查与切片，元组的不可变语义与解包用法。
+description: Adding, removing, updating, and querying lists, plus slicing; the immutability semantics of tuples and unpacking usage.
 ---
 
-# 列表与元组
+# Lists and Tuples
 
-列表（list）和元组（tuple）都是有序序列，区别只有一条：list 可变，tuple 不可变。这决定了它们的使用场景——同类元素的动态集合用 list，结构固定的记录用 tuple。
+Lists and tuples are both ordered sequences; the only difference is that lists are mutable and tuples aren't. That decides their use cases — dynamic collections of similar elements use a list, fixed-structure records use a tuple.
 
-这里讲语言层面的用法；CPython 中 list 的指针数组布局见[对象与容器实现笔记](/internals/object-model)。
+This page covers language-level usage; for the pointer-array layout of lists in CPython, see [Object and Container Implementation Notes](/zh/internals/object-model).
 
-## 列表：增删改查
+## Lists: Add, Remove, Update, Query
 
 ```python
 nums = [3, 1, 2]
@@ -28,7 +28,7 @@ print(nums, nums.index(2), nums.count(2))
 [1, 2, 4, 5] 1 1
 ```
 
-排序：`list.sort()` 原地排序返回 None；`sorted()` 返回新列表。两者都支持 `key` 与 `reverse`：
+Sorting: `list.sort()` sorts in place and returns None; `sorted()` returns a new list. Both support `key` and `reverse`:
 
 ```python
 words = ["banana", "fig", "apple"]
@@ -45,9 +45,9 @@ print(nums.sort(), nums)   # sort 返回 None，原地生效
 None [1, 2, 3]
 ```
 
-## 切片
+## Slicing
 
-切片 `seq[start:stop:step]` 左闭右开，产生新对象。省略即到头，负数从尾数。这是 Python 序列的通用语法，字符串、元组同样适用：
+Slices `seq[start:stop:step]` are left-closed, right-open, and produce a new object. Omitting a bound means "to the end," and negatives count from the tail. This is the common syntax for Python sequences — strings and tuples use it too:
 
 ```python
 nums = [0, 1, 2, 3, 4, 5]
@@ -65,7 +65,7 @@ print(nums[0], copy[0])
 0 99
 ```
 
-切片还能对列表原地赋值，实现替换、插入、删除一段：
+Slices can also be assigned to in place, replacing, inserting, or deleting a run:
 
 ```python
 nums = [0, 1, 2, 3, 4]
@@ -80,9 +80,9 @@ print(nums)
 [0, 3, 4]
 ```
 
-## 列表是引用
+## Lists Are References
 
-赋值只复制引用，两个名字指向同一个列表——修改一个「另一个也变了」。要独立副本用切片 `[:]`、`list()` 或 `copy` 模块；嵌套结构需要 `copy.deepcopy`：
+Assignment copies only the reference, so two names point at the same list — "change one, and the other changes too." For an independent copy, use a slice `[:]`, `list()`, or the `copy` module; nested structures need `copy.deepcopy`:
 
 ```python
 import copy
@@ -102,8 +102,8 @@ print(a[1], deep[1])       # 深拷贝彻底独立
 [3, 4] [3, 4, 88]
 ```
 
-::: warning `[[]] * n` 陷阱
-`[[]] * 3` 复制的是同一个内层列表的引用三次，append 一个全变。多维列表用推导式创建：
+::: warning The `[[]] * n` trap
+`[[]] * 3` copies the reference to the same inner list three times, so appending one changes all of them. Build multidimensional lists with a comprehension:
 
 ```python
 grid = [[0] * 3] * 2       # 反例：两行是同一个列表
@@ -121,9 +121,9 @@ print(grid2)
 ```
 :::
 
-## 元组
+## Tuples
 
-元组不可变，适合表达「固定结构的记录」：坐标、数据库行、多返回值。语法关键是逗号——单元素元组必须写 `(1,)`：
+Tuples are immutable, which makes them suited to "fixed-structure records": coordinates, database rows, multiple return values. The key in the syntax is the comma — a single-element tuple must be written `(1,)`:
 
 ```python
 point = 3, 4               # 括号可省
@@ -140,7 +140,7 @@ print(x + y)
 7
 ```
 
-函数「返回多个值」实际是返回一个元组，调用方解包接收；扩展解包 `*rest` 收集剩余：
+A function "returning multiple values" actually returns a tuple, which the caller unpacks; extended unpacking `*rest` collects the remainder:
 
 ```python
 def minmax(nums):
@@ -158,7 +158,7 @@ print(first, rest)
 1 [2, 3, 4]
 ```
 
-元组不可变但「内容」可能可变：`t = ([1], 2)` 里列表仍可原地改。元组能作字典键的前提是内容全部可哈希：
+Tuples are immutable, but their "contents" may still be mutable: the list inside `t = ([1], 2)` can still be changed in place. A tuple can serve as a dictionary key only if all of its contents are hashable:
 
 ```python
 t = ([1, 2], 3)
@@ -178,9 +178,9 @@ TypeError: TypeError
 {(1, 2): 'ok'}
 ```
 
-## 命名元组
+## Named Tuples
 
-记录语义想带字段名，用 `collections.namedtuple` 或 3.6+ 的 `typing.NamedTuple`，比裸下标可读得多：
+When records should carry field names, use `collections.namedtuple` or `typing.NamedTuple` (3.6+) — far more readable than bare indices:
 
 ```python
 from collections import namedtuple
@@ -203,31 +203,31 @@ print(Vec(1.5, 2.5).dx)
 1.5
 ```
 
-## 何时用元组
+## When to Use Tuples
 
-| 场景 | 选择 | 理由 |
+| Scenario | Choice | Reason |
 | --- | --- | --- |
-| 会增删改的元素集合 | list | 可变，方法齐全 |
-| 函数多返回值、固定记录 | tuple | 不可变，结构即语义 |
-| 字典键、集合元素 | tuple | 可哈希 |
-| 大量只读遍历 | tuple | 更省内存，且防误改 |
+| Element collection that gets added, removed, or modified | list | Mutable, full method set |
+| Multiple return values, fixed-structure records | tuple | Immutable, structure is semantics |
+| Dictionary keys, set elements | tuple | Hashable |
+| Lots of read-only iteration | tuple | More memory-efficient, and prevents accidental mutation |
 
-## 小结
+## Summary
 
-- list 可变、tuple 不可变；切片左闭右开、产生新对象。
-- 赋值即共享引用，嵌套结构要独立用 deepcopy。
-- `[[]] * n` 是引用复制陷阱，多维用推导式。
-- 固定结构记录用 tuple/NamedTuple，动态集合用 list。
+- Lists are mutable, tuples aren't; slices are left-closed, right-open, and produce a new object.
+- Assignment shares a reference; use deepcopy for an independent nested structure.
+- `[[]] * n` is a reference-copying trap; use a comprehension for multidimensional lists.
+- Use tuple/NamedTuple for fixed-structure records, list for dynamic collections.
 
-## 参考资料
+## References
 
-- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/datastructures.html)
-- [Python 官方文档 · 内置类型](https://docs.python.org/3/library/stdtypes.html)
+- [Python official docs · tutorial](https://docs.python.org/3/tutorial/datastructures.html)
+- [Python official docs · built-in types](https://docs.python.org/3/library/stdtypes.html)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [pitfalls](/knowledge/pitfalls.md)
-- [scenarios](/knowledge/scenarios.md)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [pitfalls](/zh/knowledge/pitfalls)
+- [scenarios](/zh/knowledge/scenarios)

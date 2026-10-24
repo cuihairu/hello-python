@@ -1,29 +1,29 @@
 ---
-description: GIL 的机制与边界，threading 的适用场景，用测量而不是猜测定位瓶颈。
+description: The mechanism and limits of the GIL, where threading actually helps, and using measurement rather than guesswork to find bottlenecks.
 ---
 
-# 多线程与 GIL
+# Multithreading and the GIL
 
-线程是操作系统调度的执行单元。Python 标准库 `threading` 提供线程原语，但受全局解释器锁（GIL）约束：多线程在 CPU 密集任务上不加速，真正的用武之地是 IO 密集。
+Threads are the execution units the OS schedules. Python's standard library `threading` provides the thread primitives, but they are constrained by the Global Interpreter Lock (GIL): multithreading does not speed up CPU-bound tasks, and its real payoff is IO-bound work.
 
-## GIL 是什么
+## What the GIL is
 
-CPython 中任何时刻只有一个线程执行 Python 字节码，GIL（Global Interpreter Lock）是这把全局锁。原因：对象引用计数不是线程安全的，GIL 保证同一时刻只有一个线程改解释器状态。
+At any given moment in CPython only one thread executes Python bytecode; the GIL (Global Interpreter Lock) is that global lock. The reason: object reference counting is not thread-safe, and the GIL guarantees that only one thread mutates interpreter state at a time.
 
-带来的直接后果：
+The direct consequences:
 
-| 任务类型 | 多线程效果 | 原因 |
+| Task type | Multithreaded effect | Why |
 | --- | --- | --- |
-| IO 密集（网络、磁盘、等待） | 有效 | 等待时线程释放 GIL，别的线程接着跑 |
-| CPU 密集（计算、解析） | 无效甚至更慢 | 线程切换 + 锁开销，实际还是串行 |
+| IO-bound (network, disk, waiting) | Effective | A waiting thread releases the GIL, so another thread keeps running |
+| CPU-bound (compute, parsing) | Ineffective, sometimes slower | Thread switching plus lock overhead — it is still serial underneath |
 
-::: tip GIL 的演进
-Python 3.9 起可用 `sys.setswitchinterval` 调整切换间隔；3.12 起 CPython 从隔离的 per-interpreter GIL 走向子解释器并行；3.13 开始提供实验性的 free-threaded 构建（无 GIL 编译选项，PEP 703）。默认的单进程 CPython 仍带 GIL，本文以默认构建为准。
+::: tip The evolution of the GIL
+From Python 3.9 you can adjust the switch interval with `sys.setswitchinterval`; from 3.12 CPython moves from an isolated per-interpreter GIL toward sub-interpreter parallelism; from 3.13 an experimental free-threaded build is offered (a no-GIL compile option, PEP 703). The default single-process CPython still has the GIL, and this chapter follows the default build.
 :::
 
-## 创建线程
+## Creating threads
 
-两种方式：直接 `Thread(target=...)`，或继承 `Thread` 类覆写 `run`。`start()` 才启动，`join()` 等它结束：
+Two ways: pass `Thread(target=...)` directly, or subclass `Thread` and override `run`. `start()` launches it, `join()` waits for it to finish:
 
 ```python
 import threading, time
@@ -47,9 +47,9 @@ print(events)
 ['主线程 启动', '主线程 等待中', '线程A 完成', '主线程 完成']
 ```
 
-## 线程安全与 Lock
+## Thread safety and Lock
 
-GIL 不等于线程安全：字节码级的 `+=` 拆成「读-改-写」多步，切换可能发生在中间。共享可变状态必须用 `Lock` 保护：
+The GIL is not the same as thread safety: a bytecode-level `+=` splits into several read-modify-write steps, and a switch can land in the middle. Shared mutable state must be protected with a `Lock`:
 
 ```python
 import threading, time
@@ -74,11 +74,11 @@ print(counter == 80000, counter)
 True 80000
 ```
 
-`with lock:` 拿锁、释放；异常路径也保证释放（与文件、with 语义一致）。
+`with lock:` acquires and releases the lock, and release is guaranteed even on exception paths (same semantics as file objects and `with` in general).
 
-## 生产者-消费者与 Queue
+## Producer-consumer and Queue
 
-`queue.Queue` 是线程安全的队列，内置等待通知机制，比手撸「锁 + 条件变量」可靠：
+`queue.Queue` is a thread-safe queue with a built-in wait-and-notify mechanism — more reliable than hand-rolling "lock + condition variable":
 
 ```python
 import threading, queue, time
@@ -110,18 +110,18 @@ print(produced, consumed)
 [0, 1, 2] ['item-0', 'item-1', 'item-2']
 ```
 
-## 线程同步原语
+## Thread synchronization primitives
 
-| 原语 | 用途 |
+| Primitive | Use |
 | --- | --- |
-| `Lock` | 互斥：保护临界区 |
-| `RLock` | 可重入锁，同一线程可多次获取 |
-| `Semaphore(n)` | 限制同时访问的线程数（连接池） |
-| `Event` | 标志位，`wait()` 阻塞到 `set()` |
-| `Condition` | 等待某个条件成立（生产者-消费者底层件） |
-| `Barrier(n)` | 会合点，n 个线程到齐一起继续 |
+| `Lock` | Mutual exclusion: guard a critical section |
+| `RLock` | Reentrant lock; the same thread can acquire it repeatedly |
+| `Semaphore(n)` | Cap the number of concurrent accessors (connection pools) |
+| `Event` | Flag; `wait()` blocks until `set()` |
+| `Condition` | Wait for a condition to hold (the building block under producer-consumer) |
+| `Barrier(n)` | Rendezvous point; all n threads arrive, then they continue together |
 
-Event 停止线程是常见模式——长跑线程检查标志位退出，比硬杀线程干净：
+Stopping a thread with an Event is a common pattern — a long-running thread checks the flag and exits, which is cleaner than hard-killing a thread:
 
 ```python
 import threading, time
@@ -148,35 +148,35 @@ print(events, count[0] > 0)
 ['收到停止信号'] True
 ```
 
-## daemon 线程
+## Daemon threads
 
-`daemon=True` 的线程随主线程退出被强杀，适合后台心跳、轮询这类「不值得等」的任务；需要完整结束的任务必须非 daemon 并 `join`。上面例子两者都演示了（daemon 保险 + join 确认）。
+Threads with `daemon=True` are hard-killed when the main thread exits — good for background heartbeats and polling, the "not worth waiting for" tasks. Tasks that need to finish cleanly must be non-daemon and `join`ed. The example above shows both (daemon as a safety net plus join to confirm).
 
-## 何时用多线程
+## When to use multithreading
 
-- 用：网络请求、文件读写、数据库轮询、GUI 后台任务——一切大部分时间在「等」的场景。
-- 不用：数值计算、图像处理、大规模文本解析——GIL 下串行；改用多进程（见下一章）或 C 扩展/NumPy 释放 GIL 的原生代码。
+- Use it for: network requests, file I/O, database polling, GUI background work — anything that spends most of its time waiting.
+- Don't use it for: numeric computation, image processing, large-scale text parsing — serial under the GIL. Switch to multiprocessing (next chapter), or native code in C extensions/NumPy that releases the GIL.
 
-判断靠测量：用 `cProfile` 或简单计时，看时间花在计算还是等待。
+Judge by measurement: use `cProfile` or plain timing to see whether the time goes to compute or to waiting.
 
-## 小结
+## Summary
 
-- GIL 让单进程多线程在 CPU 密集任务上无效；IO 密集才有效。
-- `start` 启动、`join` 等待；共享状态必须 `Lock` 保护。
-- 线程间通信用 `queue.Queue`，停止信号用 `Event`，别直接杀线程。
-- daemon 线程只放后台杂务，正事要 join。
+- The GIL makes single-process multithreading ineffective for CPU-bound tasks; it only pays off for IO-bound ones.
+- `start` launches, `join` waits; shared state must be protected with a `Lock`.
+- Use `queue.Queue` for inter-thread messaging and an `Event` for stop signals — don't kill threads directly.
+- Put only background chores in daemon threads; real work needs a `join`.
 
-## 参考资料
+## References
 
-- [Python 官方文档 · threading](https://docs.python.org/3/library/threading.html)
-- [Python 官方文档 · 队列 queue](https://docs.python.org/3/library/queue.html)
-- [Python 官方文档 · 并发 futures](https://docs.python.org/3/library/concurrent.futures.html)
+- [Python official docs · threading](https://docs.python.org/3/library/threading.html)
+- [Python official docs · queue](https://docs.python.org/3/library/queue.html)
+- [Python official docs · concurrent.futures](https://docs.python.org/3/library/concurrent.futures.html)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
-- [pitfalls](/knowledge/pitfalls.md)
-- [scenarios](/knowledge/scenarios.md)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)
+- [pitfalls](/zh/knowledge/pitfalls)
+- [scenarios](/zh/knowledge/scenarios)

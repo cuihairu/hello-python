@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
-import { ERAS, FIELD_LABELS, TIMELINE } from '../data/timeline'
+import { useData } from 'vitepress'
+import { ERAS, ERAS_ZH, FIELD_LABELS, FIELD_LABELS_ZH, TIMELINE, TIMELINE_ZH } from '../data/timeline'
 import type { TimelineEvent } from '../data/timeline'
 
 type Field = TimelineEvent['field']
@@ -8,23 +9,38 @@ type Filter = 'all' | Field
 
 type ListedEvent = TimelineEvent & { idx: number }
 
-const EVENTS: ListedEvent[] = TIMELINE.map((e, idx) => ({ ...e, idx }))
-const fields = Object.keys(FIELD_LABELS) as Field[]
+// 组件同时挂在 / 与 /zh/ 两个 locale 下，数据与文案都按 locale 选取
+const { localeIndex } = useData()
+const isZh = computed(() => localeIndex.value === 'zh')
+
+const EVENTS = computed<ListedEvent[]>(() =>
+  (isZh.value ? TIMELINE_ZH : TIMELINE).map((e, idx) => ({ ...e, idx })),
+)
+const fields = computed<Field[]>(() => Object.keys(isZh.value ? FIELD_LABELS_ZH : FIELD_LABELS) as Field[])
+const labels = computed<Record<Field, string>>(() => (isZh.value ? FIELD_LABELS_ZH : FIELD_LABELS))
+const eras = computed(() => (isZh.value ? ERAS_ZH : ERAS))
+
+// 组件内硬编码的界面文案：随 locale 切换，避免中文串出现在英文站
+const UI = {
+  en: { all: 'All', who: 'Who', why: 'Why now', link: 'Related page', readall: 'Read every event by era', filter: 'Filter the timeline by field' },
+  zh: { all: '全部', who: '谁做的', why: '为什么是这个时候', link: '站内对应', readall: '按时期通读全部节点', filter: '按领域筛选时间线' },
+} as const
+const t = computed(() => (isZh.value ? UI.zh : UI.en))
 
 const filter = ref<Filter>('all')
 const expanded = ref<number | null>(null)
 
 const counts = computed<Record<Filter, number>>(() => {
-  const c: Record<Filter, number> = { all: EVENTS.length, core: 0, concurrency: 0, ecosystem: 0, engineering: 0 }
-  for (const e of EVENTS) c[e.field] += 1
+  const c: Record<Filter, number> = { all: EVENTS.value.length, core: 0, concurrency: 0, ecosystem: 0, engineering: 0 }
+  for (const e of EVENTS.value) c[e.field] += 1
   return c
 })
 
 // 当前筛选下的分期视图；空分期整块隐藏
 const periods = computed(() =>
-  ERAS.map((era) => ({
+  eras.value.map((era) => ({
     ...era,
-    events: EVENTS.filter(
+    events: EVENTS.value.filter(
       (e) => e.year >= era.from && e.year <= era.to && (filter.value === 'all' || e.field === filter.value),
     ),
   })).filter((p) => p.events.length > 0),
@@ -32,7 +48,7 @@ const periods = computed(() =>
 
 // 通读区专用：永远给全量数据，不随筛选收窄
 function periodsOf(list: ListedEvent[]) {
-  return ERAS.map((era) => ({
+  return eras.value.map((era) => ({
     ...era,
     events: list.filter((e) => e.year >= era.from && e.year <= era.to),
   })).filter((p) => p.events.length > 0)
@@ -80,14 +96,14 @@ watch(periods, () => nextTick(observeEras))
 
 <template>
   <div class="tl">
-    <div class="tl-chips" role="group" aria-label="按领域筛选时间线">
+    <div class="tl-chips" role="group" :aria-label="t.filter">
       <button
         type="button"
         class="tl-chip"
         :class="{ active: filter === 'all' }"
         :aria-pressed="filter === 'all'"
         @click="filter = 'all'"
-      >全部 <b>{{ counts.all }}</b></button>
+      >{{ t.all }} <b>{{ counts.all }}</b></button>
       <button
         v-for="f in fields"
         :key="f"
@@ -96,7 +112,7 @@ watch(periods, () => nextTick(observeEras))
         :class="{ active: filter === f }"
         :aria-pressed="filter === f"
         @click="filter = f"
-      >{{ FIELD_LABELS[f] }} <b>{{ counts[f] }}</b></button>
+      >{{ labels[f] }} <b>{{ counts[f] }}</b></button>
     </div>
 
     <section v-for="p in periods" :key="p.name" class="tl-era">
@@ -126,18 +142,18 @@ watch(periods, () => nextTick(observeEras))
           >
             <span class="tl-year">{{ yearLabel(e) }}</span>
             <span class="tl-title">{{ e.title }}</span>
-            <span class="tl-field">{{ FIELD_LABELS[e.field] }}</span>
+            <span class="tl-field">{{ labels[e.field] }}</span>
           </button>
 
           <div :id="`tl-detail-${e.idx}`" class="tl-detail">
             <div class="tl-detail-inner">
               <dl>
-                <dt>谁做的</dt>
+                <dt>{{ t.who }}</dt>
                 <dd>{{ e.who }}</dd>
-                <dt>为什么是这个时候</dt>
+                <dt>{{ t.why }}</dt>
                 <dd>{{ e.why }}</dd>
                 <template v-if="e.link">
-                  <dt>站内对应</dt>
+                  <dt>{{ t.link }}</dt>
                   <dd><a class="tl-link" :href="withBase(e.link)">{{ e.link }}</a></dd>
                 </template>
               </dl>
@@ -148,7 +164,7 @@ watch(periods, () => nextTick(observeEras))
     </section>
 
     <section class="tl-readall">
-      <h3>按时期通读全部节点</h3>
+      <h3>{{ t.readall }}</h3>
       <div v-for="p in periodsOf(EVENTS)" :key="p.name" class="tl-readall-era">
         <h4>{{ p.name }}（{{ p.from }} → {{ p.to }}）</h4>
         <ul>

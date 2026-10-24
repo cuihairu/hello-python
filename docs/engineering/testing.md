@@ -1,14 +1,14 @@
 ---
-description: unittest 与 pytest 的写法对比、测试替身四类与覆盖率在 CI 的落法。
+description: unittest vs pytest side by side, the four kinds of test double, and where coverage fits into CI.
 ---
 
-# 测试：unittest 与 pytest
+# Testing: unittest and pytest
 
-测试是重构的底气。unittest 是标准库的 xUnit 风格框架，pytest 是事实上的社区标准：断言写 `assert parse_port("80") == 80` 一行，不用记 `assertEqual` 这类方法名；fixture 在用例结束自动回收（`yield` 之后的代码做清理），不用手写 tearDown 与 setUp 配对。两者都能测，新项目直接上 pytest。
+Tests are what let you refactor without fear. unittest is the stdlib's xUnit-style framework; pytest is the de facto community standard: an assertion is a single `assert parse_port("80") == 80` line, with no need to remember method names like `assertEqual`; fixtures are reclaimed automatically when a case finishes (the code after `yield` does the cleanup), so you never hand-write paired setUp and tearDown. Either one tests fine; for a new project, go straight to pytest.
 
-## 一个被测模块
+## A module under test
 
-贯穿本页的示例模块（校验端口配置）：
+The example module that runs through this page (validating port configuration):
 
 ```python
 # cfg.py
@@ -22,7 +22,7 @@ def parse_port(text):
 
 ## unittest
 
-`unittest.TestCase` 的子类里，`assert*` 系列断言，`setUp` 每个用例前执行（构造公共夹具）：
+Inside a subclass of `unittest.TestCase`, use the `assert*` family of assertions; `setUp` runs before every case (build shared fixtures):
 
 ```python
 # test_cfg.py —— 配套被测模块在 docs/engineering/_examples/cfg.py
@@ -57,11 +57,11 @@ if __name__ == "__main__":
 run=3 failed=0 errors=0
 ```
 
-pytest 能直接运行 unittest 用例；日常工作流两种都行：
+pytest runs unittest cases directly; both workflows are fine day to day:
 
-## pytest：更少的样板
+## pytest: less boilerplate
 
-pytest 不要求继承，普通函数 + `assert` 即可；异常用 `pytest.raises` 上下文：
+pytest requires no inheritance; plain functions plus `assert` are enough; exceptions use the `pytest.raises` context:
 
 ```python
 # test_cfg_pytest.py
@@ -78,7 +78,7 @@ def test_invalid(bad):
         parse_port(bad)
 ```
 
-fixture 是 pytest 的资源供给机制：`@pytest.fixture` 函数产出数据，测试函数按参数名申请，作用域可配（function/class/module/session）：
+Fixtures are pytest's resource-supply mechanism: an `@pytest.fixture` function produces data, a test function requests it by parameter name, and the scope is configurable (function/class/module/session):
 
 ```python
 # test_fixture.py
@@ -100,11 +100,11 @@ def cache():
     store.clear()
 ```
 
-## 测试组织与命名
+## Test organization and naming
 
-- 文件名 `test_*.py` 或 `*_test.py`，函数 `test_<行为>`，类 `Test<单元>`。
-- 一个测试只断言一件事；坏测试比没测试更糟。
-- 行为表用 `@pytest.mark.parametrize` 展开，免写循环。
+- File names `test_*.py` or `*_test.py`, functions `test_<behavior>`, classes `Test<unit>`.
+- One test asserts one thing; a bad test is worse than no test.
+- Unroll a behavior table with `@pytest.mark.parametrize` instead of writing a loop.
 
 ```python
 import pytest
@@ -121,15 +121,15 @@ def test_boundary(text, expected):
     assert parse_port(text) == expected
 ```
 
-## 运行与筛选
+## Running and selecting
 
 ```bash
-pytest                       # 当前目录发现并运行
-pytest test_cfg.py -v        # 详细输出
-pytest -k "port or valid"    # 按名字筛选
-pytest -x                    # 首个失败即停
-pytest --tb=short            # 精简回溯
-pytest -q                    # 安静模式，CI 常用
+pytest                       # discover and run in the current directory
+pytest test_cfg.py -v        # verbose output
+pytest -k "port or valid"    # select by name
+pytest -x                    # stop at the first failure
+pytest --tb=short            # trimmed traceback
+pytest -q                    # quiet mode, common in CI
 ```
 
 ```text
@@ -139,9 +139,9 @@ test_fixture.py .                                                      [100%]
 3 passed in 0.0x
 ```
 
-## 测试替身
+## Test doubles
 
-替身分四类，目的都是隔离：**stub** 提供固定返回、**spy** 记录调用、**mock** 断言调用行为、**fake** 轻量真替身（内存版数据库）。标准库 `unittest.mock` 提供 patch：
+Doubles come in four kinds, and they all aim at isolation: a **stub** returns a fixed value, a **spy** records calls, a **mock** asserts on call behavior, and a **fake** is a lightweight real stand-in (an in-memory database). The stdlib `unittest.mock` provides patch:
 
 ```python
 from unittest.mock import patch, MagicMock
@@ -163,35 +163,35 @@ print(m("x"), m.called)
 42 True
 ```
 
-## 覆盖率与 CI
+## Coverage and CI
 
-覆盖率只是线索：没覆盖的分支先问「该不该测」，该测的再补上。
+Coverage is only a clue: for an uncovered branch, ask first whether it should be tested at all, then fill in the ones that should.
 
 ```bash
 python3 -m pip install pytest-cov
-pytest --cov=. --cov-report=term-missing   # 列出未覆盖行
+pytest --cov=. --cov-report=term-missing   # list uncovered lines
 ```
 
-CI 里跑测试的标准姿势：装依赖 → `pytest -q`，失败即红灯挡合并。Python 版本矩阵用 GitHub Actions 的 `matrix` 覆盖 3.10-3.14。
+The standard way to run tests in CI: install dependencies, then `pytest -q`, where a failure turns the light red and blocks the merge. A Python version matrix uses GitHub Actions' `matrix` to cover 3.10-3.14.
 
-## 小结
+## Summary
 
-- unittest 零依赖可用；pytest 凭 assert/fixture/parametrize 成为社区标准。
-- 一个测试一件事；数据驱动用 parametrize。
-- 资源夹具用 fixture（yield 做清理），外部依赖用 mock 隔离。
-- 覆盖率看缺口不追数字，CI 必跑 `-q`。
+- unittest works with zero dependencies; pytest became the community standard on the strength of assert/fixture/parametrize.
+- One thing per test; data-driven cases use parametrize.
+- Resource fixtures use fixture (yield for cleanup); isolate external dependencies with mocks.
+- Coverage: watch the gaps, not the number; CI always runs `-q`.
 
-## 参考资料
+## References
 
-- [pytest 官方文档](https://docs.pytest.org/en/stable/)
-- [Python 官方文档 · unittest](https://docs.python.org/3/library/unittest.html)
-- [Python 官方文档 · unittest.mock](https://docs.python.org/3/library/unittest.mock.html)
+- [pytest official documentation](https://docs.pytest.org/en/stable/)
+- [Python official documentation · unittest](https://docs.python.org/3/library/unittest.html)
+- [Python official documentation · unittest.mock](https://docs.python.org/3/library/unittest.mock.html)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [books](/knowledge/books.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
-- [scenarios](/knowledge/scenarios.md)
+- [books](/zh/knowledge/books)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)
+- [scenarios](/zh/knowledge/scenarios)

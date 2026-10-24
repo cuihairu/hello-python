@@ -1,11 +1,24 @@
 ---
-description: 站点导航的唯一维护入口与侧栏更新规则。
+description: The single maintenance entry point for site navigation, and the rules for updating the sidebars.
 ---
 
-# 导航维护说明
+# Navigation guide
 
-站点侧栏的唯一真源是 [`docs/.vitepress/sidebar.json`](https://github.com/cuihairu/hello-python/blob/main/docs/.vitepress/sidebar.json)。VitePress 配置在 `docs/.vitepress/config.mts` 导入该文件。仓库没有手写 `SUMMARY.md` 副本；若将来增加其他目录清单，应链接到侧栏或明确标注为派生内容，不得维护第二份可编辑导航。
+Each locale owns exactly one sidebar, and the pair is the single source of truth for navigation:
 
-调整导航时，先改 `sidebar.json`，再确认每个链接目标对应现存页面。同一侧栏分组内不要重复列出同一链接；不同分组如确有入口需要，可以复用路由。首页由顶部导航的 `/` 进入，不必在侧栏重复列出。
+- [`docs/.vitepress/sidebar.en.json`](https://github.com/cuihairu/hello-python/blob/main/docs/.vitepress/sidebar.en.json) — the English site, paths without a locale prefix. This file is the authority for page structure: add a page here first.
+- [`docs/.vitepress/sidebar.zh.json`](https://github.com/cuihairu/hello-python/blob/main/docs/.vitepress/sidebar.zh.json) — the same structure for the Chinese site, with every link prefixed by `/zh/`.
 
-页面的正文互链仍按各自角度维护，不以侧栏代替内容关系。目录和链接变更后运行文档构建与内部链接检查。
+`docs/.vitepress/config.mts` imports both and mounts them under `themeConfig.locales`. Locale resolution is VitePress' own: English pages live at the site root, Chinese pages under `/zh/`, and the language switcher comes from the `locales` config. There is no hand-rolled switcher, no `*.zh.md` mirror scheme, and no hand-written language banner in this repository.
+
+The repo keeps no hand-written `SUMMARY.md` copy. If some other directory listing is ever added, link it to a sidebar or mark it clearly as derived content — never maintain a second editable navigation.
+
+When you change the navigation:
+
+1. Edit `sidebar.en.json` first, then apply the identical structural change to `sidebar.zh.json` with the `/zh/` prefix.
+2. Confirm every link target resolves to a real page in its own locale.
+3. Keep exactly one entry per page within a grouping; do not list the same link twice inside one group. Reusing a route across different groups is fine when a page genuinely needs two entry points.
+4. The home page is reached from the top nav (`/` or `/zh/`) and is deliberately absent from both sidebars.
+5. Re-run the documentation build and the internal link checks afterwards.
+
+In-body links between pages are still maintained per page, from each page's own angle; the sidebars are not a substitute for content relationships.

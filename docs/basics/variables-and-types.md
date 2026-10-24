@@ -1,26 +1,26 @@
 ---
-description: int/float/str/bool/None 的行为细节，动态类型与 is/== 的边界。
+description: Behaviour details for int/float/str/bool/None, dynamic typing, and the boundary between is and ==.
 ---
 
-# 变量与数据类型
+# Variables and data types
 
-Python 是动态强类型语言：变量不必声明类型，运行时每个对象都带着自己的类型；但类型不会隐式转换，`"1" + 1` 只会报错。
+Python is dynamically strongly typed: variables need no type declaration, and every object carries its own type at run time; but types are never converted implicitly — `"1" + 1` simply raises.
 
-## 内置类型一览
+## Built-in types at a glance
 
-| 类型 | 例子 | 可变性 | 说明 |
+| Type | Example | Mutability | Notes |
 | --- | --- | --- | --- |
-| `int` | `42` | 不可变 | 任意精度整数，`10**100` 不溢出 |
-| `float` | `3.14` | 不可变 | IEEE 754 双精度，`1e3` 记法 |
-| `bool` | `True` | 不可变 | `int` 的子类，`True + 1 == 2` |
-| `str` | `"hi"` | 不可变 | Unicode 字符串，支持切片 |
-| `list` | `[1, 2]` | 可变 | 有序、可重复、可增删 |
-| `tuple` | `(1, 2)` | 不可变 | 有序，可作字典键 |
-| `dict` | `{"a": 1}` | 可变 | 键值映射，3.7+ 保序 |
-| `set` | `{1, 2}` | 可变 | 无序去重集合 |
-| `NoneType` | `None` | 不可变 | 空值单例 |
+| `int` | `42` | immutable | Arbitrary-precision integers; `10**100` doesn't overflow |
+| `float` | `3.14` | immutable | IEEE 754 double precision, `1e3` notation |
+| `bool` | `True` | immutable | Subclass of `int`; `True + 1 == 2` |
+| `str` | `"hi"` | immutable | Unicode string, supports slicing |
+| `list` | `[1, 2]` | mutable | Ordered, may repeat, supports append and delete |
+| `tuple` | `(1, 2)` | immutable | Ordered, usable as a dict key |
+| `dict` | `{"a": 1}` | mutable | Key-value mapping, insertion-ordered since 3.7+ |
+| `set` | `{1, 2}` | mutable | Unordered set, no duplicates |
+| `NoneType` | `None` | immutable | The empty-value singleton |
 
-用 `type()` 查类型，`isinstance()` 做判断——后者支持继承关系（`isinstance(True, int)` 为真），API 里要类型检查时用它：
+Use `type()` to look up a type and `isinstance()` to test one — the latter respects inheritance (`isinstance(True, int)` is true), so use it whenever an API needs a type check:
 
 ```python
 values = [42, 3.14, True, "hi", None]
@@ -36,9 +36,9 @@ str False
 NoneType False
 ```
 
-## 数值类型
+## Numeric types
 
-`int` 没有位宽限制，`float` 是双精度；需要精确小数用 `decimal`，分数用 `fractions.Fraction`。除法总是返回 `float`，整除用 `//`，取余用 `%`：
+`int` has no bit-width limit and `float` is double precision; use `decimal` when you need exact decimals and `fractions.Fraction` for ratios. Division always returns `float`; floor division is `//`, remainder is `%`:
 
 ```python
 print(7 / 2, 7 // 2, 7 % 2)
@@ -58,7 +58,7 @@ print(Decimal("0.1") + Decimal("0.2"))   # 二进制浮点的误差被消除
 0.3
 ```
 
-注意 `0.1 + 0.2 == 0.3` 为假——IEEE 754 表示不了 0.1，这是所有双精度语言的通病，比较浮点要设容差：
+Note that `0.1 + 0.2 == 0.3` is false — IEEE 754 cannot represent 0.1, which is a shared affliction of every double-precision language, so compare floats with a tolerance:
 
 ```python
 print(0.1 + 0.2)
@@ -70,9 +70,9 @@ print(abs(0.1 + 0.2 - 0.3) < 1e-9)
 True
 ```
 
-## 字符串
+## Strings
 
-字符串不可变，任何「修改」都产生新对象。拼接：`+` 适合短串，`"".join()` 适合长串（O(n) 而非反复复制）。`str.encode()` 得到 bytes，`bytes.decode()` 还原：
+Strings are immutable, so any "modification" produces a new object. Concatenation: `+` suits short strings, `"".join()` suits long ones (O(n) rather than repeated copying). `str.encode()` yields bytes and `bytes.decode()` brings them back:
 
 ```python
 parts = ["he", "llo"]
@@ -89,9 +89,9 @@ b'\xe4\xb8\xad'
 中
 ```
 
-## 类型转换
+## Type conversion
 
-显式转换用构造函数：`int("12")`、`str(12)`、`float("1.5")`、`list("abc")`。转换失败抛 `ValueError`，先校验再转：
+Explicit conversion uses the constructor: `int("12")`, `str(12)`, `float("1.5")`, `list("abc")`. A failed conversion raises `ValueError`, so validate before converting:
 
 ```python
 def to_int(s):
@@ -109,13 +109,13 @@ print(bool(""), bool("0"), bool([]))    # 只有空对象与 None 为假
 False True False
 ```
 
-::: warning 为什么 `"0"` 是真
-「0 是假」的直觉只对数字和空序列成立。字符串 `"0"` 非空，`bool("0")` 是 `True`。判断输入是否为 0 要先转类型再比。
+::: warning Why `"0"` is true
+The intuition that "0 is false" only holds for numbers and empty sequences. The string `"0"` is not empty, so `bool("0")` is `True`. To test whether input is 0, convert the type first, then compare.
 :::
 
-## 可变与不可变
+## Mutable and immutable
 
-这是理解 Python 语义的钥匙。`int`、`str`、`tuple` 不可变：任何「改」都返回新对象；`list`、`dict`、`set` 可变：原地修改，所有引用一起变：
+This is the key to understanding Python's semantics. `int`, `str` and `tuple` are immutable: any "change" returns a new object. `list`, `dict` and `set` are mutable: modified in place, with every reference changing together:
 
 ```python
 a = [1, 2, 3]
@@ -133,7 +133,7 @@ True [1, 2, 3, 4]
 ab AB
 ```
 
-`is` 比较对象身份（内存地址），`==` 比较值。判断是否为空值用 `is None`，比较数值用 `==`。CPython 会缓存小整数 `-5..256` 并折叠同一代码对象里的重复常量，这让 `is` 对某些整数「碰巧」为真——结果随解释器实现和运行场景而变，不能拿 `is` 当 `==` 用：
+`is` compares object identity (memory address), `==` compares value. Test for the empty value with `is None`, compare numbers with `==`. CPython caches small integers in `-5..256` and folds duplicate constants inside the same code object, which makes `is` "accidentally" true for some integers — the result varies with the interpreter implementation and the run-time scenario, so never use `is` as `==`:
 
 ```python
 x, y = 1000, 1000
@@ -149,22 +149,22 @@ True
 True
 ```
 
-## 小结
+## Summary
 
-- 动态强类型：不声明类型，但不做隐式转换。
-- 不可变对象（int/str/tuple）改则新建，可变对象（list/dict/set）原地改、引用共变。
-- `is` 比身份，`==` 比值；判 `None` 用 `is`。
-- 浮点比较设容差，精确计算换 `Decimal`。
+- Dynamically strongly typed: no type declaration, but no implicit conversion either.
+- Immutable objects (int/str/tuple) build a new one on change; mutable objects (list/dict/set) change in place, and all references change with them.
+- `is` compares identity, `==` compares value; test `None` with `is`.
+- Compare floats with a tolerance; switch to `Decimal` for exact arithmetic.
 
-## 参考资料
+## Further reading
 
-- [Python 官方文档 · 内置类型](https://docs.python.org/3/library/stdtypes.html)
-- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/)
+- [Python official documentation · Built-in types](https://docs.python.org/3/library/stdtypes.html)
+- [Python official documentation · Tutorial](https://docs.python.org/3/tutorial/)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [books](/knowledge/books.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [pitfalls](/knowledge/pitfalls.md)
+- [books](/zh/knowledge/books)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [pitfalls](/zh/knowledge/pitfalls)

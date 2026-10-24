@@ -1,14 +1,14 @@
 ---
-description: pyproject.toml 字段全解，sdist 与 wheel 构建、版本策略、发布到 PyPI。
+description: Every pyproject.toml field explained, building sdist and wheel, versioning strategy, and publishing to PyPI.
 ---
 
-# 打包与发布
+# Packaging and publishing
 
-写好的代码要让别人用得上：内部共享走私有索引，开源发布到 PyPI。现代 Python 打包全部围绕 pyproject.toml（PEP 517/621），构建用 `build`，上传用 `twine`。
+Code that's worth anything has to reach other people: internal sharing goes through a private index, open source goes to PyPI. Modern Python packaging revolves entirely around pyproject.toml (PEP 517/621), with `build` for building and `twine` for uploading.
 
-## 项目布局
+## Project layout
 
-推荐 src 布局——包放 src/ 下，测试只能导入「安装后的包」，杜绝本地目录侥幸通过：
+The recommended layout is src — the package lives under src/, so tests can only import the *installed* package, which rules out lucky passes against the local directory:
 
 ```text
 hello-pkg/
@@ -22,28 +22,28 @@ hello-pkg/
     └── test_core.py
 ```
 
-## pyproject.toml 全解
+## pyproject.toml, field by field
 
 ```toml
 [project]
-name = "hello-pkg"                    # PyPI 上的名字，全站唯一
+name = "hello-pkg"                    # Name on PyPI, unique site-wide
 version = "0.1.0"
-description = "示例包：演示现代 Python 打包"
+description = "Example package: demonstrating modern Python packaging"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [{name = "cuihairu"}]
-dependencies = [                       # 运行时依赖，带版本约束
+dependencies = [                       # Runtime dependencies, with version constraints
     "rich>=13",
 ]
 
-[project.optional-dependencies]        # extras：pip install hello-pkg[dev]
+[project.optional-dependencies]        # extras: pip install hello-pkg[dev]
 dev = ["pytest>=8", "ruff>=0.6"]
 
-[project.scripts]                      # 安装后生成的命令行入口
+[project.scripts]                      # Command-line entry points created on install
 hello-pkg = "hello_pkg.core:main"
 
-[build-system]                         # 构建后端，负责生成 wheel/sdist
+[build-system]                         # Build backend, produces the wheel/sdist
 requires = ["setuptools>=75"]
 build-backend = "setuptools.build_meta"
 
@@ -51,26 +51,26 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 ```
 
-版本号遵循语义化（semver）：破坏性变更升主版本，新功能升次版本，修复升修订号。发布前用 `setuptools-scm` 从 git tag 派生版本也是常见做法。
+Version numbers follow semver: a breaking change bumps the major, a new feature bumps the minor, a fix bumps the patch. Deriving the version from git tags with `setuptools-scm` before release is another common practice.
 
-## 构建：sdist 与 wheel
+## Building: sdist and wheel
 
 ```bash
 python3 -m pip install build
 python3 -m build
-# 产物：dist/hello_pkg-0.1.0.tar.gz（源码包）+ dist/hello_pkg-0.1.0-py3-none-any.whl
+# Artifacts: dist/hello_pkg-0.1.0.tar.gz (source package) + dist/hello_pkg-0.1.0-py3-none-any.whl
 ```
 
-| 产物 | 内容 | 说明 |
+| Artifact | Contents | Notes |
 | --- | --- | --- |
-| sdist（.tar.gz） | 源码 | 兜底格式，安装时现场构建 |
-| wheel（.whl） | 预构建 | 安装快、不执行构建，优先分发 |
+| sdist (.tar.gz) | Source | The fallback format, built on the fly at install time |
+| wheel (.whl) | Pre-built | Fast install, no build step, preferred for distribution |
 
-验证产物完整性：`twine check dist/*` 检查元数据与 README 渲染。
+Verify the artifacts' integrity: `twine check dist/*` checks the metadata and the README rendering.
 
-## 版本与依赖声明实践
+## Version and dependency declaration in practice
 
-依赖约束用范围而不是钉死，给下游留解决冲突的空间：
+Constrain dependencies with ranges instead of pinning, leaving downstream room to resolve conflicts:
 
 ```python
 # 语义示例（pyproject.toml 的 dependencies 数组）
@@ -79,20 +79,20 @@ python3 -m build
 # "urllib3"              无约束：仅用于确知稳定的传递依赖
 ```
 
-## 发布到 PyPI
+## Publishing to PyPI
 
-PyPI 已启用可信发布（Trusted Publishing）：CI 里用 OIDC 免 token 上传，本地上传则用 API token。标准流程：
+PyPI now supports Trusted Publishing: CI uploads token-free via OIDC, while local uploads use an API token. The standard flow:
 
 ```bash
-# 本地方式
+# The local route
 python3 -m pip install twine
 python3 -m twine upload dist/*
 
-# 测试索引先走一遍（pyPI test 实例）
+# Rehearse on the test index first (the TestPyPI instance)
 python3 -m twine upload --repository testpypi dist/*
 ```
 
-GitHub Actions 自动发布的骨架（含可信发布，push tag 触发）：
+A skeleton for automated publishing on GitHub Actions (with Trusted Publishing, triggered by pushing a tag):
 
 ```yaml
 name: Publish
@@ -103,7 +103,7 @@ jobs:
   pypi-publish:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write          # Trusted Publishing 必需
+      id-token: write          # Required for Trusted Publishing
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -117,46 +117,46 @@ jobs:
       - uses: pypa/gh-action-pypi-publish@release/v1
 ```
 
-::: warning 发布不可撤回
-PyPI 上传的文件名占用永久生效：同一版本号不能重复上传，删版本也释放不了文件名。发布前在 TestPyPI 演练；版本号宁可靠后不可超前。
+::: warning Publishing is irreversible
+A filename claimed on PyPI is claimed forever: the same version number can never be uploaded again, and deleting the version does not release the filename. Rehearse on TestPyPI first; when in doubt, let the version number lag rather than run ahead.
 :::
 
-## 私有分发
+## Private distribution
 
-团队内部共享不必上 PyPI：私有索引（devpi、Artifactory、云厂商方案）或 git 直装：
+Sharing inside a team doesn't require PyPI: a private index (devpi, Artifactory, cloud-vendor offerings) or installing straight from git:
 
 ```bash
 python3 -m pip install git+https://github.com/cuihairu/hello-python.git
 python3 -m pip install "hello-pkg @ git+https://github.com/cuihairu/hello-python.git@v0.1.0"
 ```
 
-## 可执行分发
+## Executable distribution
 
-给非 Python 用户的单文件程序：
+Single-file programs for users who don't have Python:
 
-- `pipx`：安装 CLI 工具到独立环境，是分发命令行工具的推荐消费方式。
-- `PyInstaller` / `shiv` / `pex`：打成自包含可执行文件或 zipapp。
+- `pipx`: installs CLI tools into isolated environments; the recommended way to consume command-line tools.
+- `PyInstaller` / `shiv` / `pex`: bundle into self-contained executables or a zipapp.
 
-## 小结
+## Summary
 
-- 元数据进 pyproject.toml，构建用 `python -m build`，产物 sdist + wheel。
-- 依赖约束写范围；入口命令用 `[project.scripts]`。
-- 发布用 twine + 可信发布；先 TestPyPI 演练，版本号不可复用。
-- 内部共享用私有索引或 git 直装。
+- Metadata goes into pyproject.toml, build with `python -m build`, artifacts are sdist + wheel.
+- Write dependency constraints as ranges; entry-point commands go under `[project.scripts]`.
+- Publish with twine + Trusted Publishing; rehearse on TestPyPI first, and never reuse a version number.
+- For internal sharing, use a private index or install straight from git.
 
-## 参考资料
+## References
 
-- [Python 打包用户指南](https://packaging.python.org/en/latest/)
-- [PEP 517 · 构建后端接口](https://peps.python.org/pep-0517/)
+- [Python Packaging User Guide](https://packaging.python.org/en/latest/)
+- [PEP 517 · Build backend interface](https://peps.python.org/pep-0517/)
 - [PEP 518 · pyproject.toml](https://peps.python.org/pep-0518/)
-- [PEP 621 · 项目元数据](https://peps.python.org/pep-0621/)
+- [PEP 621 · Project metadata](https://peps.python.org/pep-0621/)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [books](/knowledge/books.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
-- [pitfalls](/knowledge/pitfalls.md)
-- [scenarios](/knowledge/scenarios.md)
+- [books](/zh/knowledge/books)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)
+- [pitfalls](/zh/knowledge/pitfalls)
+- [scenarios](/zh/knowledge/scenarios)

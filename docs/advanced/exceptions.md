@@ -1,14 +1,14 @@
 ---
-description: try/except/else/finally 结构、异常链、自定义异常与 3.11 异常组。
+description: The try/except/else/finally structure, exception chaining, custom exceptions, and exception groups in 3.11.
 ---
 
-# 异常处理
+# Exception handling
 
-Python 用异常表达错误：出错就抛（raise），能处理就接（except），接不住就让程序带着完整栈退出。语法层面是 try/except/else/finally，语义层面是「异常即控制流」。
+Python expresses errors with exceptions: something goes wrong and you raise, you can handle it and you catch, and if nobody catches it the program exits with the full stack. Syntactically it is try/except/else/finally; semantically it is "exceptions as control flow".
 
-## 基本结构
+## The basic structure
 
-try 包住可能出错的代码；except 按子类顺序匹配，第一个命中的执行；else 在「没抛异常」时运行；finally 无论如何都运行（清理现场）：
+try wraps the code that might fail; except clauses match in the order you wrote them and the first hit runs; else runs only when "nothing was raised"; finally runs no matter what (the cleanup spot):
 
 ```python
 def parse(s):
@@ -28,7 +28,7 @@ print(parse("21"), parse("x"))
 42 不是整数
 ```
 
-一次捕获多个类型用元组；`except ... as e` 拿到异常实例，`type(e).__name__` 是类型名，`args` 是构造参数：
+Catch several types at once with a tuple; `except ... as e` binds the exception instance, `type(e).__name__` is the type name, and `args` are the constructor arguments:
 
 ```python
 def safe(value, denom):
@@ -44,8 +44,8 @@ print(safe(1, 0), safe(1, "a"), safe(1, 4))
 失败: ZeroDivisionError 失败: TypeError 0.25
 ```
 
-::: warning 裸 except 是事故放大器
-`except:` 连 KeyboardInterrupt、SystemExit 都吞，线上出问题查无可查。最低限度也要 `except Exception`，捕获后处理、记日志或重新抛出，不要静默吞掉：
+::: warning A bare except amplifies incidents
+`except:` swallows even KeyboardInterrupt and SystemExit, so when production breaks there is nothing left to investigate. The bare minimum is `except Exception`, and after catching you should handle it, log it, or re-raise - never swallow it silently:
 
 ```python
 def risky(func):
@@ -65,9 +65,9 @@ risky(lambda: int("x"))
 ```
 :::
 
-## raise 与异常链
+## raise and exception chains
 
-`raise` 抛异常；在 except 里再 raise 新异常时，写 `raise NewError(...) from e` 保留原始上下文（`__cause__`），栈里能看到「上面的异常是下面那个的直接原因」：
+`raise` throws an exception; when you raise a new one from inside an except block, write `raise NewError(...) from e` to preserve the original context (`__cause__`), so the stack shows "the exception above is caused directly by the one below":
 
 ```python
 class ConfigError(Exception):
@@ -89,7 +89,7 @@ except ConfigError as e:
 捕获: 端口必须是整数，得到 'abc' | 原因: ValueError
 ```
 
-bare `raise` 在 except 块里重新抛出当前异常（保留原始栈），是「记录后再放行」的标准姿势：
+A bare `raise` inside an except block re-throws the current exception (keeping the original stack), which is the standard "log it, then let it go" pattern:
 
 ```python
 def handler(func):
@@ -110,9 +110,9 @@ except ValueError:
 上层继续处理
 ```
 
-## 自定义异常
+## Custom exceptions
 
-继承 `Exception`（不要继承 BaseException），起有信息量的名字，按模块组织异常层级。携带上下文字段比只有字符串好用：
+Subclass `Exception` (not BaseException), pick a name that carries meaning, and organize the exception hierarchy by module. Carrying context fields is more useful than strings alone:
 
 ```python
 class ApiError(Exception):
@@ -134,9 +134,9 @@ except ApiError as e:
 用户 u1 不存在 404
 ```
 
-## EAFP 与 LBYL
+## EAFP and LBYL
 
-Python 社区偏好 EAFP（Easier to Ask Forgiveness than Permission）：直接做，错了接异常；而不是 LBYL（Look Before You Leap）先检查一遍。字典取值、类型转换都是典型：
+The Python community prefers EAFP (Easier to Ask Forgiveness than Permission): just do it and catch the exception if it fails, rather than LBYL (Look Before You Leap), which checks first. Dict lookup and type conversion are the classic cases:
 
 ```python
 data = {"a": 1}
@@ -169,23 +169,23 @@ print(as_int("42"), as_int("zz"))
 42 None
 ```
 
-EAFP 通常更快（无竞争窗口），且在多线程下免去「检查与使用之间状态改变」的问题。
+EAFP is usually faster (no race window), and under threading it avoids the problem of state changing between the check and the use.
 
-## 内建异常速查
+## Built-in exceptions at a glance
 
-| 异常 | 触发场景 |
+| Exception | When it fires |
 | --- | --- |
-| `ValueError` | 类型对、值非法（`int("x")`） |
-| `TypeError` | 类型不对（`1 + "a"`） |
-| `KeyError` / `IndexError` | 字典缺键 / 序列越界 |
-| `AttributeError` | 对象没有该属性 |
-| `FileNotFoundError` | 文件不存在 |
-| `ZeroDivisionError` | 除以零 |
-| `RuntimeError` | 无更具体分类的运行时错误 |
+| `ValueError` | Right type, illegal value (`int("x")`) |
+| `TypeError` | Wrong type (`1 + "a"`) |
+| `KeyError` / `IndexError` | Missing dict key / out-of-range sequence index |
+| `AttributeError` | The object has no such attribute |
+| `FileNotFoundError` | The file does not exist |
+| `ZeroDivisionError` | Division by zero |
+| `RuntimeError` | A runtime error with no more specific category |
 
-## 3.11+ 异常组
+## Exception groups in 3.11+
 
-`ExceptionGroup` 一次携带多个异常，`except*` 按类型分别处理，为并发任务批量失败而生：
+`ExceptionGroup` carries several exceptions at once, and `except*` handles them separately by type - built for batches of failing concurrent tasks:
 
 ```python
 def run():
@@ -204,24 +204,24 @@ run()
 类型错误: ['t']
 ```
 
-## 小结
+## Summary
 
-- try/except/else/finally 各司其职；except 按子类顺序排列。
-- 别写裸 except；要么处理要么放行，用 `raise ... from e` 保上下文。
-- 自定义异常继承 Exception，携带结构化字段。
-- 默认 EAFP 风格；3.11+ 异常组服务并发批量失败。
+- try/except/else/finally each have their job; order the except clauses by subclass first.
+- Never write a bare except; either handle it or let it through, and use `raise ... from e` to keep the context.
+- Custom exceptions subclass Exception and carry structured fields.
+- Default to the EAFP style; exception groups in 3.11+ serve batch failures in concurrency.
 
-## 参考资料
+## Further reading
 
-- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/errors.html)
-- [Python 官方文档 · 内置异常](https://docs.python.org/3/library/exceptions.html)
+- [Python official documentation · Tutorial](https://docs.python.org/3/tutorial/errors.html)
+- [Python official documentation · Built-in exceptions](https://docs.python.org/3/library/exceptions.html)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [books](/knowledge/books.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
-- [pitfalls](/knowledge/pitfalls.md)
-- [scenarios](/knowledge/scenarios.md)
+- [books](/zh/knowledge/books)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)
+- [pitfalls](/zh/knowledge/pitfalls)
+- [scenarios](/zh/knowledge/scenarios)

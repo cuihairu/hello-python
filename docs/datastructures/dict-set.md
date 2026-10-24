@@ -1,14 +1,14 @@
 ---
-description: 字典的键值操作与推导式，可哈希约束的根源，集合运算。
+description: Dictionary key-value operations and comprehensions, the root of the hashability constraint, set operations.
 ---
 
-# 字典与集合
+# Dictionaries and Sets
 
-这里讲语言层面的用法；CPython 中 dict 紧凑哈希表的结构见[对象与容器实现笔记](/internals/object-model)。
+This page covers language-level usage; for the compact hash-table structure of dicts in CPython, see [Object and Container Implementation Notes](/zh/internals/object-model).
 
-字典（dict）是键到值的映射，集合（set）是无重复元素的容器。两者都基于哈希表实现，查找、插入、删除的平均复杂度都是 O(1)，键/元素必须可哈希。
+A dictionary (dict) maps keys to values; a set is a container of unique elements. Both are built on hash tables — lookups, inserts, and deletes all average O(1), and keys/elements must be hashable.
 
-## 字典：增删改查
+## Dictionaries: Add, Remove, Update, Query
 
 ```python
 user = {"name": "Alice", "age": 30}
@@ -26,7 +26,7 @@ Alice None
 2 True
 ```
 
-取不存在键的两种安全姿势：`get` 给默认值；`setdefault` 取值不存在时顺带写入。批量更新用 `update`：
+Two safe ways to access a missing key: `get` returns a default; `setdefault` writes one in if the key is absent. Use `update` for batch updates:
 
 ```python
 cfg = {"theme": "dark"}
@@ -43,7 +43,7 @@ dark {'theme': 'dark', 'lang': 'zh'}
 {'theme': 'light', 'lang': 'zh', 'font': 14}
 ```
 
-遍历默认按键；`values()` 取值，`items()` 取键值对。字典 3.7 起保持插入顺序：
+Iteration defaults to keys; `values()` gives values, `items()` gives key-value pairs. Dicts preserve insertion order since 3.7:
 
 ```python
 scores = {"math": 90, "english": 85, "code": 99}
@@ -58,7 +58,7 @@ math 90; english 85; code 99;
 ['code', 'math', 'english']
 ```
 
-## 字典推导式与合并
+## Dictionary Comprehensions and Merging
 
 ```python
 squares = {n: n * n for n in range(4)}
@@ -77,8 +77,8 @@ print(merged)
 {'a': 1, 'b': 20, 'c': 30}
 ```
 
-::: tip defaultdict 与 Counter
-`collections.defaultdict` 给缺失键自动造默认值，免写 `if key in d`；`Counter` 一行完成计数统计：
+::: tip defaultdict and Counter
+`collections.defaultdict` fabricates a default value for missing keys, so you skip the `if key in d`; `Counter` tallies counts in one line:
 
 ```python
 from collections import defaultdict, Counter
@@ -98,9 +98,9 @@ print(Counter(words).most_common(2))
 ```
 :::
 
-## 集合
+## Sets
 
-集合字面量用花括号（空集合必须 `set()`，`{}` 是空字典）。核心能力是去重与成员判断，支持数学集合运算：
+A set literal uses braces (an empty set must be `set()`; `{}` is an empty dict). Its core abilities are deduplication and membership testing, with support for mathematical set operations:
 
 ```python
 a = {1, 2, 3, 4}
@@ -118,7 +118,7 @@ True 2
 [1, 2, 3]
 ```
 
-集合会打乱顺序（哈希决定），需要去重又保序时用 `dict.fromkeys`——字典键在 3.7+ 有序：
+Sets shuffle order (the hash decides); when you need deduplication with order preserved, use `dict.fromkeys` — dictionary keys are ordered in 3.7+:
 
 ```python
 nums = [3, 1, 3, 2, 1]
@@ -129,7 +129,7 @@ print(list(dict.fromkeys(nums)))
 [3, 1, 2]
 ```
 
-可变集合用 `add`/`remove`（元素不存在抛 KeyError）或 `discard`（不存在静默）。`frozenset` 是不可变集合，可作字典键或放入另一个集合：
+Mutable sets use `add`/`remove` (`remove` raises KeyError if the element is absent) or `discard` (silent when absent). `frozenset` is an immutable set, usable as a dictionary key or inside another set:
 
 ```python
 s = {1, 2}
@@ -146,9 +146,9 @@ print({fs: "hashable"})
 {frozenset({1, 2}): 'hashable'}
 ```
 
-## 哈希与可哈希
+## Hashing and Hashability
 
-键必须是可哈希对象（实现 `__hash__` 且生命周期内哈希值不变）：数字、字符串、字节、内容都可哈希的元组可以；list、dict、set，以及内容里有 list/dict/set 的元组，都不行。这就是「为什么列表不能当字典键」的根源：
+Keys must be hashable objects (they implement `__hash__` and their hash value stays constant over their lifetime): numbers, strings, bytes, and tuples whose contents are all hashable qualify; lists, dicts, sets, and tuples containing a list/dict/set don't. This is the root of "why lists can't be dictionary keys":
 
 ```python
 try:
@@ -163,9 +163,9 @@ TypeError: TypeError
 {('x',): 1, 'y': 2}
 ```
 
-## 键类型实践
+## Key Type Practices
 
-字典的键常用枚举、元组或字符串。元组键天然表达多维坐标，比嵌套字典更扁平：
+Dictionary keys are usually enums, tuples, or strings. Tuple keys naturally express multidimensional coordinates and stay flatter than nested dicts:
 
 ```python
 board = {(0, 0): "x", (1, 2): "o"}
@@ -178,23 +178,23 @@ o -
 [((0, 0), 'x'), ((1, 2), 'o')]
 ```
 
-## 小结
+## Summary
 
-- dict/set 查改删均摊 O(1)，键/元素必须可哈希。
-- 取值用 `get`/`setdefault`，缺键统计用 `defaultdict`，计数用 `Counter`。
-- 3.7+ dict 保插入序；去重保序用 `dict.fromkeys`。
-- 合并用 `|`（3.9+），反转/变换用字典推导式。
+- dict/set lookups, updates, and deletes are amortized O(1); keys/elements must be hashable.
+- Use `get`/`setdefault` for access, `defaultdict` for missing-key tallying, and `Counter` for counting.
+- Dicts preserve insertion order in 3.7+; use `dict.fromkeys` for order-preserving deduplication.
+- Merge with `|` (3.9+); reverse or transform with dictionary comprehensions.
 
-## 参考资料
+## References
 
-- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/datastructures.html)
-- [Python 官方文档 · collections](https://docs.python.org/3/library/collections.html)
+- [Python official docs · tutorial](https://docs.python.org/3/tutorial/datastructures.html)
+- [Python official docs · collections](https://docs.python.org/3/library/collections.html)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
-- [pitfalls](/knowledge/pitfalls.md)
-- [scenarios](/knowledge/scenarios.md)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)
+- [pitfalls](/zh/knowledge/pitfalls)
+- [scenarios](/zh/knowledge/scenarios)

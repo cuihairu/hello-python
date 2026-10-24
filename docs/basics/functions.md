@@ -1,14 +1,14 @@
 ---
-description: 函数定义、参数形态与作用域规则，含可变默认参数陷阱与 None 哨兵写法。
+description: Function definition, parameter shapes and scoping rules, including the mutable default argument trap and the None sentinel idiom.
 ---
 
-# 函数
+# Functions
 
-函数是组织代码的基本单元。Python 函数是一等公民：可以赋值给变量、当参数传递、当返回值。本文记录函数定义、参数形态、作用域规则与 lambda 在 Python 中的行为。
+Functions are the basic unit for organising code. Python functions are first-class citizens: they can be assigned to variables, passed as arguments, and returned as values. This page records how function definition, parameter shapes, scoping rules and lambda behave in Python.
 
-## 定义与调用
+## Definition and calling
 
-`def` 定义函数，`return` 返回值（不写或裸写返回 `None`）。文档字符串写在函数体第一行：
+`def` defines a function, `return` returns a value (omit it, or write it bare, to return `None`). The docstring goes on the first line of the function body:
 
 ```python
 def greet(name, greeting="你好"):
@@ -26,9 +26,9 @@ Hi, Bob!
 你好, Carol!
 ```
 
-## 参数的五种形态
+## The five forms of parameters
 
-按定义顺序：位置参数、默认参数、可变位置参数 `*args`、仅关键字参数、可变关键字参数 `**kwargs`：
+In definition order: positional parameters, default parameters, variadic positional `*args`, keyword-only parameters, variadic keyword `**kwargs`:
 
 ```python
 def demo(a, b=2, *args, key=None, **kwargs):
@@ -43,7 +43,7 @@ demo(1, 2, 3, 4, key="k", extra="x")
 1 2 (3, 4) k {'extra': 'x'}
 ```
 
-调用端也能解包：`*` 展开序列为位置参数，`**` 展开字典为关键字参数：
+The call site can unpack too: `*` spreads a sequence into positional arguments, `**` spreads a dict into keyword arguments:
 
 ```python
 def add3(x, y, z):
@@ -60,8 +60,8 @@ print(add3(10, **kw))
 60
 ```
 
-::: warning 可变默认参数陷阱
-默认值在函数定义时求值一次，所有调用共享同一个对象。默认值用可变对象（list/dict/set）会跨调用累积——这是 Python 最著名的坑，默认值一律用 `None` 哨兵：
+::: warning The mutable default argument trap
+Default values are evaluated once, when the function is defined, and every call shares that same object. A mutable default (list/dict/set) accumulates across calls — this is Python's most famous pitfall, so use a `None` sentinel for defaults instead:
 
 ```python
 def bad(item, basket=[]):        # 反例：所有调用共享同一个列表
@@ -84,9 +84,9 @@ print(good(1), good(2))          # 每次都是新列表
 ```
 :::
 
-## 仅位置与仅关键字参数
+## Positional-only and keyword-only parameters
 
-`/` 之前的参数只能按位置传，`*` 之后的只能按关键字传。标准库大量使用这一机制保护参数名不成为调用方 API 的一部分：
+Parameters before `/` can only be passed positionally; parameters after `*` can only be passed by keyword. The standard library uses this mechanism heavily, to keep parameter names from becoming part of the caller-facing API:
 
 ```python
 def clip(text, *, max_len=10):        # max_len 只能按关键字传
@@ -104,9 +104,9 @@ hello
 TypeError: clip() takes 1 positional argument but 2 were given
 ```
 
-## 作用域与闭包
+## Scope and closures
 
-名字解析遵循 LEGB：Local → Enclosing → Global → Builtin。内层函数读取外层变量构成闭包；要**重新绑定**外层变量需 `nonlocal`（函数层）或 `global`（模块层）：
+Name resolution follows LEGB: Local → Enclosing → Global → Builtin. An inner function that reads an outer variable forms a closure; to **rebind** an outer variable you need `nonlocal` (function level) or `global` (module level):
 
 ```python
 def counter():
@@ -125,7 +125,7 @@ print(c(), c(), c())
 1 2 3
 ```
 
-闭包捕获的是变量本身而非当时的值——循环变量陷阱是它的著名表现，修复方法是让默认参数在定义时快照：
+A closure captures the variable itself, not the value it held at that moment — the loop variable trap is the famous manifestation, and the fix is to snapshot via a default parameter at definition time:
 
 ```python
 funcs = [lambda: i for i in range(3)]          # 三个 lambda 共享同一个 i
@@ -139,9 +139,9 @@ print([f() for f in fixed])
 [0, 1, 2]
 ```
 
-## lambda 与高阶函数
+## lambda and higher-order functions
 
-lambda 是单表达式匿名函数，等价于「return 表达式」。排序的 `key`、`map`/`filter` 是它最常见用法；逻辑复杂就写具名函数：
+lambda is a single-expression anonymous function, equivalent to "return expression". The `key` argument of sort, and `map`/`filter`, are its most common uses; write a named function once the logic gets complex:
 
 ```python
 pairs = [("b", 2), ("a", 3), ("c", 1)]
@@ -157,7 +157,7 @@ print(list(filter(lambda x: x > 1, [0, 1, 2, 3])))
 [2, 3]
 ```
 
-函数作为返回值，可组合出「乘方工厂」：
+A function returned from a function composes into a "power factory":
 
 ```python
 def power(n):
@@ -173,22 +173,22 @@ print(square(5), cube(5))
 25 125
 ```
 
-## 小结
+## Summary
 
-- 参数顺序：位置 → 默认 → `*args` → 仅关键字 → `**kwargs`；`/` 锁定仅位置。
-- 可变默认参数是共享陷阱，用 `None` 哨兵。
-- 闭包捕获变量本身；重绑定外层用 `nonlocal`；循环 lambda 用默认参数快照。
-- lambda 只放单表达式，复杂逻辑用具名函数。
+- Parameter order: positional → default → `*args` → keyword-only → `**kwargs`; `/` locks positional-only.
+- Mutable defaults are a sharing trap; use a `None` sentinel.
+- Closures capture the variable itself; rebinding an outer needs `nonlocal`; snapshot loop lambdas with a default parameter.
+- lambda takes a single expression; use a named function for complex logic.
 
-## 参考资料
+## Further reading
 
-- [Python 官方文档 · 函数定义](https://docs.python.org/3/reference/compound_stmts.html)
-- [Python 官方文档 · 内置函数](https://docs.python.org/3/library/functions.html)
+- [Python official documentation · Function definition](https://docs.python.org/3/reference/compound_stmts.html)
+- [Python official documentation · Built-in functions](https://docs.python.org/3/library/functions.html)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [books](/knowledge/books.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [pitfalls](/knowledge/pitfalls.md)
+- [books](/zh/knowledge/books)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [pitfalls](/zh/knowledge/pitfalls)

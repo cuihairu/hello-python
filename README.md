@@ -64,7 +64,7 @@ docs/
 └── .vitepress/      # VitePress config and theme
 ```
 
-The site navigation is maintained in `docs/.vitepress/sidebar.json`; see [Navigation maintenance](https://cuihairu.github.io/hello-python/navigation) before changing the sidebar.
+The site is bilingual under VitePress locales: English pages at the site root, Chinese pages under `/zh/`. Navigation is maintained in `docs/.vitepress/sidebar.en.json` and `docs/.vitepress/sidebar.zh.json`; see [Navigation maintenance](https://cuihairu.github.io/hello-python/navigation) before changing either sidebar.
 
 ## License
 

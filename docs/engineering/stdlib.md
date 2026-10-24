@@ -1,16 +1,16 @@
 ---
-description: collections、itertools、functools、pathlib、re 与 json/datetime 的常用面。
+description: The everyday surface of collections, itertools, functools, pathlib, re and json/datetime.
 ---
 
-# 标准库精选
+# Standard library highlights
 
-Python「自带电池」（batteries included）的底气来自标准库。这页挑出最高频的几个模块：collections、itertools、functools、pathlib、re、json、datetime——它们能省掉大部分第三方依赖。
+Python's "batteries included" claim rests on the standard library. This page picks out the most-used modules: collections, itertools, functools, pathlib, re, json and datetime — they spare most of the third-party dependencies.
 
-本页从日常开发的选用角度介绍标准库；语言规范与 CPython 实现的边界见[源码解析笔记](/internals/implementation-boundary)。
+This page covers the standard library from the angle of day-to-day selection; for the boundary between the language spec and the CPython implementation, see the [source walkthrough notes](/zh/internals/implementation-boundary).
 
 ## collections
 
-通用容器之外的增强数据结构：
+Enhanced data structures beyond the generic containers:
 
 ```python
 from collections import Counter, defaultdict, deque, namedtuple
@@ -45,7 +45,7 @@ deque([2, 3, 4], maxlen=3)
 
 ## itertools
 
-迭代器算子库——组合、分组、平铺、切片，内存友好：
+The iterator operator library — combining, grouping, flattening, slicing, all memory-friendly:
 
 ```python
 from itertools import chain, groupby, islice, combinations, product, count
@@ -69,7 +69,7 @@ print([k for k, _ in groupby(data, key=lambda w: w[0])])
 
 ## functools
 
-可调用对象的工具：记忆化、偏函数、总排序、reduce：
+Tools for callables: memoization, partial application, total ordering, reduce:
 
 ```python
 from functools import lru_cache, partial, total_ordering, reduce
@@ -101,7 +101,7 @@ True True
 
 ## pathlib
 
-路径操作的对象式写法，文件批量处理的骨架：
+An object-oriented way to handle paths, and the skeleton of any batch file job:
 
 ```python
 from pathlib import Path
@@ -128,7 +128,7 @@ with tempfile.TemporaryDirectory() as d:
 
 ## re
 
-正则做模式匹配与提取。要点：用 `r"..."` 原始字符串、编译复用、优先使用预定义类别（`\d` `\w` `\s`）：
+Regular expressions for pattern matching and extraction. Key points: use `r"..."` raw strings, compile for reuse, and prefer the predefined classes (`\d` `\w` `\s`):
 
 ```python
 import re
@@ -154,11 +154,11 @@ print(len(pat.findall(text)))
 2
 ```
 
-::: tip 什么时候不用正则
-解析结构化文本优先用专用解析器：JSON 用 `json`、CSV 用 `csv`、URL 用 `urllib.parse`、日期时间用 `datetime`。正则适合「有规律的片段」而非完整语法——写嵌套引用之类的需求时，手写状态机或 Lark 等解析库比正则清晰。
+::: tip When not to reach for a regex
+For structured text, prefer a dedicated parser: `json` for JSON, `csv` for CSV, `urllib.parse` for URLs, `datetime` for dates and times. Regexes suit "regular fragments", not a full grammar — for nested references and the like, a hand-written state machine or a parser library such as Lark reads more clearly than a regex.
 :::
 
-## json 与 datetime
+## json and datetime
 
 ```python
 import json
@@ -181,24 +181,24 @@ print((now + timedelta(days=1)).date().isoformat())
 2026-10-03
 ```
 
-`datetime` 易错点：拿现时用 `now()`；带时区的比较才安全（`timezone.utc` 或本地 `astimezone()`）；3.12+ 有 `datetime.fromisoformat` 全格式解析与 `zoneinfo` 时区库。
+Where `datetime` trips people up: use `now()` for the current time; comparisons are only safe with time zones (`timezone.utc` or the local `astimezone()`); 3.12+ adds full-format parsing with `datetime.fromisoformat` and the `zoneinfo` time zone library.
 
-## 小结
+## Summary
 
-- collections 管计数、分组、队列与记录；itertools 管迭代组合。
-- functools 的 `lru_cache`/`partial` 覆盖记忆化与偏函数两大高频需求。
-- 路径用 pathlib，正则编译复用且优先预定义类别。
-- 结构化数据用对应解析器，正则只啃有规律的片段。
+- collections covers counting, grouping, queues and records; itertools covers iterator combination.
+- functools' `lru_cache`/`partial` cover the two high-frequency needs, memoization and partial application.
+- Paths use pathlib; regexes are compiled for reuse, and predefined classes come first.
+- Use the matching parser for structured data, and leave regexes for the regular fragments.
 
-## 参考资料
+## References
 
-- [Python 官方文档 · 标准库导览](https://docs.python.org/3/tutorial/stdlib.html)
-- [Python 官方文档 · 标准库](https://docs.python.org/3/library/)
+- [Python official documentation · Standard library tour](https://docs.python.org/3/tutorial/stdlib.html)
+- [Python official documentation · Standard library](https://docs.python.org/3/library/)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
-- [books](/knowledge/books.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
-- [scenarios](/knowledge/scenarios.md)
+- [books](/zh/knowledge/books)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)
+- [scenarios](/zh/knowledge/scenarios)

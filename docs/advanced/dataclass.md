@@ -1,14 +1,14 @@
 ---
-description: "@dataclass 自动生成 __init__、__repr__、__eq__，field 与 __post_init__ 配置。"
+description: "@dataclass generates __init__, __repr__ and __eq__ for you; configuring fields with field and __post_init__."
 ---
 
-# dataclass 与结构化数据
+# dataclass and structured data
 
-多数类本质是「带字段的结构」：存数据、比较相等、打印可读。`@dataclass` 装饰器把这些样板代码自动生成，3.7 起用它表达结构化数据。
+Most classes are really just "structures with fields": they hold data, compare for equality, and print in a readable form. The `@dataclass` decorator generates that boilerplate for you, and has been the way to express structured data since 3.7.
 
-## 基本用法
+## Basic usage
 
-装饰器根据类注解自动生成 `__init__`、`__repr__`、`__eq__`。字段用「名字: 类型」声明，类级赋值给默认值：
+The decorator generates `__init__`, `__repr__` and `__eq__` from the class annotations. Declare fields as "name: type", and put a class-level assignment for a default value:
 
 ```python
 from dataclasses import dataclass
@@ -29,8 +29,8 @@ User(name='Alice', age=30)
 True True
 ```
 
-::: warning 默认值必须是不可变或 default_factory
-字段默认值与函数默认参数同一个坑：所有实例共享。可变默认（list/dict/set）必须用 `field(default_factory=...)` 让每个实例拿新对象，直接写 `tags: list = []` 会抛 `ValueError`：
+::: warning Defaults must be immutable, or use default_factory
+A field default is the same trap as a default argument on a function: every instance shares it. A mutable default (list/dict/set) must use `field(default_factory=...)` so each instance gets a fresh object - writing `tags: list = []` straight out raises `ValueError`:
 
 ```python
 from dataclasses import dataclass, field
@@ -51,9 +51,9 @@ print(p1.tags, p2.tags)
 ```
 :::
 
-## 常用开关
+## The common switches
 
-`frozen=True` 让实例不可变（可哈希、可作字典键）；`order=True` 生成比较方法（按字段顺序）；`slots=True`（3.10+）启用 slots 省内存；`kw_only=True`（3.10+）字段全部仅关键字：
+`frozen=True` makes instances immutable (hashable, usable as dict keys); `order=True` generates comparison methods (in field order); `slots=True` (3.10+) enables slots to save memory; `kw_only=True` (3.10+) makes every field keyword-only:
 
 ```python
 from dataclasses import dataclass
@@ -78,9 +78,9 @@ key
 FrozenInstanceError
 ```
 
-## field 与 __post_init__
+## field and __post_init__
 
-`field()` 控制单个字段行为：`default_factory`、`repr=False`、`compare=False`、`init=False` 等。需要派生字段或校验时实现 `__post_init__`，它在 `__init__` 末尾被自动调用：
+`field()` controls the behavior of a single field: `default_factory`, `repr=False`, `compare=False`, `init=False` and so on. When you need a derived field or validation, implement `__post_init__`, which is called automatically at the end of `__init__`:
 
 ```python
 from dataclasses import dataclass, field
@@ -110,9 +110,9 @@ except ValueError as e:
 ValueError: 价格与数量必须非负
 ```
 
-## 与序列化互转
+## Converting to and from serialization
 
-`asdict()`/`astuple()` 递归转出纯 dict/tuple，配合 json 一行入库；`replace()` 基于现有实例派生修改后的副本（frozen 类尤其常用）：
+`asdict()`/`astuple()` recursively produce a plain dict/tuple, so json can get them into the database in one line; `replace()` derives a modified copy from an existing instance (especially handy for frozen classes):
 
 ```python
 import json
@@ -133,34 +133,34 @@ print(replace(p, x=9.0), asdict(p))
 Point(x=9.0, y=2.0) {'x': 1.0, 'y': 2.0}
 ```
 
-## 结构化数据的工具谱系
+## The landscape of structured-data tools
 
-| 工具 | 定位 | 适用 |
+| Tool | Positioning | Fits |
 | --- | --- | --- |
-| `@dataclass` | 标准库，生成样板 | 内部结构、配置对象、值语义 |
-| `typing.NamedTuple` | 不可变元组带字段 | 轻量记录、需要元组兼容 |
-| `attrs` | 第三方，功能超集 | 需要更强校验/转换时 |
-| `pydantic` | 运行时校验 + 解析 | API 边界：外部数据进系统 |
+| `@dataclass` | Standard library, generates boilerplate | Internal structures, config objects, value semantics |
+| `typing.NamedTuple` | An immutable tuple with fields | Lightweight records, where tuple compatibility matters |
+| `attrs` | Third-party, a superset of features | When you need stronger validation or conversion |
+| `pydantic` | Runtime validation plus parsing | API boundaries: external data entering the system |
 
-外部输入（HTTP、配置文件）走 pydantic 这类带运行时校验的；系统内部流转用 dataclass 就够。
+External input (HTTP, config files) should go through something with runtime validation like pydantic; inside the system, a dataclass is enough.
 
-## 小结
+## Summary
 
-- `@dataclass` 自动生成 `__init__`/`__repr__`/`__eq__`，字段声明即文档。
-- 可变默认用 `field(default_factory=...)`。
-- `frozen` 换不可变与可哈希，`__post_init__` 做派生与校验。
-- `asdict`/`replace` 服务序列化与不可变更新。
+- `@dataclass` generates `__init__`/`__repr__`/`__eq__` for you, and the field declarations are the documentation.
+- Use `field(default_factory=...)` for mutable defaults.
+- `frozen` buys you immutability and hashability; `__post_init__` handles derivation and validation.
+- `asdict`/`replace` serve serialization and immutable updates.
 
-## 参考资料
+## Further reading
 
-- [Python 官方文档 · dataclasses](https://docs.python.org/3/library/dataclasses.html)
+- [Python official documentation · dataclasses](https://docs.python.org/3/library/dataclasses.html)
 - [PEP 557 · dataclasses](https://peps.python.org/pep-0557/)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
-- [pitfalls](/knowledge/pitfalls.md)
-- [scenarios](/knowledge/scenarios.md)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)
+- [pitfalls](/zh/knowledge/pitfalls)
+- [scenarios](/zh/knowledge/scenarios)

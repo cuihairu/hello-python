@@ -1,0 +1,232 @@
+[
+  {
+    "collapsed": true,
+    "items": [
+      {
+        "link": "/basics/setup",
+        "text": "Setup & Toolchain"
+      },
+      {
+        "link": "/basics/syntax",
+        "text": "Syntax Basics"
+      },
+      {
+        "link": "/basics/variables-and-types",
+        "text": "Variables & Types"
+      },
+      {
+        "link": "/basics/control-flow",
+        "text": "Control Flow"
+      },
+      {
+        "link": "/basics/functions",
+        "text": "Functions"
+      }
+    ],
+    "text": "Language Basics"
+  },
+  {
+    "collapsed": true,
+    "items": [
+      {
+        "link": "/datastructures/list-tuple",
+        "text": "Lists & Tuples"
+      },
+      {
+        "link": "/datastructures/dict-set",
+        "text": "Dictionaries & Sets"
+      },
+      {
+        "link": "/datastructures/string-formatting",
+        "text": "Strings & Formatting"
+      },
+      {
+        "link": "/datastructures/iterators-generators",
+        "text": "Comprehensions, Iterators & Generators"
+      }
+    ],
+    "text": "Data Structures"
+  },
+  {
+    "collapsed": true,
+    "items": [
+      {
+        "link": "/advanced/oop",
+        "text": "OOP: Classes & Inheritance"
+      },
+      {
+        "link": "/advanced/magic-methods",
+        "text": "Magic Methods & Protocols"
+      },
+      {
+        "link": "/advanced/dataclass",
+        "text": "dataclass & Structured Data"
+      },
+      {
+        "link": "/advanced/modules",
+        "text": "Modules & Packages"
+      },
+      {
+        "link": "/advanced/exceptions",
+        "text": "Exceptions"
+      },
+      {
+        "link": "/advanced/file-io",
+        "text": "Files & IO"
+      },
+      {
+        "link": "/advanced/context-managers",
+        "text": "Context Managers"
+      },
+      {
+        "link": "/advanced/decorators",
+        "text": "Decorators"
+      },
+      {
+        "link": "/advanced/typing",
+        "text": "Type Hints"
+      },
+      {
+        "link": "/advanced/pitfalls",
+        "text": "Pitfalls & Best Practices"
+      }
+    ],
+    "text": "Language Features"
+  },
+  {
+    "collapsed": true,
+    "items": [
+      {
+        "link": "/concurrency/threading",
+        "text": "Threads & the GIL"
+      },
+      {
+        "link": "/concurrency/asyncio",
+        "text": "asyncio"
+      },
+      {
+        "link": "/concurrency/multiprocessing",
+        "text": "multiprocessing"
+      },
+      {
+        "link": "/concurrency/concurrency-compare",
+        "text": "Choosing a Concurrency Model"
+      }
+    ],
+    "text": "Concurrency"
+  },
+  {
+    "collapsed": true,
+    "items": [
+      {
+        "link": "/engineering/stdlib",
+        "text": "Standard Library Highlights"
+      },
+      {
+        "link": "/engineering/testing",
+        "text": "Testing with unittest & pytest"
+      },
+      {
+        "link": "/engineering/logging",
+        "text": "Logging & Debugging"
+      },
+      {
+        "link": "/engineering/environments",
+        "text": "Environments & Dependencies"
+      },
+      {
+        "link": "/engineering/packaging",
+        "text": "Packaging & Publishing"
+      }
+    ],
+    "text": "Engineering Practice"
+  },
+  {
+    "collapsed": true,
+    "items": [
+      {
+        "link": "/internals/cpython-source",
+        "text": "CPython Source Overview"
+      },
+      {
+        "link": "/internals/object-model",
+        "text": "Core Data Structures"
+      },
+      {
+        "link": "/internals/type-system",
+        "text": "Type System & Attribute Lookup"
+      },
+      {
+        "link": "/internals/eval-loop",
+        "text": "The Eval Loop"
+      },
+      {
+        "link": "/internals/compiler-pipeline",
+        "text": "The Compilation Pipeline"
+      },
+      {
+        "link": "/internals/memory-management",
+        "text": "Memory Management"
+      },
+      {
+        "link": "/internals/gc-module",
+        "text": "The gc Module"
+      },
+      {
+        "link": "/internals/gil-threading",
+        "text": "GIL & the Threading Model"
+      },
+      {
+        "link": "/internals/import-system",
+        "text": "The import System"
+      },
+      {
+        "link": "/internals/implementation-boundary",
+        "text": "CPython vs. Other Implementations"
+      }
+    ],
+    "text": "CPython Internals"
+  },
+  {
+    "link": "/timeline",
+    "text": "Timeline"
+  },
+  {
+    "link": "/navigation",
+    "text": "Navigation Guide"
+  },
+  {
+    "collapsed": true,
+    "items": [
+      {
+        "link": "/knowledge/",
+        "text": "Knowledge Map"
+      },
+      {
+        "link": "/knowledge/core-concepts",
+        "text": "Core Concepts"
+      },
+      {
+        "link": "/knowledge/books",
+        "text": "Authoritative Books"
+      },
+      {
+        "link": "/knowledge/official-docs",
+        "text": "Official Documentation"
+      },
+      {
+        "link": "/knowledge/scenarios",
+        "text": "Use Cases"
+      },
+      {
+        "link": "/knowledge/pitfalls",
+        "text": "Common Pitfalls"
+      }
+    ],
+    "text": "Topic Index"
+  },
+  {
+    "link": "/glossary",
+    "text": "Glossary"
+  }
+]

@@ -1,45 +1,45 @@
 ---
-description: 站内知识点的体系化索引：核心概念、权威书籍、官方文档、应用场景、常见坑，每条挂回原调研页。
+description: "A systematic index of on-site knowledge points: core concepts, authoritative books, official docs, use cases, and common pitfalls, each linked back to the page it came from."
 ---
 
-# 主题总览
+# Topic overview
 
-站内 38 个内容页记录了不同主题的调研与开发观察。这组索引按「概念—来源—场景—坑」整理交叉关系，方便对照同一知识点在不同页面中的表述并回查原文。
+The 38 content pages on this site record research and development observations across different topics. These indexes organize the cross-references along the lines of "concept — source — scenario — pitfall," so you can compare how the same knowledge point is phrased on different pages and trace back to the original.
 
-## 盘点口径
+## Inventory scope
 
-来源分三层，可信度不同，标注也不同：
+Sources fall into three tiers, with different credibility and different labeling:
 
-- **站内页面**：38 个内容页的正文，是调研主体。每条知识点都交叉链接回原页，点击可核对。
-- **官方文档**：页面里出现过的 PEP 编号、`docs.python.org` 章节、工具官方站点。链接可访问即视为实证。
-- **书籍对照**：站内页面没有引用任何书籍，书目一节是编者按主题对照整理的阅读清单，十本书的版本、目录与作者信息已逐本对照官方或作者页面核实，映射关系按各书实际目录范围标注。
+- **On-site pages**: the body text of the 38 content pages, which is the research itself. Every knowledge point cross-links back to the page it came from; click through to verify.
+- **Official documentation**: PEP numbers, `docs.python.org` sections, and official tool sites that appeared on the pages. A link that resolves is treated as evidence.
+- **Book cross-references**: no on-site page cites any book. The book section is a reading list compiled by topic on the editor's own judgment; all ten books' editions, tables of contents, and author information were verified one by one against official or author pages, and the mappings are annotated by each book's actual chapter scope.
 
-凡无法核实来源的说法，一律标「来源未考」，不硬凑出处。
+Any claim whose source cannot be verified is marked "source unverified" — no forced attribution.
 
-## 文件导览
+## File guide
 
-| 文件 | 内容 | 条目数 |
+| File | Content | Entries |
 | --- | --- | --- |
-| [核心概念](/knowledge/core-concepts) | 六大主题的概念与要点，按章节分组 | 102 |
-| [权威书籍](/knowledge/books) | 书目、作者与对应知识点 | 10 |
-| [官方文档](/knowledge/official-docs) | PEP 编号、标准库章节、工具文档 | 41 |
-| [应用场景](/knowledge/scenarios) | 每种特性的落地场景与选型 | 39 |
-| [常见坑](/knowledge/pitfalls) | 高频陷阱的原理与规避 | 27 |
+| [Core concepts](/zh/knowledge/core-concepts) | Concepts and key points across six themes, grouped by section | 102 |
+| [Authoritative books](/zh/knowledge/books) | Bibliography, authors, and the knowledge points each maps to | 10 |
+| [Official documentation](/zh/knowledge/official-docs) | PEP numbers, standard library sections, tool docs | 41 |
+| [Use cases](/zh/knowledge/scenarios) | Where each feature lands in practice, and the trade-offs | 39 |
+| [Common pitfalls](/zh/knowledge/pitfalls) | How the high-frequency traps work, and how to avoid them | 27 |
 
-条目总数 219，每条挂回原调研页，站内交叉链接 221 条。
+219 entries in total, each linked back to the page it came from, with 221 internal cross-links.
 
-## 索引角度
+## Index angles
 
-「核心概念」整理语言机制，「应用场景」记录开发中的选型，「常见坑」汇总易错处；「官方文档」与「权威书籍」保留可复核的外部出处。它们从不同角度指回站内主题页，不规定阅读顺序。
+"Core concepts" organizes language mechanisms, "Use cases" records the trade-offs made during development, and "Common pitfalls" collects the places where things go wrong. "Official documentation" and "Authoritative books" keep the externally checkable sources. They point back at the on-site topic pages from different angles and do not prescribe a reading order.
 
-概念与坑有大量重叠——同一个机制，正着说是概念，反着说是坑。两边都留了，方便从任一方向查。
+Concepts and pitfalls overlap heavily — the same mechanism, stated positively is a concept, stated negatively is a pitfall. Both are kept, so you can look it up from either direction.
 
-- 术语速查：[术语表](../glossary.md)（中英对照、一句话定义、权威出处与相关页）。
+- Quick term lookup: [Glossary](../glossary.md) (Chinese-English pairs, one-line definitions, authoritative sources, related pages).
 
-## 参考资料
+## References
 
-- [Python 官方文档](https://docs.python.org/3/)
+- [Python official documentation](https://docs.python.org/3/)
 
-## 相关页面
+## Related pages
 
-- [books](books.md)
+- [books](/zh/knowledge/books)

@@ -1,14 +1,14 @@
 ---
-description: 缩进即语法、注释与文档字符串、变量命名等 Python 源文件层的基本规则。
+description: The basic rules of the Python source-file layer — indentation as syntax, comments and docstrings, variable naming.
 ---
 
-# 语法基础
+# Syntax basics
 
-Python 的语法哲学是「可读性优先」：用缩进表达块结构，语句末尾没有分号，大量语义靠约定俗成的命名表达。这里记下我日常会碰到的基础语法和约定。
+Python's syntactic philosophy is "readability first": indentation expresses block structure, statements carry no trailing semicolons, and a lot of meaning is carried by idiomatic naming. This page notes the syntax and conventions I meet day to day.
 
-## 缩进即语法
+## Indentation is syntax
 
-Python 不用花括号划块，缩进本身就是语法。同一代码块的语句必须左对齐，官方风格是 4 个空格，禁止 tab 与空格混用：
+Python uses no braces to delimit blocks; indentation *is* the syntax. Statements inside one block must be left-aligned. The official style is 4 spaces, and mixing tabs with spaces is forbidden:
 
 ```python
 score = 86
@@ -19,11 +19,11 @@ else:
     print("不及格")
 ```
 
-缩进错误属于语法错误：该缩进不缩进报 `IndentationError`，多缩进一层报 `unexpected indent`。
+Indentation mistakes are syntax errors: where you should indent but don't raises `IndentationError`; indenting one extra level reports `unexpected indent`.
 
-## 注释与文档字符串
+## Comments and docstrings
 
-`#` 到行尾是注释；三引号字符串放在模块、函数、类的第一行就是文档字符串（docstring），运行时可通过 `__doc__` 访问，也是 `help()` 的内容来源：
+`#` to the end of the line is a comment. A triple-quoted string on the first line of a module, function or class is a docstring, reachable at run time through `__doc__` and the content source of `help()`:
 
 ```python
 def area(r):
@@ -42,9 +42,9 @@ print(area.__doc__.splitlines()[0])
 计算圆面积。
 ```
 
-## 变量与赋值
+## Variables and assignment
 
-Python 变量是「名字贴在对象上」，赋值即绑定，无需声明类型。一行可以赋多个变量，也支持交互式交换：
+Python variables are "a name stuck onto an object"; assignment is binding, and no type declaration is needed. One line can assign several variables, and it also supports swap-by-interchange:
 
 ```python
 x, y = 10, 20
@@ -64,7 +64,7 @@ print(n, rest)
 1 [2, 3]
 ```
 
-海象运算符 `:=`（Python 3.8+）允许在表达式内部赋值，典型场景是「先算后判」：
+The walrus operator `:=` (Python 3.8+) allows assignment inside an expression; the typical case is "compute first, then test":
 
 ```python
 data = [3, -1, 0, 7]
@@ -79,9 +79,9 @@ print(total)
 10
 ```
 
-## 基本语句
+## Basic statements
 
-表达具体动作的语句就几种。`print` 输出，`input` 读入（返回字符串），`del` 删名字，`pass` 是什么都不做的占位语句：
+There are only a few statements that express a concrete action. `print` outputs, `input` reads (returning a string), `del` removes a name, and `pass` is a placeholder that does nothing:
 
 ```python
 name = "Python"
@@ -99,9 +99,9 @@ Hello, Python!
 19
 ```
 
-## 行与编码
+## Lines and encoding
 
-物理行与逻辑行：一个逻辑行可以是一条语句，分号能把多条语句挤在一行，但风格上不推荐。过长表达式用括号隐式续行，或用反斜杠显式续行：
+Physical lines versus logical lines: one logical line can hold one statement, and semicolons can cram several onto a single line, though style guides discourage it. Over-long expressions continue implicitly with parentheses, or explicitly with a backslash:
 
 ```python
 total = (1 + 2
@@ -117,7 +117,7 @@ print(s)
 abcdef
 ```
 
-源文件默认 UTF-8 编码，中文字符串无需任何声明。Python 3 的标识符甚至允许中文（虽然不建议）：
+Source files are UTF-8 by default, so Chinese strings need no declaration. Python 3 identifiers even permit Chinese (though it's discouraged):
 
 ```python
 变量 = 42
@@ -128,20 +128,20 @@ print(变量)
 42
 ```
 
-## 小结
+## Summary
 
-- 缩进是语法：4 空格，不混 tab。
-- 变量是名字绑定对象，`:=` 在表达式里赋值。
-- docstring 写在模块/函数/类第一行，`__doc__` 可取。
-- 长表达式用括号续行，源码默认 UTF-8。
+- Indentation is syntax: 4 spaces, no tab mixing.
+- Variables are names bound to objects; `:=` assigns inside an expression.
+- Docstrings go on the first line of a module/function/class; `__doc__` gives access.
+- Continue long expressions with parentheses; source defaults to UTF-8.
 
-## 参考资料
+## Further reading
 
-- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/lexical_analysis.html)
-- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/)
+- [Python official documentation · Language reference](https://docs.python.org/3/reference/lexical_analysis.html)
+- [Python official documentation · Tutorial](https://docs.python.org/3/tutorial/)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)

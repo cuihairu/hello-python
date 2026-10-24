@@ -1,14 +1,14 @@
 ---
-description: with 的协议实现：__enter__/__exit__ 与 contextlib 的等价写法及标准库现成货。
+description: The protocol behind with - __enter__/__exit__ - plus equivalent contextlib forms and what the standard library ships for free.
 ---
 
-# 上下文管理器
+# Context managers
 
-with 语句把「进入资源、退出资源」收拢成一个语法块：无论中间抛不抛异常，退出动作保证执行。打开文件、加锁、数据库事务、连接池，凡是「配对的进入/退出」都该交给上下文管理器。
+The with statement folds "enter the resource, exit the resource" into one syntactic block: whether or not an exception is raised in the middle, the exit action is guaranteed to run. Opening a file, taking a lock, a database transaction, a connection pool - anything with a paired enter/exit belongs in a context manager.
 
-## with 为什么可靠
+## Why with is reliable
 
-手动管理资源有三个漏洞：忘记 close、提前 return 跳过 close、中间异常绕过 close。with 在进入时拿资源、退出时调 `__exit__`，异常也会穿过去被清理逻辑看到：
+Managing resources by hand has three holes: forgetting to close, an early return that skips the close, and a mid-way exception that bypasses it. with grabs the resource on entry and calls `__exit__` on exit, so the exception still passes through and the cleanup logic sees it:
 
 ```python
 import tempfile, pathlib
@@ -24,7 +24,7 @@ with tempfile.TemporaryDirectory() as d:
 True
 ```
 
-抛异常时清理照样执行，异常本体继续向上传播：
+Cleanup still runs when an exception is raised, and the exception itself keeps propagating outward:
 
 ```python
 def demo():
@@ -42,9 +42,9 @@ print(demo())
 捕获 出事了，文件已随 with 关闭
 ```
 
-## __enter__ 与 __exit__
+## __enter__ and __exit__
 
-协议只有两个方法：`__enter__` 的返回值赋给 `as` 变量；`__exit__` 接收异常三元组（类型、值、栈），返回真值会**吞掉**异常——自定义管理器时除非有意恢复，别返回真：
+The protocol is only two methods: the return value of `__enter__` is bound to the `as` variable; `__exit__` receives the exception triple (type, value, traceback), and returning a true value **swallows** the exception - when writing your own manager, don't return true unless you intend to recover:
 
 ```python
 class Tag:
@@ -67,7 +67,7 @@ with Tag("db") as t:
 [db] exit exc=None
 ```
 
-异常穿透演示——`__exit__` 能看到异常但选择放行：
+Demonstrating exception pass-through - `__exit__` can see the exception but chooses to let it go:
 
 ```python
 class Guard:
@@ -89,7 +89,7 @@ except ValueError as e:
 外层收到: bad
 ```
 
-返回 True 的用途是「局部恢复」：清理现场并把异常按正常流程收掉，比如把底层异常统一转成自己的业务异常：
+Returning True is for "local recovery": clean up the scene and fold the exception back into normal flow, for instance turning a low-level exception into your own domain exception:
 
 ```python
 class Translate:
@@ -112,9 +112,9 @@ print("继续执行")
 继续执行
 ```
 
-## contextlib：三步变一行
+## contextlib: from three lines to one
 
-`@contextmanager` 装饰器把「有 yield 的生成器」变成上下文管理器：yield 之前是 enter，之后是 exit。管理资源的样板代码能省则省：
+The `@contextmanager` decorator turns "a generator that has a yield" into a context manager: everything before the yield is enter, everything after is exit. Save the boilerplate wherever you can:
 
 ```python
 from contextlib import contextmanager
@@ -141,14 +141,14 @@ True
 True
 ```
 
-## 标准库里的常用现成货
+## The ready-made helpers in the standard library
 
-- `open` / `pathlib` 文件管理（最常用）。
-- `threading.Lock`：`with lock:` 互斥加锁解锁。
-- `contextlib.suppress(X)`：忽略特定异常，比 try/except 干净。
-- `contextlib.redirect_stdout`：重定向输出（测试捕获打印）。
-- `decimal.localcontext`：小数精度上下文。
-- `async with`：异步资源（如 aiohttp 会话）。
+- `open` / `pathlib` file handling (the most common one).
+- `threading.Lock`: `with lock:` acquires and releases under mutual exclusion.
+- `contextlib.suppress(X)`: ignore a specific exception, cleaner than try/except.
+- `contextlib.redirect_stdout`: redirect output (useful for capturing prints in tests).
+- `decimal.localcontext`: a context for decimal precision.
+- `async with`: asynchronous resources (an aiohttp session, for example).
 
 ```python
 from contextlib import suppress, redirect_stdout
@@ -169,9 +169,9 @@ print("stdout 被重定向到:", repr(buf.getvalue()))
 stdout 被重定向到: '悄悄打印\n'
 ```
 
-## 自定义 vs 组合
+## Write your own, or compose
 
-自己写 `__enter__`/`__exit__` 适合资源本身由类持有（连接、会话）；用 `@contextmanager` 包一段过程性逻辑更轻。已有工具（`suppress`、`closing`、`ExitStack`）优先复用，`ExitStack` 处理「资源数量不定」的场景：
+Rolling your own `__enter__`/`__exit__` fits a resource the class itself holds (a connection, a session); wrapping a stretch of procedural logic in `@contextmanager` is lighter. Reuse what already exists (`suppress`, `closing`, `ExitStack`) first - `ExitStack` handles the case where the number of resources is not fixed:
 
 ```python
 from contextlib import ExitStack, closing
@@ -196,24 +196,24 @@ print(log)
 ['start:a', 'start:b', 'end:b', 'end:a']
 ```
 
-## 小结
+## Summary
 
-- with 保证进入/退出配对，异常路径也不例外。
-- 协议：`__enter__` 返回 as 值，`__exit__` 看异常三元组、返回真即吞异常。
-- 过程性逻辑用 `@contextmanager`，异常忽略用 `suppress`，多资源用 `ExitStack`。
-- 锁、事务、重定向这类标准场景直接用现成的。
+- with guarantees the enter/exit pair, and the exception path is no exception to that.
+- The protocol: `__enter__` returns the `as` value, `__exit__` inspects the exception triple and swallows the exception if it returns true.
+- Use `@contextmanager` for procedural logic, `suppress` to ignore exceptions, and `ExitStack` for many resources.
+- For standard cases - locks, transactions, redirection - just use the ready-made ones.
 
-## 参考资料
+## Further reading
 
-- [Python 官方文档 · contextlib](https://docs.python.org/3/library/contextlib.html)
-- [PEP 343 · with 语句](https://peps.python.org/pep-0343/)
-- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/datamodel.html)
+- [Python official documentation · contextlib](https://docs.python.org/3/library/contextlib.html)
+- [PEP 343 · the with statement](https://peps.python.org/pep-0343/)
+- [Python official documentation · Language reference](https://docs.python.org/3/reference/datamodel.html)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
-- [pitfalls](/knowledge/pitfalls.md)
-- [scenarios](/knowledge/scenarios.md)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)
+- [pitfalls](/zh/knowledge/pitfalls)
+- [scenarios](/zh/knowledge/scenarios)

@@ -1,14 +1,14 @@
 ---
-description: 类定义、继承与多态、property 等面向对象基础，落到实例方法与属性协议。
+description: Class definition, inheritance and polymorphism, property and the other OOP fundamentals, down to instance methods and the attribute protocol.
 ---
 
-# 面向对象：类与继承
+# Object-oriented programming: classes and inheritance
 
-Python 的类把数据与行为绑在一起。本文整理类定义、实例机制、属性查找、继承与多态、封装约定，以及 dataclass 之外的类语法。
+Python classes bind data and behavior together. This page collects class definition, the instance mechanism, attribute lookup, inheritance and polymorphism, the encapsulation conventions, and the class syntax beyond dataclass.
 
-## 类与实例
+## Classes and instances
 
-`class` 定义类，实例方法第一个参数约定叫 `self`，指向实例本身。`__init__` 在实例化时被自动调用，负责初始化实例属性：
+`class` defines a class. By convention the first parameter of an instance method is called `self`, and it points at the instance itself. `__init__` is called automatically on instantiation and initializes the instance attributes:
 
 ```python
 class Dog:
@@ -31,9 +31,9 @@ print(Dog.species, d.species)
 犬科 犬科
 ```
 
-## 实例机制
+## The instance mechanism
 
-`Dog("旺财", 3)` 一步做了两件事：`__new__` 创建实例，`__init__` 初始化它。属性查找顺序是「实例字典 → 类字典 → 父类链」，实例赋值只写实例自己的字典，不碰类：
+`Dog("旺财", 3)` does two things in one step: `__new__` creates the instance, `__init__` initializes it. Attribute lookup goes "instance dict -> class dict -> parent chain"; assigning on an instance only writes into the instance's own dict and never touches the class:
 
 ```python
 class Dog:
@@ -50,7 +50,7 @@ print(d.legs, Dog.legs, d.__dict__)
 3 4 {'legs': 3}
 ```
 
-类属性被实例「遮蔽」是这类查找机制的直接后果。共享可变的类属性（如计数器）要修改必须通过类名：
+A class attribute being "shadowed" by an instance is the direct consequence of this lookup. A shared mutable class attribute (such as a counter) must be changed through the class name:
 
 ```python
 class Counter:
@@ -66,9 +66,9 @@ print(Counter.count)
 2
 ```
 
-## 继承与 super
+## Inheritance and super
 
-子类获得父类全部方法，可覆写（override）同名方法。`super()` 沿 MRO（方法解析顺序）调用下一家的实现，避免硬编码父类名：
+A subclass inherits every method of its parent and may override a method of the same name. `super()` calls the next implementation along the MRO (method resolution order), which avoids hard-coding the parent's name:
 
 ```python
 class Animal:
@@ -97,7 +97,7 @@ print(Puppy.__mro__)
 (<class '__main__.Puppy'>, <class '__main__.Dog'>, <class '__main__.Animal'>, <class 'object'>)
 ```
 
-多继承按 MRO 从左到右查找。菱形继承（两边共同祖先是 object）里 `super()` 保证初始化只走一遍：
+Multiple inheritance looks up names left to right along the MRO. In a diamond hierarchy (where both branches share object as a common ancestor) `super()` guarantees initialization runs only once:
 
 ```python
 class A:
@@ -121,13 +121,13 @@ A
 ['D', 'B', 'C', 'A', 'object']
 ```
 
-::: warning 何时该用继承
-继承是「是一个」关系，组合是「有一个」关系。引擎不是车的子类，车「有」引擎——把引擎作为属性持有。继承层次一深，覆写耦合就重；默认组合，确有行为多态需求才继承。
+::: warning When to use inheritance
+Inheritance is an "is a" relationship; composition is a "has a" relationship. An engine is not a subclass of car; a car "has" an engine - hold the engine as an attribute. The deeper the inheritance tree, the heavier the coupling through overrides; default to composition and only inherit when you genuinely need behavioral polymorphism.
 :::
 
-## 属性装饰器：property
+## The attribute decorator: property
 
-`@property` 把方法伪装成属性，读取时算值，配合 `@x.setter` 做校验。这是 Python 式封装：调用方感觉是属性，实现方保留校验与演化空间：
+`@property` dresses a method up as an attribute, computing its value on read; pair it with `@x.setter` to validate on write. This is Pythonic encapsulation: the caller sees an attribute, the implementer keeps room for validation and for evolving the storage:
 
 ```python
 class Circle:
@@ -161,9 +161,9 @@ except ValueError as e:
 ValueError: 半径必须为正
 ```
 
-## 私有约定与 name mangling
+## Privacy conventions and name mangling
 
-Python 没有 private。单下划线 `_x` 是「内部使用」的君子协定；双下划线前缀 `__x` 触发名称改写（name mangling）变成 `_类名__x`，主要用于避免子类无意覆盖：
+Python has no private. A single underscore `_x` is a gentleman's agreement meaning "internal use"; a double-underscore prefix `__x` triggers name mangling, rewriting it as `_ClassName__x`, mainly to keep subclasses from overwriting it by accident:
 
 ```python
 class Account:
@@ -186,9 +186,9 @@ except AttributeError as e:
 AttributeError: AttributeError
 ```
 
-## 静态方法与类方法
+## Static methods and class methods
 
-`@staticmethod` 不接收实例或类，就是放在类命名空间里的普通函数；`@classmethod` 接收类本身（约定叫 `cls`），最常见的用途是替代构造器：
+`@staticmethod` takes neither an instance nor a class - it is just an ordinary function living in the class namespace; `@classmethod` takes the class itself (conventionally called `cls`), and its most common use is as an alternative constructor:
 
 ```python
 import datetime
@@ -213,9 +213,9 @@ print(e.name, e.at.year, Event.is_past(e.at))
 发布 2026 True
 ```
 
-## 鸭子类型与 Protocol
+## Duck typing and Protocol
 
-Python 的多态不要求共同父类——只要对象有需要的方法就能用（鸭子类型）。需要显式声明结构时用 `typing.Protocol` 做静态检查，运行时依旧不强制：
+Polymorphism in Python does not require a common parent class - anything with the method you need can be used (duck typing). When you want to declare the structure explicitly, use `typing.Protocol` for static checking; nothing is enforced at runtime:
 
 ```python
 from typing import Protocol
@@ -237,23 +237,23 @@ announce(Robot("R2"))
 R2 哔哔
 ```
 
-## 小结
+## Summary
 
-- `__new__` 建实例、`__init__` 初始化；属性查找「实例 → 类 → 父类链」。
-- 默认组合优先；确需多态才继承，`super()` 沿 MRO 调用。
-- `@property` + setter 实现带校验的属性式封装。
-- `_x` 惯例私有，`__x` 名称改写防子类冲突；`@classmethod` 做替代构造器。
-- 鸭子类型 + `Protocol`：结构对得上就能协作。
+- `__new__` creates the instance, `__init__` initializes it; attribute lookup goes "instance -> class -> parent chain".
+- Prefer composition by default; inherit only when you genuinely need polymorphism, and let `super()` follow the MRO.
+- `@property` plus a setter gives you validated, attribute-style encapsulation.
+- `_x` is private by convention, `__x` is name-mangled to prevent subclass clashes; `@classmethod` makes an alternative constructor.
+- Duck typing plus `Protocol`: if the shapes line up, the objects can work together.
 
-## 参考资料
+## Further reading
 
-- [Python 官方文档 · 教程](https://docs.python.org/3/tutorial/classes.html)
-- [Python 官方文档 · 语言参考](https://docs.python.org/3/reference/datamodel.html)
+- [Python official documentation · Tutorial](https://docs.python.org/3/tutorial/classes.html)
+- [Python official documentation · Language reference](https://docs.python.org/3/reference/datamodel.html)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [books](/knowledge/books.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [scenarios](/knowledge/scenarios.md)
+- [books](/zh/knowledge/books)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [scenarios](/zh/knowledge/scenarios)

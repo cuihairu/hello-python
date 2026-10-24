@@ -1,116 +1,116 @@
 ---
-description: 解释器安装、版本管理、venv 虚拟环境与 pip 依赖，以及编辑器与格式化工具配置。
+description: Interpreter installation, version management, venv virtual environments and pip dependencies, plus editor and formatter configuration.
 ---
 
-# 环境搭建与工具链
+# Environment setup and toolchain
 
-我常用的 Python 开发环境包括解释器、版本管理、虚拟环境、pip 和编辑器配置；这里记录各自的选择与设置方式。
+My usual Python development setup covers the interpreter, version management, virtual environments, pip and editor configuration; this page records the choices and how each is set up.
 
-## 安装 Python
+## Installing Python
 
-Linux 与 macOS 通常自带 python3，但没有虚拟环境能力（Ubuntu 需要单独装 `python3-venv` 包）。推荐做法是用系统的包管理器装一个基础版本，再用 pyenv 管理多版本。
+Linux and macOS usually ship with python3, but without virtual environment support (on Ubuntu you need the `python3-venv` package separately). The recommended approach is to install a base version with the system package manager, then manage multiple versions with pyenv.
 
 ```bash
 # Ubuntu/Debian
 sudo apt update && sudo apt install python3 python3-venv python3-pip
 
-# macOS（Homebrew）
+# macOS (Homebrew)
 brew install python
 
-# 验证
+# verify
 python3 --version
 ```
 
-需要多版本共存时用 [pyenv](https://github.com/pyenv/pyenv)，它把每个版本装到用户目录下，互不干扰：
+When you need several versions to coexist, use [pyenv](https://github.com/pyenv/pyenv). It installs every version under your user directory, so they don't interfere with each other:
 
 ```bash
-curl https://pyenv.run | bash          # 安装 pyenv
-pyenv install 3.12                     # 安装指定大版本的最新小版本
-pyenv global 3.12                      # 设为全局默认
-pyenv local 3.11                       # 当前目录用另一个版本（写入 .python-version）
+curl https://pyenv.run | bash          # install pyenv
+pyenv install 3.12                     # install the latest minor of a given major version
+pyenv global 3.12                      # set as the global default
+pyenv local 3.11                       # use another version in the current directory (writes .python-version)
 ```
 
-Windows 用户直接从 [python.org](https://www.python.org/downloads/) 下载安装包，安装时勾选 "Add Python to PATH"，并注意命令名是 `py` 或 `python` 而非 `python3`。
+Windows users download the installer straight from [python.org](https://www.python.org/downloads/), tick "Add Python to PATH" during installation, and note that the command is `py` or `python` rather than `python3`.
 
-## python3 命令行
+## The python3 command line
 
-装好后有三个最常用的入口。`python3` 直接进交互式解释器（REPL），适合验证一行代码的行为；`python3 script.py` 执行脚本；`python3 -m 模块名` 以模块方式运行标准库或已安装的包：
+After installing there are three entry points you'll use most. `python3` drops straight into the interactive interpreter (REPL), good for checking the behaviour of a one-liner; `python3 script.py` runs a script; `python3 -m module` runs a standard-library or installed package as a module:
 
 ```bash
-python3                    # 进入交互式解释器，exit() 退出
-python3 hello.py           # 运行脚本
-python3 -m json.tool a.json   # 把 json.tool 当命令用：格式化 JSON
-python3 -m http.server 8000   # 当前目录起一个静态文件服务器
+python3                    # enter the interactive interpreter; exit() to leave
+python3 hello.py           # run a script
+python3 -m json.tool a.json   # use json.tool as a command: pretty-print JSON
+python3 -m http.server 8000   # serve the current directory as a static file server
 ```
 
-REPL 里两个实用函数要记牢：`help(obj)` 查看对象文档，`dir(obj)` 列出对象的属性和方法。
+Two REPL functions worth memorising: `help(obj)` shows an object's documentation, `dir(obj)` lists an object's attributes and methods.
 
-## pip 与包管理
+## pip and package management
 
-pip 是包安装器，从 PyPI 拉取第三方包。国内环境慢可以换清华镜像源：
+pip is the package installer, pulling third-party packages from PyPI. If PyPI is slow on your network you can switch to the Tsinghua mirror:
 
 ```bash
-python3 -m pip install requests            # 安装
-python3 -m pip install "requests>=2.31"    # 带版本约束
-python3 -m pip install -r requirements.txt # 按清单安装
-python3 -m pip list                        # 已安装列表
-python3 -m pip show requests               # 查看某个包的元信息
+python3 -m pip install requests            # install
+python3 -m pip install "requests>=2.31"    # with a version constraint
+python3 -m pip install -r requirements.txt # install from a requirements file
+python3 -m pip list                        # list installed packages
+python3 -m pip show requests               # show metadata for one package
 python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple requests
 ```
 
-始终用 `python3 -m pip` 而不是裸 `pip`：前者保证 pip 操作的就是当前这个解释器，避免「装到了另一个 Python 里」的经典问题。
+Always use `python3 -m pip` rather than a bare `pip`: the former guarantees pip acts on the interpreter that's currently running, avoiding the classic "installed it into the other Python" problem.
 
-生成依赖清单用 `pip freeze`，它把当前环境的全部包和精确版本写出来：
+`pip freeze` generates the dependency list, writing out every package in the current environment with its exact version:
 
 ```bash
 python3 -m pip freeze > requirements.txt
 ```
 
-## 虚拟环境 venv
+## Virtual environments with venv
 
-不同项目依赖不同版本的同一个包，必须靠虚拟环境隔离。venv 是标准库自带的方案，每个项目建一个：
+Different projects depend on different versions of the same package, so isolation has to come from virtual environments. venv is the solution that ships with the standard library; create one per project:
 
 ```bash
-python3 -m venv .venv        # 在项目根目录创建虚拟环境
-source .venv/bin/activate    # Linux/macOS 激活
-.venv\Scripts\activate       # Windows 激活
-pip install requests         # 装进 .venv，不污染系统
-deactivate                   # 退出虚拟环境
+python3 -m venv .venv        # create a virtual environment in the project root
+source .venv/bin/activate    # activate on Linux/macOS
+.venv\Scripts\activate       # activate on Windows
+pip install requests         # installs into .venv, doesn't pollute the system
+deactivate                   # leave the virtual environment
 ```
 
-激活后提示符会出现 `(.venv)` 前缀，此时 `python`、`pip` 都指向虚拟环境内的副本。`.venv/` 目录不应提交到版本库（本仓库的 `.gitignore` 已忽略）。
+Once activated the prompt gains a `(.venv)` prefix, and both `python` and `pip` now point at the copies inside the virtual environment. Don't commit the `.venv/` directory to version control (this repository's `.gitignore` already ignores it).
 
-::: tip 环境管理工具的演进
-传统三件套是 venv + pip + requirements.txt。社区还有更现代的统一工具：[uv](https://github.com/astral-sh/uv)（Rust 编写，兼容 pip 工作流）、[Poetry](https://python-poetry.org/)（依赖解析 + 打包一体）、[PDM](https://pdm-project.org/)（遵循 PEP 582/621）。我通常从 venv + pip 起步；项目需要时再评估统一工具。
+::: tip The evolution of environment tooling
+The traditional trio is venv + pip + requirements.txt. The community also has more modern unified tools: [uv](https://github.com/astral-sh/uv) (written in Rust, compatible with the pip workflow), [Poetry](https://python-poetry.org/) (dependency resolution and packaging in one tool), [PDM](https://pdm-project.org/) (follows PEP 582/621). I usually start with venv + pip and only evaluate a unified tool when a project needs one.
 :::
 
-## 编辑器与调试
+## Editor and debugging
 
-两个主流选择：VS Code 装官方 Python 扩展（Pylance 提供语言服务），轻量、启动快，配置即开即用；PyCharm 的 Community 版免费，重构、调试、测试集成开箱即得，适合大型项目。
+Two mainstream choices: VS Code with the official Python extension (Pylance provides the language service) — lightweight, starts fast, ready to use straight after configuration; the free Community edition of PyCharm — refactoring, debugging and test integration work out of the box, which suits larger projects.
 
-无论用哪个，把格式化工具和 linter 配进保存动作：`ruff` 一个工具同时承担检查与格式化（替代 flake8 + isort + black），装好后 VS Code 保存即自动修格式。
+Whichever you use, wire the formatter and linter into the save action: `ruff` does both checking and formatting in a single tool (replacing flake8 + isort + black), and once installed VS Code auto-formats on save.
 
 ```bash
 python3 -m pip install ruff
-ruff check .        # 静态检查
-ruff format .       # 格式化
+ruff check .        # static check
+ruff format .       # format
 ```
 
-## 小结
+## Summary
 
-- pyenv 管多版本，venv 管项目隔离，pip 管包安装，三层各司其职。
-- 用 `python3 -m pip` 与 `python3 -m venv`，让命令始终绑定当前解释器。
-- 依赖清单 requirements.txt 随代码一起提交，别人才能复现你的环境。
+- pyenv manages multiple versions, venv manages project isolation, pip manages package installation — three layers, each doing its own job.
+- Use `python3 -m pip` and `python3 -m venv` so the command always binds to the current interpreter.
+- Commit the dependency list requirements.txt alongside the code, or nobody else can reproduce your environment.
 
-## 参考资料
+## Further reading
 
-- [Python 官方文档 · venv 虚拟环境教程](https://docs.python.org/3/tutorial/venv.html)
-- [Python 官方文档 · 命令行与环境](https://docs.python.org/3/using/cmdline.html)
+- [Python official documentation · venv virtual environment tutorial](https://docs.python.org/3/tutorial/venv.html)
+- [Python official documentation · Command line and environment](https://docs.python.org/3/using/cmdline.html)
 
 <!-- BACKLINKS-AUTO -->
-## 相关页面
+## Related pages
 
 - [glossary](/glossary.md)
-- [books](/knowledge/books.md)
-- [core-concepts](/knowledge/core-concepts.md)
-- [official-docs](/knowledge/official-docs.md)
+- [books](/zh/knowledge/books)
+- [core-concepts](/zh/knowledge/core-concepts)
+- [official-docs](/zh/knowledge/official-docs)

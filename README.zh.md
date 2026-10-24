@@ -64,7 +64,7 @@ docs/
 └── .vitepress/      # VitePress 配置与主题
 ```
 
-站点导航以 `docs/.vitepress/sidebar.json` 为唯一真源；修改前请先看[导航维护说明](https://cuihairu.github.io/hello-python/navigation)。
+站点用 VitePress 官方 locales 做双语：英文页在站点根目录，中文页在 `/zh/`。导航以 `docs/.vitepress/sidebar.en.json` 与 `docs/.vitepress/sidebar.zh.json` 两份为真源；修改前请先看[导航维护说明](https://cuihairu.github.io/hello-python/zh/navigation)。
 
 ## License
 
