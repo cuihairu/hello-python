@@ -176,7 +176,7 @@ Judge by measurement: use `cProfile` or plain timing to see whether the time goe
 ## Related pages
 
 - [glossary](/glossary.md)
-- [core-concepts](/zh/knowledge/core-concepts)
-- [official-docs](/zh/knowledge/official-docs)
-- [pitfalls](/zh/knowledge/pitfalls)
-- [scenarios](/zh/knowledge/scenarios)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

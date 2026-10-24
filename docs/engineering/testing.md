@@ -191,7 +191,7 @@ The standard way to run tests in CI: install dependencies, then `pytest -q`, whe
 ## Related pages
 
 - [glossary](/glossary.md)
-- [books](/zh/knowledge/books)
-- [core-concepts](/zh/knowledge/core-concepts)
-- [official-docs](/zh/knowledge/official-docs)
-- [scenarios](/zh/knowledge/scenarios)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [scenarios](/knowledge/scenarios.md)

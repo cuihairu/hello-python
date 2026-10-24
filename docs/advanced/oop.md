@@ -254,6 +254,6 @@ R2 哔哔
 ## Related pages
 
 - [glossary](/glossary.md)
-- [books](/zh/knowledge/books)
-- [core-concepts](/zh/knowledge/core-concepts)
-- [scenarios](/zh/knowledge/scenarios)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [scenarios](/knowledge/scenarios.md)

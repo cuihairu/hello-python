@@ -4,7 +4,7 @@ description: "The mechanics and fixes behind eight high-frequency traps: mutable
 
 # Common pitfalls and best practices
 
-This page digs into why these traps happen, how to reproduce them, and how to deal with them, from a semantics and engineering-practice angle. For a quick-reference digest see [common pitfalls in the knowledge index](/zh/knowledge/pitfalls).
+This page digs into why these traps happen, how to reproduce them, and how to deal with them, from a semantics and engineering-practice angle. For a quick-reference digest see [common pitfalls in the knowledge index](/knowledge/pitfalls).
 
 Every Python engineer has hit each of these at least once. They are collected here so you can learn the underlying mechanism in one pass and save yourself the 3 a.m. debugging session later.
 
@@ -220,5 +220,5 @@ False True
 ## Related pages
 
 - [glossary](/glossary.md)
-- [official-docs](/zh/knowledge/official-docs)
-- [pitfalls](/zh/knowledge/pitfalls)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)

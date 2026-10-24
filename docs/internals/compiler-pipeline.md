@@ -35,4 +35,4 @@ The emitted instruction sequence is evaluated one instruction at a time by the [
 - [glossary](/glossary.md)
 - [cpython-source](cpython-source.md)
 - [eval-loop](eval-loop.md)
-- [official-docs](/zh/knowledge/official-docs)
+- [official-docs](/knowledge/official-docs.md)

@@ -216,6 +216,6 @@ with tempfile.TemporaryDirectory() as d:
 ## Related pages
 
 - [glossary](/glossary.md)
-- [core-concepts](/zh/knowledge/core-concepts)
-- [official-docs](/zh/knowledge/official-docs)
-- [scenarios](/zh/knowledge/scenarios)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [scenarios](/knowledge/scenarios.md)

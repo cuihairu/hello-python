@@ -258,6 +258,6 @@ print(say_hi.calls, say_hi.__name__)
 ## Related pages
 
 - [glossary](/glossary.md)
-- [core-concepts](/zh/knowledge/core-concepts)
-- [pitfalls](/zh/knowledge/pitfalls)
-- [scenarios](/zh/knowledge/scenarios)
+- [core-concepts](/knowledge/core-concepts.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

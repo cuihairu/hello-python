@@ -52,15 +52,15 @@ The nine subpages that follow are organized around how data is laid out, how typ
 
 | Subpage | Content |
 | --- | --- |
-| [Core data structures](/zh/internals/object-model) | `PyObject` object header, reference counts and immortal objects, and the memory layout of the three main containers: dict, list, str |
-| [Type system and attribute lookup](/zh/internals/type-system) | the `tp_*` slot vtable, the slotdefs mapping, attribute lookup order, MRO caching, and where descriptors land |
-| [The interpreter main loop](/zh/internals/eval-loop) | the three bytecode dispatch modes, instruction definitions in `bytecodes.c`, adaptive specialization, and tier-2/JIT |
-| [Compiler pipeline](/zh/internals/compiler-pipeline) | lexing, PEG parsing, AST preprocessing, the symbol table, code generation, CFG optimization, and assembly |
-| [Memory management](/zh/internals/memory-management) | reference counting, the three tiers of pymalloc pools, and the thresholds and algorithm of generational GC |
-| [The gc module: the Python face of garbage collection](/zh/internals/gc-module) | starting and stopping, thresholds, collect and stats, the observation API, debug flags and callbacks, and freeze |
-| [The GIL and the threading model](/zh/internals/gil-threading) | the GIL implementation and switch interval, thread state, and layout changes in free-threaded builds |
-| [The import system and module objects](/zh/internals/import-system) | the C/Python two halves, the load call chain, pyc cache validation, and what a module object really is |
-| [The CPython / standards-implementation boundary](/zh/internals/implementation-boundary) | `sys.implementation`, the stable ABI, and where the language spec ends and implementation detail begins |
+| [Core data structures](/internals/object-model) | `PyObject` object header, reference counts and immortal objects, and the memory layout of the three main containers: dict, list, str |
+| [Type system and attribute lookup](/internals/type-system) | the `tp_*` slot vtable, the slotdefs mapping, attribute lookup order, MRO caching, and where descriptors land |
+| [The interpreter main loop](/internals/eval-loop) | the three bytecode dispatch modes, instruction definitions in `bytecodes.c`, adaptive specialization, and tier-2/JIT |
+| [Compiler pipeline](/internals/compiler-pipeline) | lexing, PEG parsing, AST preprocessing, the symbol table, code generation, CFG optimization, and assembly |
+| [Memory management](/internals/memory-management) | reference counting, the three tiers of pymalloc pools, and the thresholds and algorithm of generational GC |
+| [The gc module: the Python face of garbage collection](/internals/gc-module) | starting and stopping, thresholds, collect and stats, the observation API, debug flags and callbacks, and freeze |
+| [The GIL and the threading model](/internals/gil-threading) | the GIL implementation and switch interval, thread state, and layout changes in free-threaded builds |
+| [The import system and module objects](/internals/import-system) | the C/Python two halves, the load call chain, pyc cache validation, and what a module object really is |
+| [The CPython / standards-implementation boundary](/internals/implementation-boundary) | `sys.implementation`, the stable ABI, and where the language spec ends and implementation detail begins |
 
 These pages split the implementation into stages, so you can pick by concern: for performance, read the interpreter main loop and the compiler pipeline; for debugging, memory management; for multithreading, the GIL and threading model. The source overview and core data structures give the overall background.
 
@@ -73,13 +73,13 @@ These pages split the implementation into stages, so you can pick by concern: fo
 <!-- BACKLINKS-AUTO -->
 ## Related pages
 
-- [compiler-pipeline](../zh/internals/compiler-pipeline)
-- [eval-loop](../zh/internals/eval-loop)
-- [gil-threading](../zh/internals/gil-threading)
-- [implementation-boundary](../zh/internals/implementation-boundary)
-- [import-system](../zh/internals/import-system)
-- [memory-management](../zh/internals/memory-management)
-- [object-model](../zh/internals/object-model)
-- [type-system](../zh/internals/type-system)
-- [books](/zh/knowledge/books)
-- [core-concepts](/zh/knowledge/core-concepts)
+- [compiler-pipeline](compiler-pipeline.md)
+- [eval-loop](eval-loop.md)
+- [gil-threading](gil-threading.md)
+- [implementation-boundary](implementation-boundary.md)
+- [import-system](import-system.md)
+- [memory-management](memory-management.md)
+- [object-model](object-model.md)
+- [type-system](type-system.md)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)

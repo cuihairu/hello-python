@@ -20,11 +20,11 @@ Any claim whose source cannot be verified is marked "source unverified" — no f
 
 | File | Content | Entries |
 | --- | --- | --- |
-| [Core concepts](/zh/knowledge/core-concepts) | Concepts and key points across six themes, grouped by section | 102 |
-| [Authoritative books](/zh/knowledge/books) | Bibliography, authors, and the knowledge points each maps to | 10 |
-| [Official documentation](/zh/knowledge/official-docs) | PEP numbers, standard library sections, tool docs | 41 |
-| [Use cases](/zh/knowledge/scenarios) | Where each feature lands in practice, and the trade-offs | 39 |
-| [Common pitfalls](/zh/knowledge/pitfalls) | How the high-frequency traps work, and how to avoid them | 27 |
+| [Core concepts](/knowledge/core-concepts) | Concepts and key points across six themes, grouped by section | 102 |
+| [Authoritative books](/knowledge/books) | Bibliography, authors, and the knowledge points each maps to | 10 |
+| [Official documentation](/knowledge/official-docs) | PEP numbers, standard library sections, tool docs | 41 |
+| [Use cases](/knowledge/scenarios) | Where each feature lands in practice, and the trade-offs | 39 |
+| [Common pitfalls](/knowledge/pitfalls) | How the high-frequency traps work, and how to avoid them | 27 |
 
 219 entries in total, each linked back to the page it came from, with 221 internal cross-links.
 
@@ -42,4 +42,4 @@ Concepts and pitfalls overlap heavily — the same mechanism, stated positively 
 
 ## Related pages
 
-- [books](/zh/knowledge/books)
+- [books](/knowledge/books.md)

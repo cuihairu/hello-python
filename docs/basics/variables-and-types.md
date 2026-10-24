@@ -165,6 +165,6 @@ True
 ## Related pages
 
 - [glossary](/glossary.md)
-- [books](/zh/knowledge/books)
-- [core-concepts](/zh/knowledge/core-concepts)
-- [pitfalls](/zh/knowledge/pitfalls)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [pitfalls](/knowledge/pitfalls.md)

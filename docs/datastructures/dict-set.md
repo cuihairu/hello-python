@@ -4,7 +4,7 @@ description: Dictionary key-value operations and comprehensions, the root of the
 
 # Dictionaries and Sets
 
-This page covers language-level usage; for the compact hash-table structure of dicts in CPython, see [Object and Container Implementation Notes](/zh/internals/object-model).
+This page covers language-level usage; for the compact hash-table structure of dicts in CPython, see [Object and Container Implementation Notes](/internals/object-model).
 
 A dictionary (dict) maps keys to values; a set is a container of unique elements. Both are built on hash tables — lookups, inserts, and deletes all average O(1), and keys/elements must be hashable.
 
@@ -194,7 +194,7 @@ o -
 ## Related pages
 
 - [glossary](/glossary.md)
-- [core-concepts](/zh/knowledge/core-concepts)
-- [official-docs](/zh/knowledge/official-docs)
-- [pitfalls](/zh/knowledge/pitfalls)
-- [scenarios](/zh/knowledge/scenarios)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

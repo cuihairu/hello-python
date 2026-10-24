@@ -6,7 +6,7 @@ description: The everyday surface of collections, itertools, functools, pathlib,
 
 Python's "batteries included" claim rests on the standard library. This page picks out the most-used modules: collections, itertools, functools, pathlib, re, json and datetime — they spare most of the third-party dependencies.
 
-This page covers the standard library from the angle of day-to-day selection; for the boundary between the language spec and the CPython implementation, see the [source walkthrough notes](/zh/internals/implementation-boundary).
+This page covers the standard library from the angle of day-to-day selection; for the boundary between the language spec and the CPython implementation, see the [source walkthrough notes](/internals/implementation-boundary).
 
 ## collections
 
@@ -198,7 +198,7 @@ Where `datetime` trips people up: use `now()` for the current time; comparisons 
 <!-- BACKLINKS-AUTO -->
 ## Related pages
 
-- [books](/zh/knowledge/books)
-- [core-concepts](/zh/knowledge/core-concepts)
-- [official-docs](/zh/knowledge/official-docs)
-- [scenarios](/zh/knowledge/scenarios)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [scenarios](/knowledge/scenarios.md)

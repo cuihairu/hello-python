@@ -205,5 +205,5 @@ Nine out of ten cases of garbled Chinese text come from a mismatch between the "
 <!-- BACKLINKS-AUTO -->
 ## Related pages
 
-- [core-concepts](/zh/knowledge/core-concepts)
-- [scenarios](/zh/knowledge/scenarios)
+- [core-concepts](/knowledge/core-concepts.md)
+- [scenarios](/knowledge/scenarios.md)

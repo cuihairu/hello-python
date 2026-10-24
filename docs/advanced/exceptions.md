@@ -220,8 +220,8 @@ run()
 ## Related pages
 
 - [glossary](/glossary.md)
-- [books](/zh/knowledge/books)
-- [core-concepts](/zh/knowledge/core-concepts)
-- [official-docs](/zh/knowledge/official-docs)
-- [pitfalls](/zh/knowledge/pitfalls)
-- [scenarios](/zh/knowledge/scenarios)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)

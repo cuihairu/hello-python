@@ -143,5 +143,5 @@ print(变量)
 <!-- BACKLINKS-AUTO -->
 ## Related pages
 
-- [core-concepts](/zh/knowledge/core-concepts)
-- [official-docs](/zh/knowledge/official-docs)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)

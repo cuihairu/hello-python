@@ -31,4 +31,4 @@ When you want the full sweep, "Read every event by era" at the bottom of the pag
 <!-- BACKLINKS-AUTO -->
 ## Related pages
 
-- [official-docs](/zh/knowledge/official-docs)
+- [official-docs](/knowledge/official-docs.md)

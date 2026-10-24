@@ -207,6 +207,6 @@ mypy --strict src/   # strict mode: unannotated code is reported too
 ## Related pages
 
 - [glossary](/glossary.md)
-- [books](/zh/knowledge/books)
-- [core-concepts](/zh/knowledge/core-concepts)
-- [official-docs](/zh/knowledge/official-docs)
+- [books](/knowledge/books.md)
+- [core-concepts](/knowledge/core-concepts.md)
+- [official-docs](/knowledge/official-docs.md)

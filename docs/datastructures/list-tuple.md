@@ -6,7 +6,7 @@ description: Adding, removing, updating, and querying lists, plus slicing; the i
 
 Lists and tuples are both ordered sequences; the only difference is that lists are mutable and tuples aren't. That decides their use cases — dynamic collections of similar elements use a list, fixed-structure records use a tuple.
 
-This page covers language-level usage; for the pointer-array layout of lists in CPython, see [Object and Container Implementation Notes](/zh/internals/object-model).
+This page covers language-level usage; for the pointer-array layout of lists in CPython, see [Object and Container Implementation Notes](/internals/object-model).
 
 ## Lists: Add, Remove, Update, Query
 
@@ -228,6 +228,6 @@ print(Vec(1.5, 2.5).dx)
 ## Related pages
 
 - [glossary](/glossary.md)
-- [core-concepts](/zh/knowledge/core-concepts)
-- [pitfalls](/zh/knowledge/pitfalls)
-- [scenarios](/zh/knowledge/scenarios)
+- [core-concepts](/knowledge/core-concepts.md)
+- [pitfalls](/knowledge/pitfalls.md)
+- [scenarios](/knowledge/scenarios.md)
