@@ -1,12 +1,13 @@
 [English](README.md) | [中文](README.zh.md)
 
-<div align="center"><img src="docs/public/logo.svg" width="64" height="64" alt="logo" /> <img src="docs/public/badges/topic.svg" alt="topic" /> <img src="docs/public/badges/docs.svg" alt="docs" /> <img src="docs/public/badges/license.svg" alt="license" /> <img src="docs/public/badges/langs.svg" alt="langs" /> <a href="https://cuihairu.github.io/hello-python/"><img src="https://img.shields.io/badge/docs-docs-blue" alt="docs"></a></div>
+<div align="center"><img src="docs/public/logo.svg" width="64" height="64" alt="logo" /> <img src="docs/public/badges/topic.svg" alt="topic" /> <img src="docs/public/badges/docs.svg" alt="docs" /> <img src="docs/public/badges/license.svg" alt="license" /> <img src="docs/public/badges/langs.svg" alt="langs" /> <a href="https://cuihairu.github.io/hello-python//"><img src="https://img.shields.io/badge/docs-docs-blue" alt="docs"></a> <a href="https://cuihairu.github.io/hello-python/"><img src="https://img.shields.io/badge/docs-blue" alt="docs"></a>
+</div>
 
 ---
 
 A game developer's field notes on Python: observations, tradeoffs, and mistakes encountered while building software. The pages are organized by topic for reference.
 
-Knowledge base: [Core concepts](https://cuihairu.github.io/hello-python//knowledge/core-concepts) · [Books](https://cuihairu.github.io/hello-python//knowledge/books) · [Official docs](https://cuihairu.github.io/hello-python//knowledge/official-docs) · [Scenarios](https://cuihairu.github.io/hello-python//knowledge/scenarios) · [Pitfalls](https://cuihairu.github.io/hello-python//knowledge/pitfalls)
+Knowledge base: [Core concepts](https://cuihairu.github.io/hello-python///knowledge/core-concepts) · [Books](https://cuihairu.github.io/hello-python///knowledge/books) · [Official docs](https://cuihairu.github.io/hello-python///knowledge/official-docs) · [Scenarios](https://cuihairu.github.io/hello-python///knowledge/scenarios) · [Pitfalls](https://cuihairu.github.io/hello-python///knowledge/pitfalls)
 
 ## Local development
 
