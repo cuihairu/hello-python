@@ -1,27 +1,12 @@
 [English](README.md) | [中文](README.zh.md)
 
-<div align="center">
-
-<p align="center"><img src="docs/public/logo.svg" width="64" height="64" alt="logo" /> </p>
-
-# Hello Python
-
-<p align="center">
-  <img src="docs/public/badges/topic.svg" alt="topic" />
-  <img src="docs/public/badges/docs.svg" alt="docs" />
-  <img src="docs/public/badges/license.svg" alt="license" />
-  <img src="docs/public/badges/langs.svg" alt="langs" />
-</p>
-
-Python 开发记录与经验分享 · [在线阅读](https://cuihairu.github.io/hello-python/)
-
-</div>
+<div align="center"><img src="docs/public/logo.svg" width="64" height="64" alt="logo" /> <img src="docs/public/badges/topic.svg" alt="topic" /> <img src="docs/public/badges/docs.svg" alt="docs" /> <img src="docs/public/badges/license.svg" alt="license" /> <img src="docs/public/badges/langs.svg" alt="langs" /> <a href="https://cuihairu.github.io/hello-python/zh/"><img src="https://img.shields.io/badge/docs-文档-blue" alt="docs"></a></div>
 
 ---
 
 这里记录我在游戏开发中使用 Python 的观察、取舍和踩坑经历。内容按主题整理，方便回看和查找。
 
-主题索引：[核心概念](https://cuihairu.github.io/hello-python/knowledge/core-concepts) · [权威书籍](https://cuihairu.github.io/hello-python/knowledge/books) · [官方文档](https://cuihairu.github.io/hello-python/knowledge/official-docs) · [应用场景](https://cuihairu.github.io/hello-python/knowledge/scenarios) · [常见坑](https://cuihairu.github.io/hello-python/knowledge/pitfalls)
+主题索引：[核心概念](https://cuihairu.github.io/hello-python/zh/knowledge/core-concepts) · [权威书籍](https://cuihairu.github.io/hello-python/zh/knowledge/books) · [官方文档](https://cuihairu.github.io/hello-python/zh/knowledge/official-docs) · [应用场景](https://cuihairu.github.io/hello-python/zh/knowledge/scenarios) · [常见坑](https://cuihairu.github.io/hello-python/zh/knowledge/pitfalls)
 
 ## 本地开发
 
