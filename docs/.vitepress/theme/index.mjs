@@ -9,3 +9,4 @@ import './style.css'
 export default {
   extends: DefaultTheme
 }
+import './custom.css'
