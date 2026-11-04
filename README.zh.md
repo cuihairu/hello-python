@@ -20,10 +20,10 @@ Python 开发记录与经验分享 · [在线阅读](https://cuihairu.github.io/
 ## 本地开发
 
 ```bash
-npm install          # 安装依赖
-npm run docs:dev     # 本地开发
-npm run docs:build   # 构建到 docs/.vitepress/dist
-npm run docs:preview # 本地预览构建产物
+pnpm install          # 安装依赖
+pnpm run docs:dev     # 本地开发
+pnpm run docs:build   # 构建到 docs/.vitepress/dist
+pnpm run docs:preview # 本地预览构建产物
 ```
 
 ## 文档校验
@@ -37,7 +37,7 @@ python3 scripts/check_timeline.py    # 校验时间线数据
 python3 scripts/check_links.py      # 校验外链（以 CI 结果为准）
 ```
 
-构建也必须通过：`npm run docs:build`。
+构建也必须通过：`pnpm run docs:build`。
 
 ## 目录结构
 

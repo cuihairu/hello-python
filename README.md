@@ -1,23 +1,33 @@
+<div align="center">
+
 [English](README.md) | [中文](README.zh.md)
 
-<div align="center">
-  <img src="docs/public/logo.svg" width="64" height="64" alt="logo" />
-  <a href="https://cuihairu.github.io/hello-python/"><img src="https://img.shields.io/badge/docs-blue" alt="docs"></a> <img src="docs/public/badges/topic.svg" alt="topic" /> <img src="docs/public/badges/docs.svg" alt="docs" /> <img src="docs/public/badges/license.svg" alt="license" /> <img src="docs/public/badges/langs.svg" alt="langs" />
+<p align="center"><img src="docs/public/logo.svg" width="64" height="64" alt="logo" /></p>
+
+# Hello Python
+
+<p align="center">
+  <img src="docs/public/badges/topic.svg" alt="topic" />
+  <img src="docs/public/badges/docs.svg" alt="docs" />
+  <img src="docs/public/badges/license.svg" alt="license" />
+  <img src="docs/public/badges/langs.svg" alt="langs" />
+</p>
+
 </div>
 
 ---
 
 A game developer's field notes on Python: observations, tradeoffs, and mistakes encountered while building software. The pages are organized by topic for reference.
 
-Knowledge base: [Core concepts](https://cuihairu.github.io/hello-python///knowledge/core-concepts) · [Books](https://cuihairu.github.io/hello-python///knowledge/books) · [Official docs](https://cuihairu.github.io/hello-python///knowledge/official-docs) · [Scenarios](https://cuihairu.github.io/hello-python///knowledge/scenarios) · [Pitfalls](https://cuihairu.github.io/hello-python///knowledge/pitfalls)
+Knowledge base: [Core concepts](https://cuihairu.github.io/hello-python/knowledge/core-concepts) · [Books](https://cuihairu.github.io/hello-python/knowledge/books) · [Official docs](https://cuihairu.github.io/hello-python/knowledge/official-docs) · [Scenarios](https://cuihairu.github.io/hello-python/knowledge/scenarios) · [Pitfalls](https://cuihairu.github.io/hello-python/knowledge/pitfalls)
 
 ## Local development
 
 ```bash
-npm install          # Install dependencies
-npm run docs:dev     # Start the dev server
-npm run docs:build   # Build to docs/.vitepress/dist
-npm run docs:preview # Preview the build output locally
+pnpm install          # Install dependencies
+pnpm run docs:dev     # Start the dev server
+pnpm run docs:build   # Build to docs/.vitepress/dist
+pnpm run docs:preview # Preview the build output locally
 ```
 
 ## Documentation checks
@@ -31,7 +41,7 @@ python3 scripts/check_timeline.py    # Verify timeline data
 python3 scripts/check_links.py      # Verify external links (CI is authoritative)
 ```
 
-The build must also pass: `npm run docs:build`.
+The build must also pass: `pnpm run docs:build`.
 
 ## Directory structure
 
