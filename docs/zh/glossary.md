@@ -290,6 +290,19 @@ CPython 针对小对象（≤512B）的 arenas/POOL 内存分配器。
 **出处**：[Python 官方文档 · logging](https://docs.python.org/3/library/logging.html)、[Python 官方文档 · logging cookbook](https://docs.python.org/3/howto/logging-cookbook.html)
 **相关页**：[engineering/logging](/zh/engineering/logging)
 
+## 源码架构
+
+| 术语 | 英文 | 定义 | file:line |
+|---|---|---|---|
+| 层 | Layer | 围绕共同状态与变更节奏形成的职责边界；目录名只是证据，不是定义。七层见[源码架构分层](/zh/engineering/architecture.md#层清单)。 | `docs/zh/engineering/architecture.md:9` |
+| 静态内容层 | Static Content Layer | 构建前存在的双语 Markdown、页面元数据和可导入 Python fixture；拥有教学语义，不拥有路由或校验行为。 | `docs/zh/engineering/architecture.md:9` |
+| 站点运行层 | Site Runtime Layer | VitePress 配置与生成的静态资产，把 Markdown 变成 locale 路由、SEO 元数据和主题行为。 | `docs/zh/engineering/architecture.md:11` |
+| 双语路由契约层 | Bilingual Route Contract Layer | 英文页与 `/zh/` 页保持相同导航结构的不变量；每个 locale 的侧栏可独立编辑。 | `docs/zh/engineering/architecture.md:12` |
+| 时间线交互层 | Timeline Interaction Layer | Vue 边界，选择 locale 数据、推导筛选分期，并把交互状态保存在浏览器内存。 | `docs/zh/engineering/architecture.md:13` |
+| Python 示例层 | Python Example Layer | 供文档导入的 fixture；块校验器把它复制进一次性子进程环境。 | `docs/zh/engineering/architecture.md:14` |
+| 质检命令层 | Quality Command Layer | 四个独立 CLI 解析/执行器，把内容与 schema 违规转成非零退出码。 | `docs/zh/engineering/architecture.md:15` |
+| 发布流程层 | Release Flow Layer | 由文档化校验和 VitePress 构建组成的边界，在静态发布前阻断破损内容。 | `docs/zh/engineering/architecture.md:16` |
+
 ---
 
 **维护口径**：新增条目必须给出可点的权威出处；查不到就写「未找到权威出处（待核）」，不得凭印象编造链接。

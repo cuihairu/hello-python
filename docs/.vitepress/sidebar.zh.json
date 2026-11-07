@@ -196,6 +196,10 @@
     "link": "/zh/navigation"
   },
   {
+    "text": "源码架构分层",
+    "link": "/zh/engineering/architecture"
+  },
+  {
     "text": "主题索引",
     "collapsed": true,
     "items": [

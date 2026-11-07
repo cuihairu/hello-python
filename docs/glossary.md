@@ -290,6 +290,19 @@ The standard library logging framework: Logger/Handler/Formatter layers.
 **Source**: [Python official docs · logging](https://docs.python.org/3/library/logging.html), [Python official docs · logging cookbook](https://docs.python.org/3/howto/logging-cookbook.html)
 **Related pages**: [engineering/logging](/engineering/logging)
 
+## Source architecture
+
+| 术语 | 英文 | 定义 | file:line |
+|---|---|---|---|
+| 层 | Layer | A responsibility boundary over shared state and change flow; directory names are evidence, not definition. Seven layers are listed in [source architecture](/engineering/architecture.md#layers). | `docs/engineering/architecture.md:9` |
+| 静态内容层 | Static Content Layer | Bilingual Markdown, page metadata and importable Python fixtures that exist before build; owns teaching meaning, not routing or validation. | `docs/engineering/architecture.md:9` |
+| 站点运行层 | Site Runtime Layer | VitePress configuration and generated static assets that turn Markdown into locale routes, SEO metadata and theme behavior. | `docs/engineering/architecture.md:11` |
+| 双语路由契约层 | Bilingual Route Contract Layer | Invariant that an English page and its `/zh/` page have the same navigation structure; each locale sidebar is editable. | `docs/engineering/architecture.md:12` |
+| 时间线交互层 | Timeline Interaction Layer | Vue boundary selecting locale data, deriving filtered periods and keeping browser-memory interaction state. | `docs/engineering/architecture.md:13` |
+| Python 示例层 | Python Example Layer | Importable fixture used by documentation and copied by the block verifier into disposable subprocesses. | `docs/engineering/architecture.md:14` |
+| 质检命令层 | Quality Command Layer | Four standalone CLI parsers/executors that turn content and schema violations into non-zero exits. | `docs/engineering/architecture.md:15` |
+| 发布流程层 | Release Flow Layer | Documented validation and VitePress build boundary that blocks broken content before static publishing. | `docs/engineering/architecture.md:16` |
+
 ---
 
 **Maintenance rule**: New entries must include a clickable authoritative source; if none is found, write "No authoritative source found (pending review)" — do not fabricate links from memory.
