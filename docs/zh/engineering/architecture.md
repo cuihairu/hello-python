@@ -29,13 +29,13 @@ description: 文档站、源码数据、质量门禁与发布流程的职责分�
 
 ## 配置输入
 
-VitePress 站点配置在 `config.mts`，包括 locale、路径行为、死链强制、canonical/alternate 生成和主题元数据（`config.mts:35-108`、`config.mts:110-157`）。导航侧栏刻意拆成 `sidebar.en.json` 和 `sidebar.zh.json`（`config.mts:2`）。时间线 schema、标签、分期和事件在 `timeline.ts:6-32` 成对维护；质检器在同范围的字段规则位于 `check_timeline.py:25-27`。这些边界不包含环境变量、Redis、MySQL 或常驻服务端存储。
+VitePress 站点配置在 `config.mts`，包括 locale、路径行为、死链强制、canonical/alternate 生成和主题元数据（`config.mts:35-108`、`config.mts:110-157`）。导航侧栏刻意拆成 `sidebar.en.json` 和 `sidebar.zh.json`（`config.mts:2`）。时间线 schema、标签、分期和事件在 `timeline.ts:27-219` 成对维护；质检器在同范围的字段规则位于 `check_timeline.py:25-27`。这些边界不包含环境变量、Redis、MySQL 或常驻服务端存储。
 
 ## 生命周期
 
 1. **撰写：** 编辑成对 Markdown，并先更新两份侧栏（`navigation.md:16-22`）。
 2. **校验：** 运行四个 Python 命令和文档构建（`README.md:32-39`）。Python 示例在临时文件中执行，超时上限 30 秒（`verify_blocks.py:55`）。
-3. **构建：** VitePress 编译页面、拒绝站内死链（`config.mts:91`）、推导 canonical 与 hreflang URL（`config.mts:43-70`），并输出被忽略的静态产物（`config.mts:24`）。
+3. **构建：** VitePress 编译页面、拒绝站内死链（`config.mts:91`）、推导 canonical 与 hreflang URL（`config.mts:43-70`），并把静态产物输出到被 `.gitignore` 忽略的目录（`.gitignore:166`）。
 4. **消费：** 用户获得静态页面；时间线组件水合后只在浏览器内存中保留筛选/展开状态（`DevTimeline.vue:30-37`）。
 
 仓库没有专属线协议。内部调用是直接导入；Python 校验是本地子进程契约；唯一网络通道是外部链接的 HEAD/GET 探测（`check_links.py:37`）。文案挂点遵循源码契约：页面文案在对应 locale Markdown，本地化时间线事件文案在 `timeline.ts`，组件界面文案在 `DevTimeline.vue:23`。

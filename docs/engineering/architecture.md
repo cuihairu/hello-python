@@ -29,13 +29,13 @@ This page describes the repository's executable and publishing architecture at t
 
 ## Configuration inputs
 
-VitePress site configuration lives in `config.mts`, including locales, path behavior, dead-link enforcement, canonical/alternate generation and theme metadata (`config.mts:35-108`, `config.mts:110-157`). Sidebar navigation is intentionally split into `sidebar.en.json` and `sidebar.zh.json` (`config.mts:2`). Timeline schema, labels, eras and events are paired in `timeline.ts:6-32`; the checker encodes the same required and optional fields at `check_timeline.py:25-27`. No environment variables, Redis, MySQL or persistent server-side service is part of these boundaries.
+VitePress site configuration lives in `config.mts`, including locales, path behavior, dead-link enforcement, canonical/alternate generation and theme metadata (`config.mts:35-108`, `config.mts:110-157`). Sidebar navigation is intentionally split into `sidebar.en.json` and `sidebar.zh.json` (`config.mts:2`). Timeline schema, labels, eras and events are paired in `timeline.ts:27-219`; the checker encodes the same required and optional fields at `check_timeline.py:25-27`. No environment variables, Redis, MySQL or persistent server-side service is part of these boundaries.
 
 ## Lifecycle
 
 1. **Author:** edit paired Markdown and update both sidebars first (`navigation.md:16-22`).
 2. **Validate:** run the four Python commands and docs build (`README.md:32-39`). Python examples execute in temporary files with a 30-second cap (`verify_blocks.py:55`).
-3. **Build:** VitePress compiles pages, rejects dead internal links (`config.mts:91`), derives canonical and hreflang URLs (`config.mts:43-70`) and emits ignored static output (`config.mts:24`).
+3. **Build:** VitePress compiles pages, rejects dead internal links (`config.mts:91`), derives canonical and hreflang URLs (`config.mts:43-70`) and emits static output kept out of git via `.gitignore` (`.gitignore:166`).
 4. **Consume:** users receive static pages; the timeline component hydrates and keeps filter/expand state only in browser memory (`DevTimeline.vue:30-37`).
 
 There is no dedicated wire protocol. Internal calls are direct imports; Python verification is a local subprocess contract; the only network path is the external-link HEAD/GET probe (`check_links.py:37`). Text placement follows the source contract: page copy in locale Markdown, localized timeline event copy in `timeline.ts`, and component interface strings in `DevTimeline.vue:23`.
