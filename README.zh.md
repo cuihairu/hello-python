@@ -51,6 +51,7 @@ docs/
 ├── advanced/        # 语言特性：OOP、魔法方法、装饰器、类型注解
 ├── concurrency/     # 并发：threading、asyncio、multiprocessing
 ├── engineering/     # 工程：标准库、测试、日志、打包
+│   └── _examples/   # 供文档导入运行的 Python fixture，不是文档
 ├── internals/       # 源码解析：CPython 源码走读（带文件行号引用）
 ├── knowledge/       # 主题索引：概念、书籍、官方文档、场景与坑
 ├── glossary.md      # 跨主题术语表
@@ -61,6 +62,8 @@ docs/
 ```
 
 站点导航以 `docs/.vitepress/sidebar.en.json` 与 `docs/.vitepress/sidebar.zh.json` 为真源（英文页在站点根目录、中文页在 `/zh/` 下）；修改前请先看[导航维护说明](https://cuihairu.github.io/hello-python/zh/navigation)。
+
+`docs/engineering/_examples/` 是可运行的代码，不是文档：测试章节的代码块从它导入（`from cfg import ...`），`scripts/verify_blocks.py` 执行这些块时会把该目录注入 `PYTHONPATH`。请把它当源码维护，并保证文档里的每个 import 都能在其中解析到。
 
 ## License
 

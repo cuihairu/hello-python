@@ -21,5 +21,5 @@
 ### 目录/分类不合理处
 
 - [x] CAT-001 [P2] 双包管理证据分裂：`package.json:5` 只定义 VitePress 命令，`README.md:22` 和 `README.zh.md:22` 教用户安装并运行 pnpm，但仓库只跟踪 `package-lock.json`（2010 行），pnpm 锁文件未跟踪。应选一个包管理器作为唯一工作流，同步脚本、README 双语指引和锁文件策略。（2026-11-10 统一为 npm：README 双语改 npm 命令并声明口径，`.gitignore` 忽略 pnpm/yarn 锁文件，CI 原有 `npm ci` 不动。）
-- [ ] CAT-002 [P2] 可执行示例藏在文档资产目录：`docs/engineering/_examples/cfg.py:1` 是被 `docs/engineering/testing.md:30` 多次导入、又被 `scripts/verify_blocks.py:50` 注入 `PYTHONPATH` 的运行时 fixture，但它位于教学 Markdown 树内，容易让读者把运行代码误当作纯文档。可保留现有路径以避免迁移，但应在文档目录说明中单列 `_examples/` 的代码语义。
+- [x] CAT-002 [P2] 可执行示例藏在文档资产目录：`docs/engineering/_examples/cfg.py:1` 是被 `docs/engineering/testing.md:30` 多次导入、又被 `scripts/verify_blocks.py:50` 注入 `PYTHONPATH` 的运行时 fixture，但它位于教学 Markdown 树内，容易让读者把运行代码误当作纯文档。可保留现有路径以避免迁移，但应在文档目录说明中单列 `_examples/` 的代码语义。（2026-11-10 保留路径；README 双语目录树单列 `_examples/`，并在目录说明下补充其"可运行代码、随源码维护"的语义。）
 - [ ] CAT-003 [P3] 架构说明从教学目录中缺位：站点、双语路由、时间线、质检和发布的契约分散在 `docs/navigation.md:7`、`docs/timeline.md:24`、`scripts/check_timeline.py:2` 与 `README.md:30`。本次新增双语架构页并纳入侧栏；后续内容变更应继续把跨层契约写回该页，而不是复制到各章。

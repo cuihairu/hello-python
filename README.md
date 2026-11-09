@@ -50,6 +50,7 @@ docs/
 ├── advanced/        # Language features: OOP, magic methods, decorators, type annotations
 ├── concurrency/     # Concurrency: threading, asyncio, multiprocessing
 ├── engineering/     # Engineering: standard library, testing, logging, packaging
+│   └── _examples/   # Importable Python fixtures for the docs, not documentation
 ├── internals/       # CPython source walkthroughs (with file and line references)
 ├── knowledge/       # Knowledge base: concepts, books, official docs, scenarios, pitfalls
 ├── glossary.md      # Cross-topic glossary
@@ -60,6 +61,8 @@ docs/
 ```
 
 The site is bilingual under VitePress locales: English pages at the site root, Chinese pages under `/zh/`. Navigation is maintained in `docs/.vitepress/sidebar.en.json` and `docs/.vitepress/sidebar.zh.json`; see [Navigation maintenance](https://cuihairu.github.io/hello-python/navigation) before changing either sidebar.
+
+`docs/engineering/_examples/` is executable code, not documentation: the testing chapter's code blocks import from it (`from cfg import ...`), and `scripts/verify_blocks.py` puts it on `PYTHONPATH` when running those blocks. Edit it like source code, and keep every import in the docs resolvable against it.
 
 ## License
 
