@@ -19,11 +19,13 @@ Knowledge base: [Core concepts](https://cuihairu.github.io/hello-python/knowledg
 ## Local development
 
 ```bash
-pnpm install          # Install dependencies
-pnpm run docs:dev     # Start the dev server
-pnpm run docs:build   # Build to docs/.vitepress/dist
-pnpm run docs:preview # Preview the build output locally
+npm install           # Install dependencies
+npm run docs:dev      # Start the dev server
+npm run docs:build    # Build to docs/.vitepress/dist
+npm run docs:preview  # Preview the build output locally
 ```
+
+This repo standardizes on npm: CI runs `npm ci`, and `package-lock.json` is the only tracked lockfile.
 
 ## Documentation checks
 
@@ -36,7 +38,7 @@ python3 scripts/check_timeline.py    # Verify timeline data
 python3 scripts/check_links.py      # Verify external links (CI is authoritative)
 ```
 
-The build must also pass: `pnpm run docs:build`.
+The build must also pass: `npm run docs:build`.
 
 ## Directory structure
 

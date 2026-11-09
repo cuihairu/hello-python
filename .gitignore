@@ -165,3 +165,7 @@ cython_debug/
 node_modules/
 docs/.vitepress/dist/
 docs/.vitepress/cache/
+
+# npm is the package manager here; never commit a second lockfile
+pnpm-lock.yaml
+yarn.lock

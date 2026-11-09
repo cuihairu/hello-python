@@ -20,11 +20,13 @@ Python 开发记录与经验分享 · [在线阅读](https://cuihairu.github.io/
 ## 本地开发
 
 ```bash
-pnpm install          # 安装依赖
-pnpm run docs:dev     # 本地开发
-pnpm run docs:build   # 构建到 docs/.vitepress/dist
-pnpm run docs:preview # 本地预览构建产物
+npm install           # 安装依赖
+npm run docs:dev      # 本地开发
+npm run docs:build    # 构建到 docs/.vitepress/dist
+npm run docs:preview  # 本地预览构建产物
 ```
+
+仓库统一使用 npm：CI 里跑 `npm ci`，只跟踪 `package-lock.json` 这一份锁文件。
 
 ## 文档校验
 
@@ -37,7 +39,7 @@ python3 scripts/check_timeline.py    # 校验时间线数据
 python3 scripts/check_links.py      # 校验外链（以 CI 结果为准）
 ```
 
-构建也必须通过：`pnpm run docs:build`。
+构建也必须通过：`npm run docs:build`。
 
 ## 目录结构
 
@@ -58,7 +60,7 @@ docs/
 └── .vitepress/      # VitePress 配置与主题
 ```
 
-站点导航以 `docs/.vitepress/sidebar.json` 为唯一真源；修改前请先看[导航维护说明](https://cuihairu.github.io/hello-python/navigation)。
+站点导航以 `docs/.vitepress/sidebar.en.json` 与 `docs/.vitepress/sidebar.zh.json` 为真源（英文页在站点根目录、中文页在 `/zh/` 下）；修改前请先看[导航维护说明](https://cuihairu.github.io/hello-python/zh/navigation)。
 
 ## License
 
